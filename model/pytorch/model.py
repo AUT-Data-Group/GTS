@@ -250,3 +250,107 @@ class GTSModel(nn.Module, Seq2SeqAttrs):
             )
 
         return outputs, x.softmax(-1)[:, 0].clone().reshape(self.num_nodes, -1)
+
+
+class GTSContribModel(nn.Module, Seq2SeqAttrs):
+    def __init__(self, temperature, logger, **model_kwargs):
+        super().__init__()
+        Seq2SeqAttrs.__init__(self, **model_kwargs)
+        self.encoder_model = EncoderModel(**model_kwargs)
+        self.decoder_model = DecoderModel(**model_kwargs)
+        self.cl_decay_steps = int(model_kwargs.get('cl_decay_steps', 1000))
+        self.use_curriculum_learning = bool(model_kwargs.get('use_curriculum_learning', False))
+        self._logger = logger
+        self.temperature = temperature
+        self.dim_fc = int(model_kwargs.get('dim_fc', False))
+        self.embedding_dim = 100
+        self.conv1 = torch.nn.Conv1d(1, 8, 10, stride=1)  # .to(device)
+        self.conv2 = torch.nn.Conv1d(8, 16, 10, stride=1)  # .to(device)
+        self.hidden_drop = torch.nn.Dropout(0.2)
+        self.fc = torch.nn.Linear(self.dim_fc, self.embedding_dim)
+        self.bn1 = torch.nn.BatchNorm1d(8)
+        self.bn2 = torch.nn.BatchNorm1d(16)
+        self.bn3 = torch.nn.BatchNorm1d(self.embedding_dim)
+        self.fc_out = nn.Linear(self.embedding_dim * 2, self.embedding_dim)
+        self.fc_cat = nn.Linear(self.embedding_dim, 2)
+        def encode_onehot(labels):
+            classes = set(labels)
+            classes_dict = {c: np.identity(len(classes))[i, :] for i, c in
+                            enumerate(classes)}
+            labels_onehot = np.array(list(map(classes_dict.get, labels)),
+                                     dtype=np.int32)
+            return labels_onehot
+        # Generate off-diagonal interaction graph
+        off_diag = np.ones([self.num_nodes, self.num_nodes])
+        rel_rec = np.array(encode_onehot(np.where(off_diag)[0]), dtype=np.float32)
+        rel_send = np.array(encode_onehot(np.where(off_diag)[1]), dtype=np.float32)
+        self.rel_rec = torch.FloatTensor(rel_rec).to(device)
+        self.rel_send = torch.FloatTensor(rel_send).to(device)
+
+
+    def _compute_sampling_threshold(self, batches_seen):
+        return self.cl_decay_steps / (
+                self.cl_decay_steps + np.exp(batches_seen / self.cl_decay_steps))
+
+    def encoder(self, inputs, adj):
+        """
+        Encoder forward pass
+        :param inputs: shape (seq_len, batch_size, num_sensor * input_dim)
+        :return: encoder_hidden_state: (num_layers, batch_size, self.hidden_state_size)
+        """
+        pass
+
+    def decoder(self, encoder_hidden_state, adj, labels=None, batches_seen=None):
+        """
+        Decoder forward pass
+        :param encoder_hidden_state: (num_layers, batch_size, self.hidden_state_size)
+        :param labels: (self.horizon, batch_size, self.num_nodes * self.output_dim) [optional, not exist for inference]
+        :param batches_seen: global step [optional, not exist for inference]
+        :return: output: (self.horizon, batch_size, self.num_nodes * self.output_dim)
+        """
+        pass
+
+    def forward(self, label, inputs, node_feas, temp, gumbel_soft, labels=None, batches_seen=None):
+        """
+        :param inputs: shape (seq_len, batch_size, num_sensor * input_dim)
+        :param labels: shape (horizon, batch_size, num_sensor * output)
+        :param batches_seen: batches seen till now
+        :return: output: (self.horizon, batch_size, self.num_nodes * self.output_dim)
+        """
+        x = node_feas.transpose(1, 0).view(self.num_nodes, 1, -1)
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = self.bn1(x)
+        # x = self.hidden_drop(x)
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = self.bn2(x)
+        x = x.view(self.num_nodes, -1)
+        x = self.fc(x)
+        x = F.relu(x)
+        x = self.bn3(x)
+
+        receivers = torch.matmul(self.rel_rec, x)
+        senders = torch.matmul(self.rel_send, x)
+        x = torch.cat([senders, receivers], dim=1)
+        x = torch.relu(self.fc_out(x))
+        x = self.fc_cat(x)
+
+        adj = gumbel_softmax(x, temperature=temp, hard=True)
+        adj = adj[:, 0].clone().reshape(self.num_nodes, -1)
+        # mask = torch.eye(self.num_nodes, self.num_nodes).to(device).byte()
+        mask = torch.eye(self.num_nodes, self.num_nodes).bool().to(device)
+        adj.masked_fill_(mask, 0)
+        # import pdb;pdb.set_trace()
+        encoder_hidden_state = self.encoder(inputs, adj)
+        # import pdb;pdb.set_trace()
+
+        self._logger.debug("Encoder complete, starting decoder")
+        outputs = self.decoder(encoder_hidden_state, adj, labels, batches_seen=batches_seen)
+        self._logger.debug("Decoder complete")
+        if batches_seen == 0:
+            self._logger.info(
+                "Total trainable parameters {}".format(count_parameters(self))
+            )
+
+        return outputs, x.softmax(-1)[:, 0].clone().reshape(self.num_nodes, -1)
