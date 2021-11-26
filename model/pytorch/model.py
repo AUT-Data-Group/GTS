@@ -237,9 +237,7 @@ class GTSModel(nn.Module, Seq2SeqAttrs):
         # mask = torch.eye(self.num_nodes, self.num_nodes).to(device).byte()
         mask = torch.eye(self.num_nodes, self.num_nodes).bool().to(device)
         adj.masked_fill_(mask, 0)
-        # import pdb;pdb.set_trace()
         encoder_hidden_state = self.encoder(inputs, adj)
-        # import pdb;pdb.set_trace()
 
         self._logger.debug("Encoder complete, starting decoder")
         outputs = self.decoder(encoder_hidden_state, adj, labels, batches_seen=batches_seen)
@@ -273,6 +271,8 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
         self.bn3 = torch.nn.BatchNorm1d(self.embedding_dim)
         self.fc_out = nn.Linear(self.embedding_dim * 2, self.embedding_dim)
         self.fc_cat = nn.Linear(self.embedding_dim, 2)
+        self.layers = nn.TransformerEncoderLayer(d_model=self.num_nodes * 2, nhead=9)
+        self.transformer = nn.TransformerEncoder(self.layers, num_layers=2)
         def encode_onehot(labels):
             classes = set(labels)
             classes_dict = {c: np.identity(len(classes))[i, :] for i, c in
@@ -298,7 +298,16 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
         :param inputs: shape (seq_len, batch_size, num_sensor * input_dim)
         :return: encoder_hidden_state: (num_layers, batch_size, self.hidden_state_size)
         """
-        pass
+        x1 = torch.mm(adj, inputs.reshape(207,-1))
+        # x = self._concat(x, x1)
+
+        for k in range(2, 3 + 1):
+            x2 = 2 * torch.mm(adj, x1)
+            x1, x0 = x2, x1
+        diffusion = x2
+        transformer_output = self.transformer(diffusion.reshape(12,64, 414))
+        return transformer_output
+                
 
     def decoder(self, encoder_hidden_state, adj, labels=None, batches_seen=None):
         """
@@ -308,7 +317,28 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
         :param batches_seen: global step [optional, not exist for inference]
         :return: output: (self.horizon, batch_size, self.num_nodes * self.output_dim)
         """
-        pass
+        batch_size = encoder_hidden_state.size(1)
+        go_symbol = torch.zeros((batch_size, self.num_nodes * self.decoder_model.output_dim),
+                                device=device)
+        decoder_hidden_state = encoder_hidden_state
+        decoder_input = go_symbol
+
+        outputs = []
+
+        for t in range(self.decoder_model.horizon):
+            # decoder_input -> 64 , 207
+            # adj = 207, 207
+            # decoder_hidden_state -> 12, 64, 414
+            decoder_output, decoder_hidden_state = self.decoder_model(decoder_input, adj,
+                                                                      decoder_hidden_state)
+            decoder_input = decoder_output
+            outputs.append(decoder_output)
+            if self.training and self.use_curriculum_learning:
+                c = np.random.uniform(0, 1)
+                if c < self._compute_sampling_threshold(batches_seen):
+                    decoder_input = labels[t]
+        outputs = torch.stack(outputs)
+        return outputs
 
     def forward(self, label, inputs, node_feas, temp, gumbel_soft, labels=None, batches_seen=None):
         """
@@ -341,12 +371,11 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
         # mask = torch.eye(self.num_nodes, self.num_nodes).to(device).byte()
         mask = torch.eye(self.num_nodes, self.num_nodes).bool().to(device)
         adj.masked_fill_(mask, 0)
-        # import pdb;pdb.set_trace()
         encoder_hidden_state = self.encoder(inputs, adj)
-        # import pdb;pdb.set_trace()
 
         self._logger.debug("Encoder complete, starting decoder")
         outputs = self.decoder(encoder_hidden_state, adj, labels, batches_seen=batches_seen)
+        
         self._logger.debug("Decoder complete")
         if batches_seen == 0:
             self._logger.info(

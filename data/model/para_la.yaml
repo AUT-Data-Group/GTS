@@ -18,15 +18,15 @@ model:
   num_nodes: 207
   num_rnn_layers: 1
   output_dim: 1
-  rnn_units: 64
+  rnn_units: 2
   seq_len: 12
   use_curriculum_learning: true
   dim_fc: 383552
 
 train:
-  base_lr: 0.001
+  base_lr: 0.0015
   dropout: 0
-  epoch: 148
+  epoch: 0
   epochs: 200
   epsilon: 1.0e-3
   global_step: 0

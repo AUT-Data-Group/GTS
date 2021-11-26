@@ -160,9 +160,9 @@ class DCGRUCell(torch.nn.Module):
         self._max_diffusion_step = max_diffusion_step
         self._supports = []
         self._use_gc_for_ru = use_gc_for_ru
-        self.attention = self.get_spatial_attention()
-        self.wt = torch.nn.Parameter(torch.empty(64,207,64)).to(device)
-        torch.nn.init.xavier_normal_(self.wt)
+        # self.attention = self.get_spatial_attention()
+        # self.wt = torch.nn.Parameter(torch.empty(64,207,64)).to(device)
+        # torch.nn.init.xavier_normal_(self.wt)
 
         
         '''
@@ -239,8 +239,8 @@ class DCGRUCell(torch.nn.Module):
             c = self._activation(c)
         # R-> torch.Size([64, 13248])
         # U-> torch.Size([64, 13248])
-        attention = torch.matmul(self.attention(inputs), self.wt).reshape(-1, b_s).T 
-        new_state = u * hx + (1.0 - u) * c + attention
+        # attention = torch.matmul(self.attention(inputs), self.wt).reshape(-1, b_s).T 
+        new_state = u * hx + (1.0 - u) * c
         return new_state
 
     @staticmethod

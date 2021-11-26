@@ -2,7 +2,7 @@ import torch
 from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 from lib import utils
-from model.pytorch.model import GTSModel
+from model.pytorch.model import GTSModel, GTSContribModel
 from model.pytorch.loss import masked_mae_loss, masked_mape_loss, masked_rmse_loss, masked_mse_loss
 import pandas as pd
 import os
@@ -66,7 +66,7 @@ class GTSSupervisor:
         self.horizon = int(self._model_kwargs.get('horizon', 1))  # for the decoder
 
         # setup model
-        GTS_model = GTSModel(self.temperature, self._logger, **self._model_kwargs)
+        GTS_model = GTSContribModel(self.temperature, self._logger, **self._model_kwargs)
         self.GTS_model = GTS_model.cuda() if torch.cuda.is_available() else GTS_model
         self._logger.info("Model created")
 
