@@ -254,7 +254,7 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
     def __init__(self, temperature, logger, **model_kwargs):
         super().__init__()
         Seq2SeqAttrs.__init__(self, **model_kwargs)
-        self.encoder_model = EncoderModel(**model_kwargs)
+        # self.encoder_model = EncoderModel(**model_kwargs)
         self.decoder_model = DecoderModel(**model_kwargs)
         self.cl_decay_steps = int(model_kwargs.get('cl_decay_steps', 1000))
         self.use_curriculum_learning = bool(model_kwargs.get('use_curriculum_learning', False))

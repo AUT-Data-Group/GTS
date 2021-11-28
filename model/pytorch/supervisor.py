@@ -56,7 +56,9 @@ class GTSSupervisor:
         from sklearn.neighbors import kneighbors_graph
         g = kneighbors_graph(train_feas.T, k, metric=knn_metric)
         g = np.array(g.todense(), dtype=np.float32)
-        self.adj_mx = torch.Tensor(g).to(device)
+        _,_, adj_matrix = utils.load_graph_data(self._data_kwargs.get("graph_pkl_filename", "data/sensor_graph/adj_mx.pkl"))
+        normalized = utils.calculate_normalized_laplacian(adj_matrix).toarray()
+        self.adj_mx = torch.Tensor(normalized).to(device)
         self.num_nodes = int(self._model_kwargs.get('num_nodes', 1))
         self.input_dim = int(self._model_kwargs.get('input_dim', 1))
         self.seq_len = int(self._model_kwargs.get('seq_len'))  # for the encoder
