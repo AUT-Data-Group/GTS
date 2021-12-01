@@ -1,3 +1,4 @@
+import math
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -250,6 +251,27 @@ class GTSModel(nn.Module, Seq2SeqAttrs):
         return outputs, x.softmax(-1)[:, 0].clone().reshape(self.num_nodes, -1)
 
 
+class PositionalEncoding(nn.Module):
+
+    def __init__(self, d_model: int, dropout: float = 0.1, max_len: int = 5000):
+        super().__init__()
+        self.dropout = nn.Dropout(p=dropout)
+
+        position = torch.arange(max_len).unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2) * (-math.log(10000.0) / d_model))
+        pe = torch.zeros(max_len, 1, d_model)
+        pe[:, 0, 0::2] = torch.sin(position * div_term)
+        pe[:, 0, 1::2] = torch.cos(position * div_term)
+        self.register_buffer('pe', pe)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: Tensor, shape [seq_len, batch_size, embedding_dim]
+        """
+        x = x + self.pe[:x.size(0)]
+        return self.dropout(x)
+
 class GTSContribModel(nn.Module, Seq2SeqAttrs):
     def __init__(self, temperature, logger, **model_kwargs):
         super().__init__()
@@ -272,7 +294,8 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
         self.fc_out = nn.Linear(self.embedding_dim * 2, self.embedding_dim)
         self.fc_cat = nn.Linear(self.embedding_dim, 2)
         self.layers = nn.TransformerEncoderLayer(d_model=self.num_nodes * 2, nhead=9)
-        self.transformer = nn.TransformerEncoder(self.layers, num_layers=2)
+        self.transformer = nn.TransformerEncoder(self.layers, num_layers=1)
+        self.pos_encoder = PositionalEncoding(self.num_nodes * 2)
         def encode_onehot(labels):
             classes = set(labels)
             classes_dict = {c: np.identity(len(classes))[i, :] for i, c in
@@ -298,7 +321,8 @@ class GTSContribModel(nn.Module, Seq2SeqAttrs):
         :param inputs: shape (seq_len, batch_size, num_sensor * input_dim)
         :return: encoder_hidden_state: (num_layers, batch_size, self.hidden_state_size)
         """
-        x1 = torch.mm(adj, inputs.reshape(207,-1))
+        encoded_input = self.pos_encoder(inputs)
+        x1 = torch.mm(adj, encoded_input.reshape(207,-1))
         # x = self._concat(x, x1)
 
         for k in range(2, 3 + 1):
