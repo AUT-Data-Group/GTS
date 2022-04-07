@@ -42,7 +42,7 @@ class ViViT(nn.Module):
                  img_size,
                  patch_size,
                  embed_dims=768,
-                 num_heads=4,
+                 num_heads=1,
                  num_transformer_layers=12,
                  in_channels=3,
                  dropout_p=0.,
