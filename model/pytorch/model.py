@@ -43,7 +43,7 @@ class ViViT(nn.Module):
                  patch_size,
                  embed_dims=768,
                  num_heads=1,
-                 num_transformer_layers=6,
+                 num_transformer_layers=1,
                  in_channels=3,
                  dropout_p=0.,
                  tube_size=2,
