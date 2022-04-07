@@ -1,3 +1,6 @@
-data/
+data/*
 __pycache__/
 train.sh
+runs/
+run*
+models

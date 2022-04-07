@@ -1,0 +1,516 @@
+2021-12-12 02:57:43.140971: W tensorflow/stream_executor/platform/default/dso_loader.cc:60] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-12-12 02:57:43.141001: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+train.py:12: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  supervisor_config = yaml.load(f)
+2021-12-12 02:57:44,804 - INFO - Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_1212025744/
+/home/seyed/Desktop/gvi/classic/GTS/lib/utils.py:53: RuntimeWarning: invalid value encountered in true_divide
+  result = np.array(adj.sum(0)).ravel() / np.array(adj.sum(1)).ravel()
+/home/seyed/Desktop/gvi/classic/GTS/model/pytorch/model.py:728: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  self.centrality_linear = nn.Parameter(F.softmax(torch.Tensor(centrality).to(device)).reshape(1,207,1), requires_grad=True)
+2021-12-12 02:57:56,998 - INFO - Model created
+2021-12-12 02:57:57,000 - INFO - Start training ...
+2021-12-12 02:57:57,000 - INFO - num_batches:375
+Num of epoch: 0
+/home/seyed/anaconda3/lib/python3.8/site-packages/torch/nn/functional.py:1805: UserWarning: nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.
+  warnings.warn("nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.")
+/home/seyed/Desktop/gvi/classic/GTS/model/pytorch/supervisor.py:347: FutureWarning: Non-finite norm encountered in torch.nn.utils.clip_grad_norm_; continuing anyway. Note that the default behavior will change in a future release to error out if a non-finite total norm is encountered. At that point, setting error_if_nonfinite=false will be required to retain the old behavior.
+  torch.nn.utils.clip_grad_norm_(self.GTS_model.parameters(), self.max_grad_norm)
+2021-12-12 03:02:40,634 - INFO - epoch complete
+/home/seyed/anaconda3/lib/python3.8/site-packages/torch/optim/lr_scheduler.py:129: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+2021-12-12 03:02:40,635 - INFO - evaluating now!
+/home/seyed/anaconda3/lib/python3.8/site-packages/torch/optim/lr_scheduler.py:416: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  warnings.warn("To get the last learning rate computed by the scheduler, "
+2021-12-12 03:02:52,625 - INFO - Epoch [0/200] (375) train_mae: 6.4025, val_mae: 6.2212, val_mape: 0.2340, val_rmse: 12.1471, lr: 0.001500, 283.6s, 295.6s
+2021-12-12 03:02:52,660 - INFO - Saved model at 0
+2021-12-12 03:02:52,660 - INFO - Val loss decrease from inf to 6.2212, saving to models/epo0.tar
+Num of epoch: 1
+2021-12-12 03:07:36,383 - INFO - epoch complete
+2021-12-12 03:07:36,383 - INFO - evaluating now!
+2021-12-12 03:07:48,094 - INFO - Epoch [1/200] (750) train_mae: 6.1729, val_mae: 6.2156, val_mape: 0.2339, val_rmse: 12.1521, lr: 0.001500, 283.7s, 295.4s
+2021-12-12 03:07:48,113 - INFO - Saved model at 1
+2021-12-12 03:07:48,113 - INFO - Val loss decrease from 6.2212 to 6.2156, saving to models/epo1.tar
+Num of epoch: 2
+2021-12-12 03:12:32,077 - INFO - epoch complete
+2021-12-12 03:12:32,077 - INFO - evaluating now!
+2021-12-12 03:12:43,794 - INFO - Epoch [2/200] (1125) train_mae: 6.1700, val_mae: 6.2165, val_mape: 0.2339, val_rmse: 12.1509, lr: 0.001500, 284.0s, 295.7s
+Num of epoch: 3
+2021-12-12 03:17:27,878 - INFO - epoch complete
+2021-12-12 03:17:27,878 - INFO - evaluating now!
+2021-12-12 03:17:39,590 - INFO - Epoch [3/200] (1500) train_mae: 6.1681, val_mae: 6.2167, val_mape: 0.2338, val_rmse: 12.1504, lr: 0.001500, 284.1s, 295.8s
+Num of epoch: 4
+2021-12-12 03:22:23,342 - INFO - epoch complete
+2021-12-12 03:22:23,342 - INFO - evaluating now!
+2021-12-12 03:22:35,058 - INFO - Epoch [4/200] (1875) train_mae: 6.1667, val_mae: 6.2167, val_mape: 0.2338, val_rmse: 12.1495, lr: 0.001500, 283.8s, 295.5s
+2021-12-12 03:22:58,469 - INFO - Test: mae: 6.4441, mape: 0.2445, rmse: 12.6698
+2021-12-12 03:22:58,469 - INFO - Horizon 15mins: mae: 6.4390, mape: 0.2440, rmse: 12.6498
+2021-12-12 03:22:58,469 - INFO - Horizon 30mins: mae: 6.4521, mape: 0.2446, rmse: 12.6659
+2021-12-12 03:22:58,469 - INFO - Horizon 60mins: mae: 6.4432, mape: 0.2447, rmse: 12.6809
+2021-12-12 03:22:58,469 - INFO - Epoch [4/200] (1875) train_mae: 6.1667, test_mae: 6.4441, test_mape: 0.2445, test_rmse: 12.6698, lr: 0.001500, 283.8s, 295.5s
+Num of epoch: 5
+2021-12-12 03:27:42,422 - INFO - epoch complete
+2021-12-12 03:27:42,422 - INFO - evaluating now!
+2021-12-12 03:27:54,109 - INFO - Epoch [5/200] (2250) train_mae: 6.1652, val_mae: 6.2158, val_mape: 0.2338, val_rmse: 12.1501, lr: 0.001500, 284.0s, 295.6s
+Num of epoch: 6
+2021-12-12 03:32:37,954 - INFO - epoch complete
+2021-12-12 03:32:37,954 - INFO - evaluating now!
+2021-12-12 03:32:49,668 - INFO - Epoch [6/200] (2625) train_mae: 6.1637, val_mae: 6.2140, val_mape: 0.2338, val_rmse: 12.1516, lr: 0.001500, 283.8s, 295.6s
+2021-12-12 03:32:49,692 - INFO - Saved model at 6
+2021-12-12 03:32:49,692 - INFO - Val loss decrease from 6.2156 to 6.2140, saving to models/epo6.tar
+Num of epoch: 7
+2021-12-12 03:37:33,451 - INFO - epoch complete
+2021-12-12 03:37:33,451 - INFO - evaluating now!
+2021-12-12 03:37:45,116 - INFO - Epoch [7/200] (3000) train_mae: 6.1621, val_mae: 6.2114, val_mape: 0.2338, val_rmse: 12.1541, lr: 0.001500, 283.8s, 295.4s
+2021-12-12 03:37:45,134 - INFO - Saved model at 7
+2021-12-12 03:37:45,134 - INFO - Val loss decrease from 6.2140 to 6.2114, saving to models/epo7.tar
+Num of epoch: 8
+2021-12-12 03:42:28,751 - INFO - epoch complete
+2021-12-12 03:42:28,751 - INFO - evaluating now!
+2021-12-12 03:42:40,461 - INFO - Epoch [8/200] (3375) train_mae: 6.1602, val_mae: 6.2096, val_mape: 0.2337, val_rmse: 12.1559, lr: 0.001500, 283.6s, 295.3s
+2021-12-12 03:42:40,480 - INFO - Saved model at 8
+2021-12-12 03:42:40,480 - INFO - Val loss decrease from 6.2114 to 6.2096, saving to models/epo8.tar
+Num of epoch: 9
+2021-12-12 03:47:24,266 - INFO - epoch complete
+2021-12-12 03:47:24,266 - INFO - evaluating now!
+2021-12-12 03:47:35,991 - INFO - Epoch [9/200] (3750) train_mae: 6.1581, val_mae: 6.2079, val_mape: 0.2337, val_rmse: 12.1566, lr: 0.001500, 283.8s, 295.5s
+2021-12-12 03:47:59,418 - INFO - Test: mae: 6.4415, mape: 0.2445, rmse: 12.6799
+2021-12-12 03:47:59,418 - INFO - Horizon 15mins: mae: 6.4348, mape: 0.2441, rmse: 12.6644
+2021-12-12 03:47:59,419 - INFO - Horizon 30mins: mae: 6.4495, mape: 0.2446, rmse: 12.6750
+2021-12-12 03:47:59,419 - INFO - Horizon 60mins: mae: 6.4410, mape: 0.2447, rmse: 12.6921
+2021-12-12 03:47:59,419 - INFO - Epoch [9/200] (3750) train_mae: 6.1581, test_mae: 6.4415, test_mape: 0.2445, test_rmse: 12.6799, lr: 0.001500, 283.8s, 295.5s
+2021-12-12 03:47:59,438 - INFO - Saved model at 9
+2021-12-12 03:47:59,438 - INFO - Val loss decrease from 6.2096 to 6.2079, saving to models/epo9.tar
+Num of epoch: 10
+2021-12-12 03:52:43,344 - INFO - epoch complete
+2021-12-12 03:52:43,344 - INFO - evaluating now!
+2021-12-12 03:52:55,047 - INFO - Epoch [10/200] (4125) train_mae: 6.1555, val_mae: 6.2058, val_mape: 0.2337, val_rmse: 12.1586, lr: 0.001500, 283.9s, 295.6s
+2021-12-12 03:52:55,067 - INFO - Saved model at 10
+2021-12-12 03:52:55,067 - INFO - Val loss decrease from 6.2079 to 6.2058, saving to models/epo10.tar
+Num of epoch: 11
+2021-12-12 03:57:38,726 - INFO - epoch complete
+2021-12-12 03:57:38,726 - INFO - evaluating now!
+2021-12-12 03:57:50,433 - INFO - Epoch [11/200] (4500) train_mae: 6.1525, val_mae: 6.2053, val_mape: 0.2337, val_rmse: 12.1614, lr: 0.001500, 283.7s, 295.4s
+2021-12-12 03:57:50,452 - INFO - Saved model at 11
+2021-12-12 03:57:50,453 - INFO - Val loss decrease from 6.2058 to 6.2053, saving to models/epo11.tar
+Num of epoch: 12
+2021-12-12 04:02:34,304 - INFO - epoch complete
+2021-12-12 04:02:34,304 - INFO - evaluating now!
+2021-12-12 04:02:46,019 - INFO - Epoch [12/200] (4875) train_mae: 6.1488, val_mae: 6.2048, val_mape: 0.2336, val_rmse: 12.1657, lr: 0.001500, 283.9s, 295.6s
+2021-12-12 04:02:46,038 - INFO - Saved model at 12
+2021-12-12 04:02:46,038 - INFO - Val loss decrease from 6.2053 to 6.2048, saving to models/epo12.tar
+Num of epoch: 13
+2021-12-12 04:07:29,825 - INFO - epoch complete
+2021-12-12 04:07:29,825 - INFO - evaluating now!
+2021-12-12 04:07:41,514 - INFO - Epoch [13/200] (5250) train_mae: 6.1450, val_mae: 6.2021, val_mape: 0.2334, val_rmse: 12.1727, lr: 0.001500, 283.8s, 295.5s
+2021-12-12 04:07:41,533 - INFO - Saved model at 13
+2021-12-12 04:07:41,533 - INFO - Val loss decrease from 6.2048 to 6.2021, saving to models/epo13.tar
+Num of epoch: 14
+2021-12-12 04:12:25,272 - INFO - epoch complete
+2021-12-12 04:12:25,272 - INFO - evaluating now!
+2021-12-12 04:12:36,988 - INFO - Epoch [14/200] (5625) train_mae: 6.1410, val_mae: 6.2014, val_mape: 0.2335, val_rmse: 12.1745, lr: 0.001500, 283.7s, 295.5s
+2021-12-12 04:13:00,421 - INFO - Test: mae: 6.4413, mape: 0.2444, rmse: 12.7000
+2021-12-12 04:13:00,421 - INFO - Horizon 15mins: mae: 6.4336, mape: 0.2439, rmse: 12.6824
+2021-12-12 04:13:00,421 - INFO - Horizon 30mins: mae: 6.4486, mape: 0.2444, rmse: 12.6962
+2021-12-12 04:13:00,422 - INFO - Horizon 60mins: mae: 6.4412, mape: 0.2446, rmse: 12.7174
+2021-12-12 04:13:00,422 - INFO - Epoch [14/200] (5625) train_mae: 6.1410, test_mae: 6.4413, test_mape: 0.2444, test_rmse: 12.7000, lr: 0.001500, 283.7s, 295.5s
+2021-12-12 04:13:00,449 - INFO - Saved model at 14
+2021-12-12 04:13:00,450 - INFO - Val loss decrease from 6.2021 to 6.2014, saving to models/epo14.tar
+Num of epoch: 15
+2021-12-12 04:17:44,065 - INFO - epoch complete
+2021-12-12 04:17:44,066 - INFO - evaluating now!
+2021-12-12 04:17:55,778 - INFO - Epoch [15/200] (6000) train_mae: 6.1346, val_mae: 6.1991, val_mape: 0.2336, val_rmse: 12.1851, lr: 0.001500, 283.6s, 295.3s
+2021-12-12 04:17:55,798 - INFO - Saved model at 15
+2021-12-12 04:17:55,798 - INFO - Val loss decrease from 6.2014 to 6.1991, saving to models/epo15.tar
+Num of epoch: 16
+2021-12-12 04:22:39,611 - INFO - epoch complete
+2021-12-12 04:22:39,612 - INFO - evaluating now!
+2021-12-12 04:22:51,357 - INFO - Epoch [16/200] (6375) train_mae: 6.1281, val_mae: 6.1983, val_mape: 0.2335, val_rmse: 12.1855, lr: 0.001500, 283.8s, 295.6s
+2021-12-12 04:22:51,378 - INFO - Saved model at 16
+2021-12-12 04:22:51,378 - INFO - Val loss decrease from 6.1991 to 6.1983, saving to models/epo16.tar
+Num of epoch: 17
+2021-12-12 04:27:34,957 - INFO - epoch complete
+2021-12-12 04:27:34,957 - INFO - evaluating now!
+2021-12-12 04:27:46,648 - INFO - Epoch [17/200] (6750) train_mae: 6.1213, val_mae: 6.1985, val_mape: 0.2335, val_rmse: 12.1913, lr: 0.001500, 283.6s, 295.3s
+Num of epoch: 18
+2021-12-12 04:32:30,286 - INFO - epoch complete
+2021-12-12 04:32:30,286 - INFO - evaluating now!
+2021-12-12 04:32:42,073 - INFO - Epoch [18/200] (7125) train_mae: 6.1154, val_mae: 6.1973, val_mape: 0.2334, val_rmse: 12.1994, lr: 0.001500, 283.6s, 295.4s
+2021-12-12 04:32:42,093 - INFO - Saved model at 18
+2021-12-12 04:32:42,093 - INFO - Val loss decrease from 6.1983 to 6.1973, saving to models/epo18.tar
+Num of epoch: 19
+2021-12-12 04:37:25,751 - INFO - epoch complete
+2021-12-12 04:37:25,751 - INFO - evaluating now!
+2021-12-12 04:37:37,472 - INFO - Epoch [19/200] (7500) train_mae: 6.1080, val_mae: 6.1954, val_mape: 0.2330, val_rmse: 12.1969, lr: 0.000015, 283.7s, 295.4s
+2021-12-12 04:38:00,876 - INFO - Test: mae: 6.4442, mape: 0.2441, rmse: 12.7258
+2021-12-12 04:38:00,876 - INFO - Horizon 15mins: mae: 6.4341, mape: 0.2435, rmse: 12.7071
+2021-12-12 04:38:00,876 - INFO - Horizon 30mins: mae: 6.4509, mape: 0.2441, rmse: 12.7217
+2021-12-12 04:38:00,876 - INFO - Horizon 60mins: mae: 6.4465, mape: 0.2445, rmse: 12.7466
+2021-12-12 04:38:00,877 - INFO - Epoch [19/200] (7500) train_mae: 6.1080, test_mae: 6.4442, test_mape: 0.2441, test_rmse: 12.7258, lr: 0.000015, 283.7s, 295.4s
+2021-12-12 04:38:00,895 - INFO - Saved model at 19
+2021-12-12 04:38:00,895 - INFO - Val loss decrease from 6.1973 to 6.1954, saving to models/epo19.tar
+Num of epoch: 20
+2021-12-12 04:42:44,547 - INFO - epoch complete
+2021-12-12 04:42:44,547 - INFO - evaluating now!
+2021-12-12 04:42:56,251 - INFO - Epoch [20/200] (7875) train_mae: 6.1011, val_mae: 6.1962, val_mape: 0.2329, val_rmse: 12.1996, lr: 0.000150, 283.7s, 295.4s
+Num of epoch: 21
+2021-12-12 04:47:40,141 - INFO - epoch complete
+2021-12-12 04:47:40,141 - INFO - evaluating now!
+2021-12-12 04:47:51,835 - INFO - Epoch [21/200] (8250) train_mae: 6.0930, val_mae: 6.1979, val_mape: 0.2328, val_rmse: 12.2079, lr: 0.000150, 283.9s, 295.6s
+Num of epoch: 22
+2021-12-12 04:52:35,364 - INFO - epoch complete
+2021-12-12 04:52:35,364 - INFO - evaluating now!
+2021-12-12 04:52:47,044 - INFO - Epoch [22/200] (8625) train_mae: 6.0863, val_mae: 6.2001, val_mape: 0.2326, val_rmse: 12.2097, lr: 0.000150, 283.5s, 295.2s
+Num of epoch: 23
+2021-12-12 04:57:30,655 - INFO - epoch complete
+2021-12-12 04:57:30,655 - INFO - evaluating now!
+2021-12-12 04:57:42,343 - INFO - Epoch [23/200] (9000) train_mae: 6.0762, val_mae: 6.2017, val_mape: 0.2323, val_rmse: 12.2092, lr: 0.000150, 283.6s, 295.3s
+Num of epoch: 24
+2021-12-12 05:02:25,955 - INFO - epoch complete
+2021-12-12 05:02:25,955 - INFO - evaluating now!
+2021-12-12 05:02:37,649 - INFO - Epoch [24/200] (9375) train_mae: 6.0658, val_mae: 6.2059, val_mape: 0.2325, val_rmse: 12.2254, lr: 0.000150, 283.6s, 295.3s
+2021-12-12 05:03:01,085 - INFO - Test: mae: 6.4476, mape: 0.2433, rmse: 12.7376
+2021-12-12 05:03:01,085 - INFO - Horizon 15mins: mae: 6.4382, mape: 0.2428, rmse: 12.7192
+2021-12-12 05:03:01,086 - INFO - Horizon 30mins: mae: 6.4538, mape: 0.2433, rmse: 12.7337
+2021-12-12 05:03:01,086 - INFO - Horizon 60mins: mae: 6.4516, mape: 0.2438, rmse: 12.7599
+2021-12-12 05:03:01,086 - INFO - Epoch [24/200] (9375) train_mae: 6.0658, test_mae: 6.4476, test_mape: 0.2433, test_rmse: 12.7376, lr: 0.000150, 283.6s, 295.3s
+Num of epoch: 25
+2021-12-12 05:07:44,885 - INFO - epoch complete
+2021-12-12 05:07:44,885 - INFO - evaluating now!
+2021-12-12 05:07:56,589 - INFO - Epoch [25/200] (9750) train_mae: 6.0543, val_mae: 6.2102, val_mape: 0.2324, val_rmse: 12.2386, lr: 0.000150, 283.8s, 295.5s
+Num of epoch: 26
+2021-12-12 05:12:40,474 - INFO - epoch complete
+2021-12-12 05:12:40,474 - INFO - evaluating now!
+2021-12-12 05:12:52,216 - INFO - Epoch [26/200] (10125) train_mae: 6.0438, val_mae: 6.2185, val_mape: 0.2323, val_rmse: 12.2542, lr: 0.000150, 283.9s, 295.6s
+Num of epoch: 27
+2021-12-12 05:17:35,757 - INFO - epoch complete
+2021-12-12 05:17:35,757 - INFO - evaluating now!
+2021-12-12 05:17:47,460 - INFO - Epoch [27/200] (10500) train_mae: 6.0309, val_mae: 6.2188, val_mape: 0.2321, val_rmse: 12.2513, lr: 0.000150, 283.5s, 295.2s
+Num of epoch: 28
+2021-12-12 05:22:30,802 - INFO - epoch complete
+2021-12-12 05:22:30,802 - INFO - evaluating now!
+2021-12-12 05:22:42,500 - INFO - Epoch [28/200] (10875) train_mae: 6.0203, val_mae: 6.2319, val_mape: 0.2320, val_rmse: 12.2680, lr: 0.000150, 283.3s, 295.0s
+Num of epoch: 29
+2021-12-12 05:27:26,168 - INFO - epoch complete
+2021-12-12 05:27:26,169 - INFO - evaluating now!
+2021-12-12 05:27:37,870 - INFO - Epoch [29/200] (11250) train_mae: 6.0028, val_mae: 6.2388, val_mape: 0.2321, val_rmse: 12.2839, lr: 0.000002, 283.7s, 295.4s
+2021-12-12 05:28:01,259 - INFO - Test: mae: 6.4631, mape: 0.2427, rmse: 12.7610
+2021-12-12 05:28:01,259 - INFO - Horizon 15mins: mae: 6.4535, mape: 0.2422, rmse: 12.7413
+2021-12-12 05:28:01,259 - INFO - Horizon 30mins: mae: 6.4685, mape: 0.2426, rmse: 12.7527
+2021-12-12 05:28:01,259 - INFO - Horizon 60mins: mae: 6.4689, mape: 0.2433, rmse: 12.7829
+2021-12-12 05:28:01,259 - INFO - Epoch [29/200] (11250) train_mae: 6.0028, test_mae: 6.4631, test_mape: 0.2427, test_rmse: 12.7610, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 30
+2021-12-12 05:32:45,090 - INFO - epoch complete
+2021-12-12 05:32:45,091 - INFO - evaluating now!
+2021-12-12 05:32:56,817 - INFO - Epoch [30/200] (11625) train_mae: 5.9886, val_mae: 6.2486, val_mape: 0.2317, val_rmse: 12.2942, lr: 0.000015, 283.8s, 295.6s
+Num of epoch: 31
+2021-12-12 05:37:40,552 - INFO - epoch complete
+2021-12-12 05:37:40,552 - INFO - evaluating now!
+2021-12-12 05:37:52,263 - INFO - Epoch [31/200] (12000) train_mae: 5.9740, val_mae: 6.2569, val_mape: 0.2317, val_rmse: 12.3031, lr: 0.000015, 283.7s, 295.4s
+Num of epoch: 32
+2021-12-12 05:42:35,923 - INFO - epoch complete
+2021-12-12 05:42:35,924 - INFO - evaluating now!
+2021-12-12 05:42:47,625 - INFO - Epoch [32/200] (12375) train_mae: 5.9571, val_mae: 6.2664, val_mape: 0.2314, val_rmse: 12.3151, lr: 0.000015, 283.7s, 295.4s
+Num of epoch: 33
+2021-12-12 05:47:31,296 - INFO - epoch complete
+2021-12-12 05:47:31,296 - INFO - evaluating now!
+2021-12-12 05:47:43,001 - INFO - Epoch [33/200] (12750) train_mae: 5.9385, val_mae: 6.2733, val_mape: 0.2320, val_rmse: 12.3301, lr: 0.000015, 283.7s, 295.4s
+Num of epoch: 34
+2021-12-12 05:52:26,680 - INFO - epoch complete
+2021-12-12 05:52:26,680 - INFO - evaluating now!
+2021-12-12 05:52:38,372 - INFO - Epoch [34/200] (13125) train_mae: 5.9242, val_mae: 6.2724, val_mape: 0.2315, val_rmse: 12.3306, lr: 0.000015, 283.7s, 295.4s
+2021-12-12 05:53:01,923 - INFO - Test: mae: 6.4833, mape: 0.2418, rmse: 12.7714
+2021-12-12 05:53:01,923 - INFO - Horizon 15mins: mae: 6.4758, mape: 0.2412, rmse: 12.7582
+2021-12-12 05:53:01,923 - INFO - Horizon 30mins: mae: 6.4877, mape: 0.2416, rmse: 12.7632
+2021-12-12 05:53:01,923 - INFO - Horizon 60mins: mae: 6.4889, mape: 0.2423, rmse: 12.7907
+2021-12-12 05:53:01,923 - INFO - Epoch [34/200] (13125) train_mae: 5.9242, test_mae: 6.4833, test_mape: 0.2418, test_rmse: 12.7714, lr: 0.000015, 283.7s, 295.4s
+Num of epoch: 35
+2021-12-12 05:57:45,664 - INFO - epoch complete
+2021-12-12 05:57:45,665 - INFO - evaluating now!
+2021-12-12 05:57:57,350 - INFO - Epoch [35/200] (13500) train_mae: 5.8989, val_mae: 6.2972, val_mape: 0.2311, val_rmse: 12.3597, lr: 0.000015, 283.7s, 295.4s
+Num of epoch: 36
+2021-12-12 06:02:41,156 - INFO - epoch complete
+2021-12-12 06:02:41,156 - INFO - evaluating now!
+2021-12-12 06:02:52,850 - INFO - Epoch [36/200] (13875) train_mae: 5.8792, val_mae: 6.3236, val_mape: 0.2316, val_rmse: 12.3838, lr: 0.000015, 283.8s, 295.5s
+Num of epoch: 37
+2021-12-12 06:07:36,585 - INFO - epoch complete
+2021-12-12 06:07:36,585 - INFO - evaluating now!
+2021-12-12 06:07:48,291 - INFO - Epoch [37/200] (14250) train_mae: 5.8564, val_mae: 6.3082, val_mape: 0.2317, val_rmse: 12.3760, lr: 0.000015, 283.7s, 295.4s
+Num of epoch: 38
+2021-12-12 06:12:32,219 - INFO - epoch complete
+2021-12-12 06:12:32,219 - INFO - evaluating now!
+2021-12-12 06:12:43,929 - INFO - Epoch [38/200] (14625) train_mae: 5.8355, val_mae: 6.3143, val_mape: 0.2311, val_rmse: 12.3745, lr: 0.000015, 283.9s, 295.6s
+Num of epoch: 39
+2021-12-12 06:17:27,408 - INFO - epoch complete
+2021-12-12 06:17:27,408 - INFO - evaluating now!
+2021-12-12 06:17:39,127 - INFO - Epoch [39/200] (15000) train_mae: 5.8091, val_mae: 6.3314, val_mape: 0.2314, val_rmse: 12.4004, lr: 0.000000, 283.5s, 295.2s
+2021-12-12 06:18:02,542 - INFO - Test: mae: 6.5222, mape: 0.2414, rmse: 12.8046
+2021-12-12 06:18:02,543 - INFO - Horizon 15mins: mae: 6.5120, mape: 0.2407, rmse: 12.7861
+2021-12-12 06:18:02,543 - INFO - Horizon 30mins: mae: 6.5277, mape: 0.2413, rmse: 12.8015
+2021-12-12 06:18:02,543 - INFO - Horizon 60mins: mae: 6.5278, mape: 0.2419, rmse: 12.8213
+2021-12-12 06:18:02,543 - INFO - Epoch [39/200] (15000) train_mae: 5.8091, test_mae: 6.5222, test_mape: 0.2414, test_rmse: 12.8046, lr: 0.000000, 283.5s, 295.2s
+Num of epoch: 40
+2021-12-12 06:22:46,143 - INFO - epoch complete
+2021-12-12 06:22:46,143 - INFO - evaluating now!
+2021-12-12 06:22:57,863 - INFO - Epoch [40/200] (15375) train_mae: 5.7805, val_mae: 6.3499, val_mape: 0.2311, val_rmse: 12.4273, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 41
+2021-12-12 06:27:41,513 - INFO - epoch complete
+2021-12-12 06:27:41,513 - INFO - evaluating now!
+2021-12-12 06:27:53,235 - INFO - Epoch [41/200] (15750) train_mae: 5.7540, val_mae: 6.3735, val_mape: 0.2310, val_rmse: 12.4422, lr: 0.000002, 283.6s, 295.4s
+Num of epoch: 42
+2021-12-12 06:32:37,009 - INFO - epoch complete
+2021-12-12 06:32:37,009 - INFO - evaluating now!
+2021-12-12 06:32:48,717 - INFO - Epoch [42/200] (16125) train_mae: 5.7218, val_mae: 6.3937, val_mape: 0.2309, val_rmse: 12.4519, lr: 0.000002, 283.8s, 295.5s
+Num of epoch: 43
+2021-12-12 06:37:32,319 - INFO - epoch complete
+2021-12-12 06:37:32,319 - INFO - evaluating now!
+2021-12-12 06:37:44,023 - INFO - Epoch [43/200] (16500) train_mae: 5.6886, val_mae: 6.4016, val_mape: 0.2310, val_rmse: 12.4705, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 44
+2021-12-12 06:42:27,530 - INFO - epoch complete
+2021-12-12 06:42:27,530 - INFO - evaluating now!
+2021-12-12 06:42:39,255 - INFO - Epoch [44/200] (16875) train_mae: 5.6513, val_mae: 6.4409, val_mape: 0.2311, val_rmse: 12.5124, lr: 0.000002, 283.5s, 295.2s
+2021-12-12 06:43:02,667 - INFO - Test: mae: 6.6059, mape: 0.2408, rmse: 12.8722
+2021-12-12 06:43:02,668 - INFO - Horizon 15mins: mae: 6.5906, mape: 0.2400, rmse: 12.8468
+2021-12-12 06:43:02,668 - INFO - Horizon 30mins: mae: 6.6121, mape: 0.2408, rmse: 12.8719
+2021-12-12 06:43:02,668 - INFO - Horizon 60mins: mae: 6.6181, mape: 0.2416, rmse: 12.8988
+2021-12-12 06:43:02,668 - INFO - Epoch [44/200] (16875) train_mae: 5.6513, test_mae: 6.6059, test_mape: 0.2408, test_rmse: 12.8722, lr: 0.000002, 283.5s, 295.2s
+Num of epoch: 45
+2021-12-12 06:47:46,298 - INFO - epoch complete
+2021-12-12 06:47:46,298 - INFO - evaluating now!
+2021-12-12 06:47:57,999 - INFO - Epoch [45/200] (17250) train_mae: 5.6097, val_mae: 6.4807, val_mape: 0.2317, val_rmse: 12.5629, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 46
+2021-12-12 06:52:41,995 - INFO - epoch complete
+2021-12-12 06:52:41,996 - INFO - evaluating now!
+2021-12-12 06:52:53,739 - INFO - Epoch [46/200] (17625) train_mae: 5.5700, val_mae: 6.5205, val_mape: 0.2315, val_rmse: 12.5989, lr: 0.000002, 284.0s, 295.7s
+Num of epoch: 47
+2021-12-12 06:57:38,523 - INFO - epoch complete
+2021-12-12 06:57:38,524 - INFO - evaluating now!
+2021-12-12 06:57:50,237 - INFO - Epoch [47/200] (18000) train_mae: 5.5272, val_mae: 6.5630, val_mape: 0.2315, val_rmse: 12.6216, lr: 0.000002, 284.8s, 296.5s
+Num of epoch: 48
+2021-12-12 07:02:34,186 - INFO - epoch complete
+2021-12-12 07:02:34,186 - INFO - evaluating now!
+2021-12-12 07:02:45,888 - INFO - Epoch [48/200] (18375) train_mae: 5.4890, val_mae: 6.6267, val_mape: 0.2320, val_rmse: 12.6963, lr: 0.000002, 283.9s, 295.7s
+Num of epoch: 49
+2021-12-12 07:07:29,779 - INFO - epoch complete
+2021-12-12 07:07:29,779 - INFO - evaluating now!
+2021-12-12 07:07:41,506 - INFO - Epoch [49/200] (18750) train_mae: 5.4425, val_mae: 6.6375, val_mape: 0.2324, val_rmse: 12.7125, lr: 0.000002, 283.9s, 295.6s
+2021-12-12 07:08:04,902 - INFO - Test: mae: 6.7132, mape: 0.2405, rmse: 12.9335
+2021-12-12 07:08:04,903 - INFO - Horizon 15mins: mae: 6.7000, mape: 0.2398, rmse: 12.9122
+2021-12-12 07:08:04,903 - INFO - Horizon 30mins: mae: 6.7236, mape: 0.2406, rmse: 12.9439
+2021-12-12 07:08:04,903 - INFO - Horizon 60mins: mae: 6.7203, mape: 0.2412, rmse: 12.9559
+2021-12-12 07:08:04,903 - INFO - Epoch [49/200] (18750) train_mae: 5.4425, test_mae: 6.7132, test_mape: 0.2405, test_rmse: 12.9335, lr: 0.000002, 283.9s, 295.6s
+Num of epoch: 50
+2021-12-12 07:12:48,452 - INFO - epoch complete
+2021-12-12 07:12:48,453 - INFO - evaluating now!
+2021-12-12 07:13:00,142 - INFO - Epoch [50/200] (19125) train_mae: 5.3991, val_mae: 6.6599, val_mape: 0.2324, val_rmse: 12.7424, lr: 0.000002, 283.5s, 295.2s
+Num of epoch: 51
+2021-12-12 07:17:43,663 - INFO - epoch complete
+2021-12-12 07:17:43,663 - INFO - evaluating now!
+2021-12-12 07:17:55,393 - INFO - Epoch [51/200] (19500) train_mae: 5.3526, val_mae: 6.6104, val_mape: 0.2320, val_rmse: 12.6730, lr: 0.000002, 283.5s, 295.3s
+Num of epoch: 52
+2021-12-12 07:22:39,207 - INFO - epoch complete
+2021-12-12 07:22:39,207 - INFO - evaluating now!
+2021-12-12 07:22:50,902 - INFO - Epoch [52/200] (19875) train_mae: 5.3087, val_mae: 6.6832, val_mape: 0.2329, val_rmse: 12.7542, lr: 0.000002, 283.8s, 295.5s
+Num of epoch: 53
+2021-12-12 07:27:34,341 - INFO - epoch complete
+2021-12-12 07:27:34,341 - INFO - evaluating now!
+2021-12-12 07:27:46,040 - INFO - Epoch [53/200] (20250) train_mae: 5.2688, val_mae: 6.7444, val_mape: 0.2334, val_rmse: 12.8456, lr: 0.000002, 283.4s, 295.1s
+Num of epoch: 54
+2021-12-12 07:32:29,572 - INFO - epoch complete
+2021-12-12 07:32:29,572 - INFO - evaluating now!
+2021-12-12 07:32:41,255 - INFO - Epoch [54/200] (20625) train_mae: 5.2203, val_mae: 6.7353, val_mape: 0.2339, val_rmse: 12.8402, lr: 0.000002, 283.5s, 295.2s
+2021-12-12 07:33:04,662 - INFO - Test: mae: 6.7979, mape: 0.2417, rmse: 13.0275
+2021-12-12 07:33:04,662 - INFO - Horizon 15mins: mae: 6.7837, mape: 0.2410, rmse: 13.0029
+2021-12-12 07:33:04,662 - INFO - Horizon 30mins: mae: 6.8105, mape: 0.2419, rmse: 13.0411
+2021-12-12 07:33:04,662 - INFO - Horizon 60mins: mae: 6.8030, mape: 0.2424, rmse: 13.0483
+2021-12-12 07:33:04,663 - INFO - Epoch [54/200] (20625) train_mae: 5.2203, test_mae: 6.7979, test_mape: 0.2417, test_rmse: 13.0275, lr: 0.000002, 283.5s, 295.2s
+Num of epoch: 55
+2021-12-12 07:37:48,748 - INFO - epoch complete
+2021-12-12 07:37:48,748 - INFO - evaluating now!
+2021-12-12 07:38:00,475 - INFO - Epoch [55/200] (21000) train_mae: 5.1815, val_mae: 6.7634, val_mape: 0.2334, val_rmse: 12.8495, lr: 0.000002, 284.1s, 295.8s
+Num of epoch: 56
+2021-12-12 07:42:44,060 - INFO - epoch complete
+2021-12-12 07:42:44,060 - INFO - evaluating now!
+2021-12-12 07:42:55,756 - INFO - Epoch [56/200] (21375) train_mae: 5.1397, val_mae: 6.7327, val_mape: 0.2326, val_rmse: 12.8157, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 57
+2021-12-12 07:47:39,066 - INFO - epoch complete
+2021-12-12 07:47:39,066 - INFO - evaluating now!
+2021-12-12 07:47:50,780 - INFO - Epoch [57/200] (21750) train_mae: 5.0964, val_mae: 6.7479, val_mape: 0.2330, val_rmse: 12.8445, lr: 0.000002, 283.3s, 295.0s
+Num of epoch: 58
+2021-12-12 07:52:34,375 - INFO - epoch complete
+2021-12-12 07:52:34,375 - INFO - evaluating now!
+2021-12-12 07:52:46,053 - INFO - Epoch [58/200] (22125) train_mae: 5.0676, val_mae: 6.7583, val_mape: 0.2333, val_rmse: 12.8420, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 59
+2021-12-12 07:57:29,455 - INFO - epoch complete
+2021-12-12 07:57:29,455 - INFO - evaluating now!
+2021-12-12 07:57:41,152 - INFO - Epoch [59/200] (22500) train_mae: 5.0384, val_mae: 6.7917, val_mape: 0.2343, val_rmse: 12.9131, lr: 0.000002, 283.4s, 295.1s
+2021-12-12 07:58:04,528 - INFO - Test: mae: 6.8742, mape: 0.2423, rmse: 13.1115
+2021-12-12 07:58:04,528 - INFO - Horizon 15mins: mae: 6.8558, mape: 0.2415, rmse: 13.0810
+2021-12-12 07:58:04,528 - INFO - Horizon 30mins: mae: 6.8878, mape: 0.2426, rmse: 13.1284
+2021-12-12 07:58:04,529 - INFO - Horizon 60mins: mae: 6.8822, mape: 0.2430, rmse: 13.1302
+2021-12-12 07:58:04,529 - INFO - Epoch [59/200] (22500) train_mae: 5.0384, test_mae: 6.8742, test_mape: 0.2423, test_rmse: 13.1115, lr: 0.000002, 283.4s, 295.1s
+Num of epoch: 60
+2021-12-12 08:02:48,307 - INFO - epoch complete
+2021-12-12 08:02:48,307 - INFO - evaluating now!
+2021-12-12 08:03:00,013 - INFO - Epoch [60/200] (22875) train_mae: 5.0166, val_mae: 6.7886, val_mape: 0.2342, val_rmse: 12.8521, lr: 0.000002, 283.8s, 295.5s
+Num of epoch: 61
+2021-12-12 08:07:43,596 - INFO - epoch complete
+2021-12-12 08:07:43,596 - INFO - evaluating now!
+2021-12-12 08:07:55,287 - INFO - Epoch [61/200] (23250) train_mae: 4.9846, val_mae: 6.8828, val_mape: 0.2334, val_rmse: 12.9352, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 62
+2021-12-12 08:12:39,190 - INFO - epoch complete
+2021-12-12 08:12:39,190 - INFO - evaluating now!
+2021-12-12 08:12:50,905 - INFO - Epoch [62/200] (23625) train_mae: 4.9538, val_mae: 6.8978, val_mape: 0.2328, val_rmse: 12.9014, lr: 0.000002, 283.9s, 295.6s
+Num of epoch: 63
+2021-12-12 08:17:34,393 - INFO - epoch complete
+2021-12-12 08:17:34,394 - INFO - evaluating now!
+2021-12-12 08:17:46,086 - INFO - Epoch [63/200] (24000) train_mae: 4.9223, val_mae: 6.8981, val_mape: 0.2328, val_rmse: 12.9961, lr: 0.000002, 283.5s, 295.2s
+Num of epoch: 64
+2021-12-12 08:22:29,517 - INFO - epoch complete
+2021-12-12 08:22:29,517 - INFO - evaluating now!
+2021-12-12 08:22:41,219 - INFO - Epoch [64/200] (24375) train_mae: 4.9068, val_mae: 6.8555, val_mape: 0.2334, val_rmse: 12.9920, lr: 0.000002, 283.4s, 295.1s
+2021-12-12 08:23:04,604 - INFO - Test: mae: 6.8819, mape: 0.2408, rmse: 13.1247
+2021-12-12 08:23:04,604 - INFO - Horizon 15mins: mae: 6.8699, mape: 0.2403, rmse: 13.1064
+2021-12-12 08:23:04,604 - INFO - Horizon 30mins: mae: 6.8973, mape: 0.2411, rmse: 13.1388
+2021-12-12 08:23:04,604 - INFO - Horizon 60mins: mae: 6.8842, mape: 0.2413, rmse: 13.1427
+2021-12-12 08:23:04,605 - INFO - Epoch [64/200] (24375) train_mae: 4.9068, test_mae: 6.8819, test_mape: 0.2408, test_rmse: 13.1247, lr: 0.000002, 283.4s, 295.1s
+Num of epoch: 65
+2021-12-12 08:27:48,140 - INFO - epoch complete
+2021-12-12 08:27:48,141 - INFO - evaluating now!
+2021-12-12 08:27:59,867 - INFO - Epoch [65/200] (24750) train_mae: 4.8798, val_mae: 6.8879, val_mape: 0.2345, val_rmse: 12.9872, lr: 0.000002, 283.5s, 295.3s
+Num of epoch: 66
+2021-12-12 08:32:43,529 - INFO - epoch complete
+2021-12-12 08:32:43,529 - INFO - evaluating now!
+2021-12-12 08:32:55,243 - INFO - Epoch [66/200] (25125) train_mae: 4.8439, val_mae: 6.9357, val_mape: 0.2331, val_rmse: 13.0811, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 67
+2021-12-12 08:37:38,718 - INFO - epoch complete
+2021-12-12 08:37:38,719 - INFO - evaluating now!
+2021-12-12 08:37:50,393 - INFO - Epoch [67/200] (25500) train_mae: 4.8176, val_mae: 6.9376, val_mape: 0.2343, val_rmse: 13.1241, lr: 0.000002, 283.5s, 295.1s
+Num of epoch: 68
+2021-12-12 08:42:33,731 - INFO - epoch complete
+2021-12-12 08:42:33,731 - INFO - evaluating now!
+2021-12-12 08:42:45,428 - INFO - Epoch [68/200] (25875) train_mae: 4.7943, val_mae: 6.9637, val_mape: 0.2348, val_rmse: 13.1915, lr: 0.000002, 283.3s, 295.0s
+Num of epoch: 69
+2021-12-12 08:47:29,412 - INFO - epoch complete
+2021-12-12 08:47:29,413 - INFO - evaluating now!
+2021-12-12 08:47:41,150 - INFO - Epoch [69/200] (26250) train_mae: 4.7779, val_mae: 6.9174, val_mape: 0.2358, val_rmse: 13.1230, lr: 0.000002, 284.0s, 295.7s
+2021-12-12 08:48:04,606 - INFO - Test: mae: 6.9422, mape: 0.2436, rmse: 13.2404
+2021-12-12 08:48:04,607 - INFO - Horizon 15mins: mae: 6.9269, mape: 0.2430, rmse: 13.2209
+2021-12-12 08:48:04,607 - INFO - Horizon 30mins: mae: 6.9599, mape: 0.2439, rmse: 13.2580
+2021-12-12 08:48:04,607 - INFO - Horizon 60mins: mae: 6.9440, mape: 0.2441, rmse: 13.2482
+2021-12-12 08:48:04,607 - INFO - Epoch [69/200] (26250) train_mae: 4.7779, test_mae: 6.9422, test_mape: 0.2436, test_rmse: 13.2404, lr: 0.000002, 284.0s, 295.7s
+Num of epoch: 70
+2021-12-12 08:52:48,473 - INFO - epoch complete
+2021-12-12 08:52:48,473 - INFO - evaluating now!
+2021-12-12 08:53:00,168 - INFO - Epoch [70/200] (26625) train_mae: 4.7610, val_mae: 6.9182, val_mape: 0.2352, val_rmse: 13.0252, lr: 0.000002, 283.9s, 295.6s
+Num of epoch: 71
+2021-12-12 08:57:44,030 - INFO - epoch complete
+2021-12-12 08:57:44,030 - INFO - evaluating now!
+2021-12-12 08:57:55,710 - INFO - Epoch [71/200] (27000) train_mae: 4.7444, val_mae: 7.0262, val_mape: 0.2348, val_rmse: 13.0027, lr: 0.000002, 283.9s, 295.5s
+Num of epoch: 72
+2021-12-12 09:02:39,538 - INFO - epoch complete
+2021-12-12 09:02:39,539 - INFO - evaluating now!
+2021-12-12 09:02:51,280 - INFO - Epoch [72/200] (27375) train_mae: 4.7320, val_mae: 7.0976, val_mape: 0.2337, val_rmse: 13.0705, lr: 0.000002, 283.8s, 295.6s
+Num of epoch: 73
+2021-12-12 09:07:34,903 - INFO - epoch complete
+2021-12-12 09:07:34,903 - INFO - evaluating now!
+2021-12-12 09:07:46,612 - INFO - Epoch [73/200] (27750) train_mae: 4.7163, val_mae: 7.0154, val_mape: 0.2337, val_rmse: 13.0937, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 74
+2021-12-12 09:12:30,275 - INFO - epoch complete
+2021-12-12 09:12:30,275 - INFO - evaluating now!
+2021-12-12 09:12:41,988 - INFO - Epoch [74/200] (28125) train_mae: 4.7021, val_mae: 7.0495, val_mape: 0.2353, val_rmse: 13.2453, lr: 0.000002, 283.7s, 295.4s
+2021-12-12 09:13:05,448 - INFO - Test: mae: 7.0125, mape: 0.2421, rmse: 13.2952
+2021-12-12 09:13:05,448 - INFO - Horizon 15mins: mae: 7.0020, mape: 0.2416, rmse: 13.2793
+2021-12-12 09:13:05,448 - INFO - Horizon 30mins: mae: 7.0289, mape: 0.2424, rmse: 13.3118
+2021-12-12 09:13:05,448 - INFO - Horizon 60mins: mae: 7.0080, mape: 0.2425, rmse: 13.2929
+2021-12-12 09:13:05,448 - INFO - Epoch [74/200] (28125) train_mae: 4.7021, test_mae: 7.0125, test_mape: 0.2421, test_rmse: 13.2952, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 75
+2021-12-12 09:17:48,855 - INFO - epoch complete
+2021-12-12 09:17:48,855 - INFO - evaluating now!
+2021-12-12 09:18:00,539 - INFO - Epoch [75/200] (28500) train_mae: 4.6805, val_mae: 7.0258, val_mape: 0.2347, val_rmse: 13.2705, lr: 0.000002, 283.4s, 295.1s
+Num of epoch: 76
+2021-12-12 09:22:43,918 - INFO - epoch complete
+2021-12-12 09:22:43,918 - INFO - evaluating now!
+2021-12-12 09:22:55,611 - INFO - Epoch [76/200] (28875) train_mae: 4.6630, val_mae: 7.0458, val_mape: 0.2352, val_rmse: 13.2031, lr: 0.000002, 283.4s, 295.1s
+Num of epoch: 77
+2021-12-12 09:27:39,282 - INFO - epoch complete
+2021-12-12 09:27:39,282 - INFO - evaluating now!
+2021-12-12 09:27:50,997 - INFO - Epoch [77/200] (29250) train_mae: 4.6456, val_mae: 7.1068, val_mape: 0.2343, val_rmse: 13.1728, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 78
+2021-12-12 09:32:34,833 - INFO - epoch complete
+2021-12-12 09:32:34,833 - INFO - evaluating now!
+2021-12-12 09:32:46,515 - INFO - Epoch [78/200] (29625) train_mae: 4.6309, val_mae: 7.1227, val_mape: 0.2333, val_rmse: 13.1564, lr: 0.000002, 283.8s, 295.5s
+Num of epoch: 79
+2021-12-12 09:37:30,384 - INFO - epoch complete
+2021-12-12 09:37:30,385 - INFO - evaluating now!
+2021-12-12 09:37:42,082 - INFO - Epoch [79/200] (30000) train_mae: 4.6142, val_mae: 7.1666, val_mape: 0.2342, val_rmse: 13.1625, lr: 0.000002, 283.9s, 295.6s
+2021-12-12 09:38:05,493 - INFO - Test: mae: 7.0339, mape: 0.2392, rmse: 13.1316
+2021-12-12 09:38:05,493 - INFO - Horizon 15mins: mae: 7.0266, mape: 0.2387, rmse: 13.1103
+2021-12-12 09:38:05,493 - INFO - Horizon 30mins: mae: 7.0508, mape: 0.2394, rmse: 13.1500
+2021-12-12 09:38:05,493 - INFO - Horizon 60mins: mae: 7.0240, mape: 0.2397, rmse: 13.1333
+2021-12-12 09:38:05,494 - INFO - Epoch [79/200] (30000) train_mae: 4.6142, test_mae: 7.0339, test_mape: 0.2392, test_rmse: 13.1316, lr: 0.000002, 283.9s, 295.6s
+Num of epoch: 80
+2021-12-12 09:42:49,129 - INFO - epoch complete
+2021-12-12 09:42:49,129 - INFO - evaluating now!
+2021-12-12 09:43:00,832 - INFO - Epoch [80/200] (30375) train_mae: 4.6148, val_mae: 7.1342, val_mape: 0.2336, val_rmse: 13.1768, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 81
+2021-12-12 09:47:44,365 - INFO - epoch complete
+2021-12-12 09:47:44,365 - INFO - evaluating now!
+2021-12-12 09:47:56,085 - INFO - Epoch [81/200] (30750) train_mae: 4.6047, val_mae: 7.0546, val_mape: 0.2345, val_rmse: 13.2772, lr: 0.000002, 283.5s, 295.3s
+Num of epoch: 82
+2021-12-12 09:52:39,610 - INFO - epoch complete
+2021-12-12 09:52:39,610 - INFO - evaluating now!
+2021-12-12 09:52:51,307 - INFO - Epoch [82/200] (31125) train_mae: 4.5942, val_mae: 7.0103, val_mape: 0.2361, val_rmse: 13.2664, lr: 0.000002, 283.5s, 295.2s
+Num of epoch: 83
+2021-12-12 09:57:34,848 - INFO - epoch complete
+2021-12-12 09:57:34,848 - INFO - evaluating now!
+2021-12-12 09:57:46,560 - INFO - Epoch [83/200] (31500) train_mae: 4.5912, val_mae: 6.9452, val_mape: 0.2365, val_rmse: 13.1746, lr: 0.000002, 283.5s, 295.3s
+Num of epoch: 84
+2021-12-12 10:02:30,362 - INFO - epoch complete
+2021-12-12 10:02:30,362 - INFO - evaluating now!
+2021-12-12 10:02:42,052 - INFO - Epoch [84/200] (31875) train_mae: 4.5778, val_mae: 6.9934, val_mape: 0.2360, val_rmse: 13.2036, lr: 0.000002, 283.8s, 295.5s
+2021-12-12 10:03:05,409 - INFO - Test: mae: 7.0190, mape: 0.2440, rmse: 13.3344
+2021-12-12 10:03:05,409 - INFO - Horizon 15mins: mae: 7.0056, mape: 0.2434, rmse: 13.3122
+2021-12-12 10:03:05,409 - INFO - Horizon 30mins: mae: 7.0356, mape: 0.2442, rmse: 13.3516
+2021-12-12 10:03:05,409 - INFO - Horizon 60mins: mae: 7.0132, mape: 0.2444, rmse: 13.3344
+2021-12-12 10:03:05,410 - INFO - Epoch [84/200] (31875) train_mae: 4.5778, test_mae: 7.0190, test_mape: 0.2440, test_rmse: 13.3344, lr: 0.000002, 283.8s, 295.5s
+Num of epoch: 85
+2021-12-12 10:07:49,073 - INFO - epoch complete
+2021-12-12 10:07:49,074 - INFO - evaluating now!
+2021-12-12 10:08:00,792 - INFO - Epoch [85/200] (32250) train_mae: 4.5667, val_mae: 7.1824, val_mape: 0.2350, val_rmse: 13.3514, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 86
+2021-12-12 10:12:44,447 - INFO - epoch complete
+2021-12-12 10:12:44,447 - INFO - evaluating now!
+2021-12-12 10:12:56,157 - INFO - Epoch [86/200] (32625) train_mae: 4.5512, val_mae: 7.1221, val_mape: 0.2335, val_rmse: 13.1639, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 87
+2021-12-12 10:17:39,757 - INFO - epoch complete
+2021-12-12 10:17:39,757 - INFO - evaluating now!
+2021-12-12 10:17:51,463 - INFO - Epoch [87/200] (33000) train_mae: 4.5404, val_mae: 7.1027, val_mape: 0.2341, val_rmse: 13.2294, lr: 0.000002, 283.6s, 295.3s
+Num of epoch: 88
+2021-12-12 10:22:35,230 - INFO - epoch complete
+2021-12-12 10:22:35,231 - INFO - evaluating now!
+2021-12-12 10:22:46,921 - INFO - Epoch [88/200] (33375) train_mae: 4.5225, val_mae: 6.9923, val_mape: 0.2346, val_rmse: 13.1741, lr: 0.000002, 283.8s, 295.5s
+Num of epoch: 89
+2021-12-12 10:27:30,637 - INFO - epoch complete
+2021-12-12 10:27:30,637 - INFO - evaluating now!
+2021-12-12 10:27:42,344 - INFO - Epoch [89/200] (33750) train_mae: 4.5115, val_mae: 7.0126, val_mape: 0.2353, val_rmse: 13.3045, lr: 0.000002, 283.7s, 295.4s
+2021-12-12 10:28:05,759 - INFO - Test: mae: 7.0542, mape: 0.2435, rmse: 13.4249
+2021-12-12 10:28:05,759 - INFO - Horizon 15mins: mae: 7.0394, mape: 0.2429, rmse: 13.4017
+2021-12-12 10:28:05,760 - INFO - Horizon 30mins: mae: 7.0733, mape: 0.2437, rmse: 13.4454
+2021-12-12 10:28:05,760 - INFO - Horizon 60mins: mae: 7.0454, mape: 0.2437, rmse: 13.4170
+2021-12-12 10:28:05,760 - INFO - Epoch [89/200] (33750) train_mae: 4.5115, test_mae: 7.0542, test_mape: 0.2435, test_rmse: 13.4249, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 90
+2021-12-12 10:32:49,502 - INFO - epoch complete
+2021-12-12 10:32:49,502 - INFO - evaluating now!
+2021-12-12 10:33:01,206 - INFO - Epoch [90/200] (34125) train_mae: 4.5202, val_mae: 6.9824, val_mape: 0.2355, val_rmse: 13.2164, lr: 0.000002, 283.7s, 295.4s
+Num of epoch: 91
+2021-12-12 10:37:45,101 - INFO - epoch complete
+2021-12-12 10:37:45,101 - INFO - evaluating now!
+2021-12-12 10:37:56,839 - INFO - Epoch [91/200] (34500) train_mae: 4.5104, val_mae: 7.1340, val_mape: 0.2356, val_rmse: 13.3723, lr: 0.000002, 283.9s, 295.6s
+Num of epoch: 92
+2021-12-12 10:42:41,197 - INFO - epoch complete
+2021-12-12 10:42:41,197 - INFO - evaluating now!
+2021-12-12 10:42:52,914 - INFO - Epoch [92/200] (34875) train_mae: 4.4995, val_mae: 7.1621, val_mape: 0.2347, val_rmse: 13.2810, lr: 0.000002, 284.4s, 296.1s
+Num of epoch: 93
+2021-12-12 10:47:36,983 - INFO - epoch complete
+2021-12-12 10:47:36,983 - INFO - evaluating now!
+2021-12-12 10:47:48,688 - INFO - Epoch [93/200] (35250) train_mae: 4.4913, val_mae: 7.1384, val_mape: 0.2330, val_rmse: 13.1444, lr: 0.000002, 284.1s, 295.8s

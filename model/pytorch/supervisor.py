@@ -2,7 +2,7 @@ import torch
 from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 from lib import utils
-from model.pytorch.model import GTSModel, GTSContribModel
+from model.pytorch.model import GTSModel
 from model.pytorch.loss import masked_mae_loss, masked_mape_loss, masked_rmse_loss, masked_mse_loss
 import pandas as pd
 import os
@@ -15,66 +15,66 @@ class GTSSupervisor:
         self._kwargs = kwargs
         self._data_kwargs = kwargs.get('data')
         self._model_kwargs = kwargs.get('model')
-        self._train_kwargs = kwargs.get('train')
+        # self._train_kwargs = kwargs.get('train')
         self.temperature = float(temperature)
-        self.opt = self._train_kwargs.get('optimizer')
-        self.max_grad_norm = self._train_kwargs.get('max_grad_norm', 1.)
-        self.ANNEAL_RATE = 0.00003
-        self.temp_min = 0.1
-        self.save_adj_name = save_adj_name
-        self.epoch_use_regularization = self._train_kwargs.get('epoch_use_regularization')
-        self.num_sample = self._train_kwargs.get('num_sample')
+        # self.opt = self._train_kwargs.get('optimizer')
+        # self.max_grad_norm = self._train_kwargs.get('max_grad_norm', 1.)
+        # self.ANNEAL_RATE = 0.00003
+        # self.temp_min = 0.1
+        # self.save_adj_name = save_adj_name
+        # self.epoch_use_regularization = self._train_kwargs.get('epoch_use_regularization')
+        # self.num_sample = self._train_kwargs.get('num_sample')
 
-        # logging.
+        # # logging.
         self._log_dir = self._get_log_dir(kwargs)
         self._writer = SummaryWriter('runs/' + self._log_dir)
         log_level = self._kwargs.get('log_level', 'INFO')
         self._logger = utils.get_logger(self._log_dir, __name__, 'info.log', level=log_level)
 
-        # data set
-        self._data = utils.load_dataset(**self._data_kwargs)
-        self.standard_scaler = self._data['scaler']
+        # # data set
+        # self._data = utils.load_dataset(**self._data_kwargs)
+        # self.standard_scaler = self._data['scaler']
 
-        ### Feas
-        if self._data_kwargs['dataset_dir'] == 'data/METR-LA':
-            df = pd.read_hdf('./data/metr-la.h5')
-        elif self._data_kwargs['dataset_dir'] == 'data/PEMS-BAY':
-            df = pd.read_hdf('./data/pems-bay.h5')
-        #else:
-        #    df = pd.read_csv('./data/pmu_normalized.csv', header=None)
-        #    df = df.transpose()
-        num_samples = df.shape[0]
-        num_train = round(num_samples * 0.7)
-        df = df[:num_train].values
-        scaler = utils.StandardScaler(mean=df.mean(), std=df.std())
-        train_feas = scaler.transform(df)
-        self._train_feas = torch.Tensor(train_feas).to(device)
-        #print(self._train_feas.shape)
+        # ### Feas
+        # if self._data_kwargs['dataset_dir'] == 'data/METR-LA':
+        #     df = pd.read_hdf('./data/metr-la.h5')
+        # elif self._data_kwargs['dataset_dir'] == 'data/PEMS-BAY':
+        #     df = pd.read_hdf('./data/pems-bay.h5')
+        # #else:
+        # #    df = pd.read_csv('./data/pmu_normalized.csv', header=None)
+        # #    df = df.transpose()
+        # num_samples = df.shape[0]
+        # num_train = round(num_samples * 0.7)
+        # df = df[:num_train].values
+        # scaler = utils.StandardScaler(mean=df.mean(), std=df.std())
+        # train_feas = scaler.transform(df)
+        # self._train_feas = torch.Tensor(train_feas).to(device)
+        # #print(self._train_feas.shape)
 
-        k = self._train_kwargs.get('knn_k')
-        knn_metric = 'cosine'
-        from sklearn.neighbors import kneighbors_graph
-        g = kneighbors_graph(train_feas.T, k, metric=knn_metric)
-        g = np.array(g.todense(), dtype=np.float32)
-        _,_, adj_matrix = utils.load_graph_data(self._data_kwargs.get("graph_pkl_filename", "data/sensor_graph/adj_mx.pkl"))
-        normalized = utils.calculate_normalized_laplacian(adj_matrix).toarray()
-        self.adj_mx = torch.Tensor(normalized).to(device)
-        self.num_nodes = int(self._model_kwargs.get('num_nodes', 1))
-        self.input_dim = int(self._model_kwargs.get('input_dim', 1))
-        self.seq_len = int(self._model_kwargs.get('seq_len'))  # for the encoder
-        self.output_dim = int(self._model_kwargs.get('output_dim', 1))
-        self.use_curriculum_learning = bool(
-            self._model_kwargs.get('use_curriculum_learning', False))
-        self.horizon = int(self._model_kwargs.get('horizon', 1))  # for the decoder
+        # k = self._train_kwargs.get('knn_k')
+        # knn_metric = 'cosine'
+        # from sklearn.neighbors import kneighbors_graph
+        # g = kneighbors_graph(train_feas.T, k, metric=knn_metric)
+        # g = np.array(g.todense(), dtype=np.float32)
+        # self.adj_mx = torch.Tensor(g).to(device)
+        # self.num_nodes = int(self._model_kwargs.get('num_nodes', 1))
+        # self.input_dim = int(self._model_kwargs.get('input_dim', 1))
+        # self.seq_len = int(self._model_kwargs.get('seq_len'))  # for the encoder
+        # self.output_dim = int(self._model_kwargs.get('output_dim', 1))
+        # self.use_curriculum_learning = bool(
+        #     self._model_kwargs.get('use_curriculum_learning', False))
+        # self.horizon = int(self._model_kwargs.get('horizon', 1))  # for the decoder
 
         # setup model
-        GTS_model = GTSContribModel(self.temperature, self._logger, **self._model_kwargs)
+        GTS_model = GTSModel(self.temperature, self._logger, **self._model_kwargs)
         self.GTS_model = GTS_model.cuda() if torch.cuda.is_available() else GTS_model
-        self._logger.info("Model created")
-
-        self._epoch_num = self._train_kwargs.get('epoch', 0)
-        if self._epoch_num > 0:
-            self.load_model()
+        # self._logger.info("Model created")
+        import pdb
+        pdb.set_trace()
+        print("Params:",len(list(filter(lambda x: x.requires_grad is True,self.GTS_model.parameters()))))
+        # self._epoch_num = self._train_kwargs.get('epoch', 0)
+        # if self._epoch_num > 0:
+        #     self.load_model()
 
     @staticmethod
     def _get_log_dir(kwargs):
@@ -113,15 +113,12 @@ class GTSSupervisor:
         config['epoch'] = epoch
         torch.save(config, 'models/epo%d.tar' % epoch)
         self._logger.info("Saved model at {}".format(epoch))
-        # if epoch%25==0 and epoch!=25:
-        #     from google.colab import files
-        #     files.download('models/epo%d.tar' % epoch)
         return 'models/epo%d.tar' % epoch
 
     def load_model(self):
         self._setup_graph()
-        assert os.path.exists('/content/drive/MyDrive/improved_graph_wavenet/models/epo%d.tar' % self._epoch_num), 'Weights at epoch %d not found' % self._epoch_num
-        checkpoint = torch.load('/content/drive/MyDrive/improved_graph_wavenet/models/epo%d.tar' % self._epoch_num, map_location='cpu')
+        assert os.path.exists('models/epo%d.tar' % self._epoch_num), 'Weights at epoch %d not found' % self._epoch_num
+        checkpoint = torch.load('models/epo%d.tar' % self._epoch_num, map_location='cpu')
         self.GTS_model.load_state_dict(checkpoint['model_state_dict'])
         self._logger.info("Loaded model at {}".format(self._epoch_num))
 
@@ -133,7 +130,7 @@ class GTSSupervisor:
 
             for _, (x, y) in enumerate(val_iterator):
                 x, y = self._prepare_data(x, y)
-                output = self.GTS_model("with_regularization",x, self._train_feas,self.temperature, True)
+                output = self.GTS_model(x, self._train_feas)
                 break
 
     def train(self, **kwargs):
@@ -252,7 +249,7 @@ class GTSSupervisor:
 
 
     def _train(self, base_lr,
-               steps, patience=200, epochs=100, lr_decay_ratio=0.1, log_every=1, save_model=1,
+               steps, patience=200, epochs=100, lr_decay_ratio=0.1, log_every=1, save_model=0,
                test_every_n_epochs=10, epsilon=1e-8, **kwargs):
         # steps is used in learning rate - will see if need to use it?
         min_val_loss = float('inf')

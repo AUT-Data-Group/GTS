@@ -48,6 +48,40 @@ class DataLoader(object):
 
         return _wrapper()
 
+def calculate_centrality(c):
+    adj = sp.coo_matrix(c)
+    result = np.array(adj.sum(0)).ravel() / np.array(adj.sum(1)).ravel()
+    for i, x in np.ndenumerate(result):
+        if x != 0.0 and x > 1/x:
+            result[i] = 1/x
+    return result
+
+def load_adj(pkl_filename, adjtype):
+    sensor_ids, sensor_id_to_ind, adj_mx = load_pickle(pkl_filename)
+    if adjtype == "scalap":
+        adj = [calculate_scaled_laplacian(adj_mx)]
+    elif adjtype == "normlap":
+        adj = [calculate_normalized_laplacian(adj_mx).astype(np.float32).todense()]
+    elif adjtype == "transition":
+        adj = [asym_adj(adj_mx)]
+    elif adjtype == "doubletransition":
+        adj = [asym_adj(adj_mx), asym_adj(np.transpose(adj_mx))]
+    elif adjtype == "identity":
+        adj = [np.diag(np.ones(adj_mx.shape[0])).astype(np.float32)]
+    else:
+        return sensor_ids, sensor_id_to_ind, adj_mx
+        error = 0
+        # assert error, "adj type not defined"
+    return sensor_ids, sensor_id_to_ind, adj
+
+
+def asym_adj(adj):
+    adj = sp.coo_matrix(adj)
+    rowsum = np.array(adj.sum(1)).flatten()
+    d_inv = np.power(rowsum, -1).flatten()
+    d_inv[np.isinf(d_inv)] = 0.
+    d_mat= sp.diags(d_inv)
+    return d_mat.dot(adj).astype(np.float32).todense()
 
 class StandardScaler:
     """
