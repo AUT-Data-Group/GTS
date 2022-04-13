@@ -100,8 +100,8 @@ class PatchEmbed(nn.Module):
 				 embed_dims=768,
 				 conv_type='Conv2d'):
 		super().__init__()
-		self.img_size = _pair(img_size)
-		self.patch_size = _pair(patch_size)
+		self.img_size = (img_size, 1)
+		self.patch_size = (patch_size, 1)
 
 		num_patches = \
 			(self.img_size[1] // self.patch_size[1]) * \
