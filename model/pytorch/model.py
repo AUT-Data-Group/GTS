@@ -76,6 +76,7 @@ class XViViT(nn.Module):
             tube_size=tube_size,
             conv_type=conv_type)
         # num_patches = self.patch_embed.num_patches
+        self.cls_token = nn.Parameter(torch.zeros(1,1,embed_dims))
     
     def interpolate_pos_encoding(self, x, w, h):
         npatch = x.shape[1] - 1
