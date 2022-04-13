@@ -152,7 +152,7 @@ class ViViT(nn.Module):
                  in_channels=3,
                  dropout_p=0.,
                  tube_size=2,
-                 conv_type='Conv3d',
+                 conv_type='Conv2d',
                  attention_type='fact_encoder',
                  norm_layer=nn.LayerNorm,
                  return_cls_token=True,
