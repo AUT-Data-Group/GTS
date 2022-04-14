@@ -223,7 +223,8 @@ class ViViT(nn.Module):
         import pdb;pdb.set_trace()
         npatch = x.shape[1] - 1
         N = self.pos_embed.shape[1] - 1
-        if npatch == N and w == h:
+        # if npatch == N and w == h:
+        if npatch == N:
             return self.pos_embed
         class_pos_embed = self.pos_embed[:, 0]
         patch_pos_embed = self.pos_embed[:, 1:]
