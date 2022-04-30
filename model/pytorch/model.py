@@ -181,6 +181,7 @@ class ViViT(nn.Module):
 
     def forward(self, x):
         #Tokenize
+        print(f"Info: {x.shape}")
         b, t, c, h, w = x.shape
         x = self.patch_embed(x)
 
