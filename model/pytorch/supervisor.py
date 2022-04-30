@@ -159,12 +159,12 @@ class GTSSupervisor:
             l_12 = []
             m_12 = []
             r_12 = []
+            label = 'without_regularization'
 
             for batch_idx, (x, y) in enumerate(val_iterator):
                 x, y = self._prepare_data(x, y)
 
-                output, mid_output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft)
-
+                output = self.GTS_model(x)
                 if label == 'without_regularization': 
                     loss = self._compute_loss(y, output)
                     y_true = self.standard_scaler.inverse_transform(y)
@@ -278,18 +278,19 @@ class GTSSupervisor:
             temp = self.temperature
             gumbel_soft = True
 
-            if epoch_num < self.epoch_use_regularization:
-                label = 'with_regularization'
-            else:
-                label = 'without_regularization'
+            # if epoch_num < self.epoch_use_regularization:
+            #     label = 'with_regularization'
+            # else:
+            #     label = 'without_regularization'
+            label = 'without_regularization'
+
 
             for batch_idx, (x, y) in enumerate(train_iterator):
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
-                import pdb;pdb.set_trace()
-                output, mid_output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
+                output = self.GTS_model(x)
                 if (epoch_num % epochs) == epochs - 1:
-                    output, mid_output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
+                    output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
 
                 if batches_seen == 0:
                     if self.opt == 'adam':
@@ -303,7 +304,6 @@ class GTSSupervisor:
                 
                 #if batch_idx % 100 == 1:
                 #    temp = np.maximum(temp * np.exp(-self.ANNEAL_RATE * batch_idx), self.temp_min)
-
                 if label == 'without_regularization':  # or label == 'predictor':
                     loss = self._compute_loss(y, output)
                     losses.append(loss.item())
