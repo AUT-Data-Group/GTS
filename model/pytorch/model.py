@@ -182,7 +182,8 @@ class ViViT(nn.Module):
     def forward(self, x):
         #Tokenize
         print(f"Info: {x.shape}")
-        b, t, c, h, w = x.shape
+        b, t, Y = x.shape
+        c, h, w = 2, Y//2, 1
         x = self.patch_embed(x)
 
         # Add Position Embedding
