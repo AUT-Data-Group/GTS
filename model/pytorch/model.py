@@ -184,6 +184,7 @@ class ViViT(nn.Module):
         print(f"Info: {x.shape}")
         b, t, Y = x.shape
         c, h, w = 2, Y//2, 1
+        x = x.reshape(b, t, c, h, w)
         x = self.patch_embed(x)
 
         # Add Position Embedding
