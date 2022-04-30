@@ -7,7 +7,7 @@ from logging import config
 from einops import rearrange, reduce, repeat
 from IPython.display import display
 
-import .data_transform as T
+from . import data_transform as T
 from .transformer import PatchEmbed, TransformerContainer, ClassificationHead
 
 
