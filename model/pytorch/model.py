@@ -41,8 +41,11 @@ config.dictConfig(log_config)
 
 
 class ViViT(nn.Module):
+
     """ViViT. A PyTorch impl of `ViViT: A Video Vision Transformer`
         <https://arxiv.org/abs/2103.15691>
+    Input dim: torch.Size([12, 64, 414])
+     outpur dim: torch.Size([12, 64, 414])
 
     Args:
         num_frames (int): Number of frames in the video.
@@ -83,6 +86,7 @@ class ViViT(nn.Module):
                  attention_type='fact_encoder',
                  norm_layer=nn.LayerNorm,
                  return_cls_token=True,
+                 horizon=12,
                  **kwargs):
         super().__init__()
         assert attention_type in self.supported_attention_types, (
@@ -149,6 +153,8 @@ class ViViT(nn.Module):
         self.time_embed = nn.Parameter(torch.zeros(1,num_frames,embed_dims))
         self.drop_after_pos = nn.Dropout(p=dropout_p)
         self.drop_after_time = nn.Dropout(p=dropout_p)
+        self.fc = nn.Linear(768, 414)
+        self.conv = nn.Conv2d(1, 12, kernel_size=1)
     
     def interpolate_pos_encoding(self, x, w, h):
         npatch = x.shape[1] - 1
@@ -199,8 +205,10 @@ class ViViT(nn.Module):
         x = temporal_transformer(x)
 
         x = self.norm(x)
-        # Return Class Token
-        if self.return_cls_token:
-            return x[:, 0]
-        else:
-            return x[:, 1:].mean(1)
+        # # Return Class Token
+        # if self.return_cls_token:
+        #     return x[:, 0]
+        # else:
+        #     return x[:, 1:].mean(1)
+        fc = self.fc(x[:, 0])
+        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")

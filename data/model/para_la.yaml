@@ -17,7 +17,7 @@ model:
   max_diffusion_step: 3
   num_nodes: 207
   num_rnn_layers: 1
-  output_dim: 1
+  output_dim: 2
   rnn_units: 2
   seq_len: 12
   use_curriculum_learning: true
