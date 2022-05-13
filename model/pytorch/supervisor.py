@@ -128,7 +128,7 @@ class GTSSupervisor:
 
             for _, (x, y) in enumerate(val_iterator):
                 x, y = self._prepare_data(x, y)
-                output = self.GTS_model(x, self._train_feas)
+                output = self.GTS_model(x)
                 break
 
     def train(self, **kwargs):
