@@ -27,7 +27,7 @@ train:
   base_lr: 0.0015
   dropout: 0
   epoch: 0
-  epochs: 200
+  epochs: 150
   epsilon: 1.0e-3
   global_step: 0
   lr_decay_ratio: 0.1
@@ -39,5 +39,6 @@ train:
   steps: [20, 30, 40]
   test_every_n_epochs: 5
   knn_k: 10
-  epoch_use_regularization: 200
+  epoch_use_regularization: 150
   num_sample: 10
+  save_model: 1
