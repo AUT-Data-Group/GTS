@@ -289,8 +289,8 @@ class GTSSupervisor:
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
                 output = self.GTS_model(x)
-                if (epoch_num % epochs) == epochs - 1:
-                    output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
+                # if (epoch_num % epochs) == epochs - 1:
+                #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
 
                 if batches_seen == 0:
                     if self.opt == 'adam':
