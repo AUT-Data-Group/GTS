@@ -6,7 +6,10 @@ from einops import repeat
 import torch
 import torch.nn as nn
 
-from .utils import print_on_rank_zero
+try:
+	from .utils import print_on_rank_zero
+except ImportError as e:
+	from utils import print_on_rank_zero
 
 
 def show_state_dict(state_dict):

@@ -7,8 +7,14 @@ from logging import config
 from einops import rearrange, reduce, repeat
 from IPython.display import display
 
-from . import data_transform as T
-from .transformer import PatchEmbed, TransformerContainer, ClassificationHead
+try:
+    from . import data_transform as T
+    from .transformer import PatchEmbed, TransformerContainer, ClassificationHead
+except ImportError as e:
+    import data_transform as T
+    from transformer import PatchEmbed, TransformerContainer, ClassificationHead
+
+
 
 
 logger = logging.getLogger("Model")
