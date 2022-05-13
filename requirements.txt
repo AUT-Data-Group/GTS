@@ -9,3 +9,4 @@ tensorflow>=1.3.0
 tables
 future
 einops
+pytorch_lightning
