@@ -4,3 +4,4 @@ train.sh
 runs/
 run*
 models
+.vscode/
