@@ -10,3 +10,4 @@ tables
 future
 einops
 pytorch_lightning
+warmup_scheduler
