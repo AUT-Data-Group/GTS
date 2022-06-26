@@ -185,6 +185,7 @@ class ViViT(nn.Module):
         patch_pos_embed = patch_pos_embed.permute(0, 2, 3, 1).view(1, -1, dim)
         return torch.cat((class_pos_embed.unsqueeze(0), patch_pos_embed), dim=1)
 
+
     def forward(self, x):
         #Tokenize
         t, b, Y = x.shape
