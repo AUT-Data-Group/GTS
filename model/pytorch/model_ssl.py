@@ -47,7 +47,7 @@ log_config = {
 config.dictConfig(log_config)
 
 
-class ViViT(nn.Module):
+class ViViTSSL(nn.Module):
 
     """ViViT. A PyTorch impl of `ViViT: A Video Vision Transformer`
         <https://arxiv.org/abs/2103.15691>
@@ -161,7 +161,10 @@ class ViViT(nn.Module):
         self.drop_after_pos = nn.Dropout(p=dropout_p)
         self.drop_after_time = nn.Dropout(p=dropout_p)
         self.fc = nn.Linear(768, 414)
-        self.conv = nn.Conv2d(1, 12, kernel_size=1)
+        self.conv = nn.Conv2d(1, 8, kernel_size=1)
+        # self.decoder_embed = norm_layer(decoder_embed_dim)
+        self.decoder_pred = nn.Linear(embed_dims, 414, bias=True)
+        #  norm_layer(decoder_embed_dim, patch_size**2 * in_chans, bias=True) steal from source code
     
     def interpolate_pos_encoding(self, x, w, h):
         npatch = x.shape[1] - 1
@@ -186,107 +189,9 @@ class ViViT(nn.Module):
         patch_pos_embed = patch_pos_embed.permute(0, 2, 3, 1).view(1, -1, dim)
         return torch.cat((class_pos_embed.unsqueeze(0), patch_pos_embed), dim=1)
 
-    def forward_mask(self, x, mask_ratio):
-        """
-        Perform per-sample random masking by per-sample shuffling.
-        Per-sample shuffling is done by argsort random noise.
-        x: [N, L, D], sequence
-        """
-        N, L, D = x.shape  # batch, length, dim
-        len_keep = int(L * (1 - mask_ratio))
-        
-        noise = torch.rand(N, L, device=x.device)  # noise in [0, 1]
-        
-        # sort noise for each sample
-        ids_shuffle = torch.argsort(noise, dim=1)  # ascend: small is keep, large is remove
-        ids_restore = torch.argsort(ids_shuffle, dim=1)
-
-        # keep the first subset
-        ids_keep = ids_shuffle[:, :len_keep]
-        x_masked = torch.gather(x, dim=1, index=ids_keep.unsqueeze(-1).repeat(1, 1, D))
-
-        # generate the binary mask: 0 is keep, 1 is remove
-        mask = torch.ones([N, L], device=x.device)
-        mask[:, :len_keep] = 0
-        # unshuffle to get the binary mask
-        mask = torch.gather(mask, dim=1, index=ids_restore)
-
-        return x_masked, mask, ids_restore
-
-    def forward_encoder(self, x, mask_ratio):
-        # embed patches
-        x = self.patch_embed(x)
-
-        # add pos embed w/o cls token
-        x = x + self.pos_embed[:, 1:, :]
-
-        # masking: length -> length * mask_ratio
-        x, mask, ids_restore = self.random_masking(x, mask_ratio)
-
-        # append cls token
-        cls_token = self.cls_token + self.pos_embed[:, :1, :]
-        cls_tokens = cls_token.expand(x.shape[0], -1, -1)
-        x = torch.cat((cls_tokens, x), dim=1)
-
-        # apply Transformer blocks
-        for blk in self.blocks:
-            x = blk(x)
-        x = self.norm(x)
-
-        return x, mask, ids_restore
-
-    def forward_decoder(self, x, ids_restore):
-        # embed tokens
-        x = self.decoder_embed(x)
-
-        # append mask tokens to sequence
-        mask_tokens = self.mask_token.repeat(x.shape[0], ids_restore.shape[1] + 1 - x.shape[1], 1)
-        x_ = torch.cat([x[:, 1:, :], mask_tokens], dim=1)  # no cls token
-        x_ = torch.gather(x_, dim=1, index=ids_restore.unsqueeze(-1).repeat(1, 1, x.shape[2]))  # unshuffle
-        x = torch.cat([x[:, :1, :], x_], dim=1)  # append cls token
-
-        # add pos embed
-        x = x + self.decoder_pos_embed
-
-        # apply Transformer blocks
-        for blk in self.decoder_blocks:
-            x = blk(x)
-        x = self.decoder_norm(x)
-
-        # predictor projection
-        x = self.decoder_pred(x)
-
-        # remove cls token
-        x = x[:, 1:, :]
-
-        return x
-
-    def forward_loss(self, imgs, pred, mask):
-        """
-        imgs: [N, 3, H, W]
-        pred: [N, L, p*p*3]
-        mask: [N, L], 0 is keep, 1 is remove, 
-        """
-        target = self.patchify(imgs)
-        if self.norm_pix_loss:
-            mean = target.mean(dim=-1, keepdim=True)
-            var = target.var(dim=-1, keepdim=True)
-            target = (target - mean) / (var + 1.e-6)**.5
-
-        loss = (pred - target) ** 2
-        loss = loss.mean(dim=-1)  # [N, L], mean loss per patch
-
-        loss = (loss * mask).sum() / mask.sum()  # mean loss on removed patches
-        return loss
-
-    def forward(self, x, mask_ratio=0.3):
-        #Tokenize
-        t, b, Y = x.shape
-        c, h, w = 2, Y//2, 1
-        x = x.reshape(b, t, c, h, w)
-        masked_gt = x[:, t//3: t//2, :, :].clone()
-        x = x.clone()
-        x[:,t//3: t//2,:,:] = 2 * 117.0/255.0 - 1.0
+    def encode(self, x, b, t, c, h, w):
+        # t, b, Y = x.shape
+        # c, h, w = 2, Y//2, 1
         x = self.patch_embed(x)
 
         # Add Position Embedding
@@ -315,11 +220,112 @@ class ViViT(nn.Module):
         #     return x[:, 0]
         # else:
         #     return x[:, 1:].mean(1)
-        z = x[:, 0].clone()
-        fc = self.fc(x[:, 0])
-        recon = rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
-        return F.mse_loss(recon[:, t//3: t//2, :, :], masked_gt), z
+        z = x[:, 0]
+        return z
 
+    def random_masking(self, x, mask_ratio):
+        """
+        Perform per-sample random masking by per-sample shuffling.
+        Per-sample shuffling is done by argsort random noise.
+        x: [N, L, D], sequence
+        """
+        N, L, D = x.shape  # batch, length, dim
+        len_keep = int(L * (1 - mask_ratio))
+        
+        noise = torch.rand(N, L, device=x.device)  # noise in [0, 1]
+        
+        # sort noise for each sample
+        ids_shuffle = torch.argsort(noise, dim=1)  # ascend: small is keep, large is remove
+        ids_restore = torch.argsort(ids_shuffle, dim=1)
+
+        # keep the first subset
+        ids_keep = ids_shuffle[:, :len_keep]
+        x_masked = torch.gather(x, dim=1, index=ids_keep.unsqueeze(-1).repeat(1, 1, D))
+
+        # generate the binary mask: 0 is keep, 1 is remove
+        mask = torch.ones([N, L], device=x.device)
+        mask[:, :len_keep] = 0
+        # unshuffle to get the binary mask
+        mask = torch.gather(mask, dim=1, index=ids_restore)
+
+        return x_masked, mask, ids_restore
+
+    def forward_encoder(self, x, mask_ratio):
+        # embed patches
+        # x = self.patch_embed(x)
+
+        # add pos embed w/o cls token
+        # x = x + self.pos_embed[:, 1:, :]
+
+        # masking: length -> length * mask_ratio
+        t, b, Y = x.shape
+        x = x.reshape(b, t, Y)
+        x, mask, ids_restore = self.random_masking(x, mask_ratio)
+        # import pdb;pdb.set_trace()
+        t, b, Y = x.shape
+        c, h, w = 2, Y//2, 1
+        x = x.reshape(b, t, c, h, w)
+        z = self.encode(x, b, t, c, h, w)
+
+        return z, mask, ids_restore
+
+    def forward_decoder(self, x, ids_restore):
+        # embed tokens
+        # x = self.decoder_embed(x)
+
+        # # append mask tokens to sequence
+        # mask_tokens = self.mask_token.repeat(x.shape[0], ids_restore.shape[1] + 1 - x.shape[1], 1)
+        # x_ = torch.cat([x[:, 1:, :], mask_tokens], dim=1)  # no cls token
+        # x_ = torch.gather(x_, dim=1, index=ids_restore.unsqueeze(-1).repeat(1, 1, x.shape[2]))  # unshuffle
+        # x = torch.cat([x[:, :1, :], x_], dim=1)  # append cls token
+
+        # # add pos embed
+        # x = x + self.decoder_pos_embed
+
+        # # apply Transformer blocks
+        # for blk in self.decoder_blocks:
+        #     x = blk(x)
+        # x = self.decoder_norm(x)
+
+        # # predictor projection
+        # x = self.decoder_pred(x)
+
+        # # remove cls token
+        # x = x[:, 1:, :]
+        fc = self.decoder_pred(x)
+        rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
+        return x
+
+    def forward_loss(self, x, pred, mask):
+        """
+        imgs: [N, 3, H, W]
+        pred: [N, L, p*p*3]
+        mask: [N, L], 0 is keep, 1 is remove, 
+        """
+        target = x
+        if True:
+            mean = target.mean(dim=-1, keepdim=True)
+            var = target.var(dim=-1, keepdim=True)
+            target = (target - mean) / (var + 1.e-6)**.5
+
+        loss = (pred - target) ** 2
+        loss = loss.mean(dim=-1)  # [N, L], mean loss per patch
+
+        loss = (loss * mask).sum() / mask.sum()  # mean loss on removed patches
+        return loss
+
+    def forward(self, x, mask_ratio=0.3):
+        # # Return Class Token
+        # if self.return_cls_token:
+        #     return x[:, 0]
+        # else:
+        #     return x[:, 1:].mean(1)
+        # ==================================
+        # z = x[:, 0].clone()
+        # fc = self.fc(x[:, 0])
+        # recon = rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
+        # return F.mse_loss(recon[:, t//3: t//2, :, :], masked_gt), z
+        # torch.Size([12, 64, 414])
         latent, mask, ids_restore = self.forward_encoder(x, mask_ratio)
         pred = self.forward_decoder(latent, ids_restore)  # [N, L, p*p*3]
         loss = self.forward_loss(x, pred, mask)

@@ -288,6 +288,7 @@ class GTSSupervisor:
             for batch_idx, (x, y) in enumerate(train_iterator):
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
+                import pdb;pdb.set_trace()
                 output = self.GTS_model(x)
                 # if (epoch_num % epochs) == epochs - 1:
                 #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)

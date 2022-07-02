@@ -187,6 +187,7 @@ class ViViT(nn.Module):
 
 
     def forward(self, x):
+        #x => torch.Size([12, 64, 414])
         #Tokenize
         t, b, Y = x.shape
         c, h, w = 2, Y//2, 1
