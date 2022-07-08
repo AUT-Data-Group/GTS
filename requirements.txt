@@ -11,3 +11,4 @@ future
 einops
 pytorch_lightning
 warmup_scheduler
+ray[tune]

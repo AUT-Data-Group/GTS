@@ -94,6 +94,7 @@ class ViViTSSL(nn.Module):
                  norm_layer=nn.LayerNorm,
                  return_cls_token=True,
                  horizon=12,
+                 mask_ratio=0.3,
                  **kwargs):
         super().__init__()
         assert attention_type in self.supported_attention_types, (
@@ -157,13 +158,14 @@ class ViViTSSL(nn.Module):
         num_patches = num_patches + 1
 
         self.pos_embed = nn.Parameter(torch.zeros(1,num_patches,embed_dims))
-        self.time_embed = nn.Parameter(torch.zeros(1,num_frames,embed_dims))
+        self.time_embed = nn.Parameter(torch.zeros(1,int((1 - mask_ratio)*num_frames),embed_dims))
         self.drop_after_pos = nn.Dropout(p=dropout_p)
         self.drop_after_time = nn.Dropout(p=dropout_p)
         self.fc = nn.Linear(768, 414)
-        self.conv = nn.Conv2d(1, 8, kernel_size=1)
+        self.conv = nn.Conv2d(1, 12, kernel_size=1)
         # self.decoder_embed = norm_layer(decoder_embed_dim)
         self.decoder_pred = nn.Linear(embed_dims, 414, bias=True)
+        self.mask_token = nn.Parameter(torch.zeros(1, 1, 768))
         #  norm_layer(decoder_embed_dim, patch_size**2 * in_chans, bias=True) steal from source code
     
     def interpolate_pos_encoding(self, x, w, h):
@@ -261,16 +263,14 @@ class ViViTSSL(nn.Module):
         t, b, Y = x.shape
         x = x.reshape(b, t, Y)
         x, mask, ids_restore = self.random_masking(x, mask_ratio)
-        # import pdb;pdb.set_trace()
-        t, b, Y = x.shape
+        b,t, Y = x.shape
         c, h, w = 2, Y//2, 1
         x = x.reshape(b, t, c, h, w)
         z = self.encode(x, b, t, c, h, w)
-
         return z, mask, ids_restore
 
     def forward_decoder(self, x, ids_restore):
-        # embed tokens
+        logger.info(f"Decode x shape = {x.shape}")
         # x = self.decoder_embed(x)
 
         # # append mask tokens to sequence
@@ -293,8 +293,7 @@ class ViViTSSL(nn.Module):
         # # remove cls token
         # x = x[:, 1:, :]
         fc = self.decoder_pred(x)
-        rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
-        return x
+        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> b x (n c)")
 
     def forward_loss(self, x, pred, mask):
         """
@@ -302,12 +301,24 @@ class ViViTSSL(nn.Module):
         pred: [N, L, p*p*3]
         mask: [N, L], 0 is keep, 1 is remove, 
         """
+        """
+        x.shape
+        torch.Size([12, 64, 414])
+        (Pdb) pred.shape
+        torch.Size([64, 8, 414])
+        (Pdb) mask.shape
+        torch.Size([64, 12])
+        """
+        t, b, Y = x.shape
+        x = x.reshape(b, t, Y)
         target = x
         if True:
             mean = target.mean(dim=-1, keepdim=True)
             var = target.var(dim=-1, keepdim=True)
             target = (target - mean) / (var + 1.e-6)**.5
-
+        # import pdb;pdb.set_trace()
+        # torch.Size([8, 64, 414])
+        # torch.Size([64, 12, 414])
         loss = (pred - target) ** 2
         loss = loss.mean(dim=-1)  # [N, L], mean loss per patch
 
