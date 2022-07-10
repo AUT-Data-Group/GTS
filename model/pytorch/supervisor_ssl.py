@@ -32,7 +32,7 @@ class GTSSupervisor:
 
         # logging.
         self._log_dir = self._get_log_dir(kwargs)
-        self._writer = SummaryWriter('runs/' + self._log_dir)
+        # self._writer = SummaryWriter('runs/' + self._log_dir)
         log_level = self._kwargs.get('log_level', 'INFO')
         self._logger = utils.get_logger(self._log_dir, __name__, 'info.log', level=log_level)
 
@@ -263,7 +263,7 @@ class GTSSupervisor:
                 #                                                                            np.sqrt(np.mean(r_12)))
                 # self._logger.info(message)
 
-            self._writer.add_scalar('{} loss'.format(dataset), mean_loss, batches_seen)
+            # self._writer.add_scalar('{} loss'.format(dataset), mean_loss, batches_seen)
             if label == 'without_regularization':
                 return mean_loss
             else:
@@ -360,9 +360,9 @@ class GTSSupervisor:
                 val_loss = self.evaluate(label, dataset='val', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
                 val_steps += 1
                 end_time2 = time.time()
-                self._writer.add_scalar('training loss',
-                                        np.mean(losses),
-                                        batches_seen)
+                # self._writer.add_scalar('training loss',
+                #                         np.mean(losses),
+                #                         batches_seen)
 
                 if (epoch_num % log_every) == log_every - 1:
                     message = 'Epoch [{}/{}] ({}) train_mae: {:.4f}, val_mae: {:.4f}, val_mape: {:.4f}, val_rmse: {:.4f}, lr: {:.6f}, ' \
@@ -385,7 +385,7 @@ class GTSSupervisor:
 
                 end_time2 = time.time()
 
-                self._writer.add_scalar('training loss', np.mean(losses), batches_seen)
+                # self._writer.add_scalar('training loss', np.mean(losses), batches_seen)
 
                 if (epoch_num % log_every) == log_every - 1:
                     message = 'Epoch [{}/{}] ({}) train_mae: {:.4f}, val_mae: {:.4f}'.format(epoch_num, epochs,
