@@ -1,4 +1,5 @@
 import math
+import wandb
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -337,6 +338,7 @@ class ViViTSSL(nn.Module):
         # recon = rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
         # return F.mse_loss(recon[:, t//3: t//2, :, :], masked_gt), z
         # torch.Size([12, 64, 414])
+        wandb.config.mask_ratio = mask_ratio
         latent, mask, ids_restore = self.forward_encoder(x, mask_ratio)
         pred = self.forward_decoder(latent, ids_restore)  # [N, L, p*p*3]
         loss = self.forward_loss(x, pred, mask)

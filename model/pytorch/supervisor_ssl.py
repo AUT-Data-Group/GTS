@@ -8,12 +8,14 @@ from model.pytorch.loss import masked_mae_loss, masked_mape_loss, masked_rmse_lo
 import pandas as pd
 import os
 import time
+import wandb
 from ray import tune
 from ray.tune import CLIReporter
 from ray.tune.schedulers import ASHAScheduler
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+wandb.init(project="gpt3")
 
 class GTSSupervisor:
     def __init__(self, save_adj_name, temperature, **kwargs):
@@ -138,6 +140,8 @@ class GTSSupervisor:
 
     def train(self, **kwargs):
         kwargs.update(self._train_kwargs)
+        for k, v in kwargs.items():
+            setattr(wandb.config, k, v)
         config = {
             "mask_ratio": tune.choice([0.15, 0.3, 0.45, 0.6, 0.75])
         }
@@ -313,7 +317,7 @@ class GTSSupervisor:
             for batch_idx, (x, y) in enumerate(train_iterator):
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
-                # import pdb;pdb.set_trace()
+                wandb.watch(self.GTS_model)
                 loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
                 # if (epoch_num % epochs) == epochs - 1:
                 #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
@@ -357,6 +361,8 @@ class GTSSupervisor:
             end_time = time.time()
 
             if label == 'without_regularization':
+                wandb.log({'train_loss': np.mean(losses)})
+                wandb.log({'epoch': epoch_num})
                 val_loss = self.evaluate(label, dataset='val', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
                 val_steps += 1
                 end_time2 = time.time()
@@ -420,6 +426,7 @@ class GTSSupervisor:
                 torch.save((self.GTS_model.state_dict(), optimizer.state_dict()), path)
 
             tune.report(loss=(val_loss / val_steps))
+            wandb.log({'val_loss': val_loss})
 
     def _prepare_data(self, x, y):
         x, y = self._get_x_y(x, y)
