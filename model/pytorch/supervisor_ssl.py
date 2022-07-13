@@ -15,7 +15,7 @@ from ray.tune.schedulers import ASHAScheduler
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-wandb.init(project="transformer", entity="aufl")
+wandb.init(project="transformer", entity="moghadas76", mode="offline")
 
 class GTSSupervisor:
     def __init__(self, save_adj_name, temperature, **kwargs):
@@ -145,6 +145,7 @@ class GTSSupervisor:
         config = {
             "mask_ratio": tune.choice([0.15, 0.3, 0.45, 0.6, 0.75])
         }
+        '''
         scheduler = ASHAScheduler(
             metric="loss",
             mode="min",
@@ -161,6 +162,8 @@ class GTSSupervisor:
             num_samples=100,
             scheduler=scheduler,
             progress_reporter=reporter)
+        '''
+        self._train(config,**kwargs)
         return result
 
     def evaluate(self,label, dataset='val', batches_seen=0, gumbel_soft=True, config=None):
@@ -192,7 +195,7 @@ class GTSSupervisor:
             for batch_idx, (x, y) in enumerate(val_iterator):
                 x, y = self._prepare_data(x, y)
 
-                loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
+                loss, _, _ = self.GTS_model(x)
                 if label == 'without_regularization': 
                     # loss = self._compute_loss(y, output)
                     # y_true = self.standard_scaler.inverse_transform(y)
@@ -318,7 +321,7 @@ class GTSSupervisor:
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
                 wandb.watch(self.GTS_model)
-                loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
+                loss, _, _ = self.GTS_model(x)
                 # if (epoch_num % epochs) == epochs - 1:
                 #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
 
@@ -371,18 +374,18 @@ class GTSSupervisor:
                 #                         batches_seen)
 
                 if (epoch_num % log_every) == log_every - 1:
-                    message = 'Epoch [{}/{}] ({}) train_mae: {:.4f}, val_mae: {:.4f}, val_mape: {:.4f}, val_rmse: {:.4f}, lr: {:.6f}, ' \
+                    message = 'Epoch [{}/{}] ({}) train_mae: {:.4f}, val_mae: {:.4f}, val_mape: {}, val_rmse: {}, lr: {:.6f}, ' \
                               '{:.1f}s, {:.1f}s'.format(epoch_num, epochs, batches_seen,
-                                                        np.mean(losses), val_loss, val_mape, val_rmse,
+                                                        np.mean(losses), val_loss, "val_mape", "val_rmse",
                                                         lr_scheduler.get_lr()[0],
                                                         (end_time - start_time), (end_time2 - start_time))
                     self._logger.info(message)
 
                 if (epoch_num % test_every_n_epochs) == test_every_n_epochs - 1:
-                    test_loss, test_mape, test_rmse = self.evaluate(label, dataset='test', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
-                    message = 'Epoch [{}/{}] ({}) train_mae: {:.4f}, test_mae: {:.4f}, test_mape: {:.4f}, test_rmse: {:.4f}, lr: {:.6f}, ' \
+                    test_loss = self.evaluate(label, dataset='test', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
+                    message = 'Epoch [{}/{}] ({}) train_mae: {:.4f}, test_mae: {:.4f}, test_mape: {}, test_rmse: {}, lr: {:.6f}, ' \
                               '{:.1f}s, {:.1f}s'.format(epoch_num, epochs, batches_seen,
-                                                        np.mean(losses), test_loss, test_mape, test_rmse,
+                                                        np.mean(losses), test_loss, "_mape", "test_rmse",
                                                         lr_scheduler.get_lr()[0],
                                                         (end_time - start_time), (end_time2 - start_time))
                     self._logger.info(message)

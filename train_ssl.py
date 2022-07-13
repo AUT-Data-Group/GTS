@@ -7,7 +7,6 @@ import argparse
 import yaml
 from model.pytorch.supervisor_ssl import GTSSupervisor
 from lib.utils import load_graph_data
-from google.colab import files
 
 
 def main(args):
@@ -21,7 +20,11 @@ def main(args):
         print("Best trial final validation loss: {}".format(
             best_trial.last_result["loss"]))
         best_checkpoint_dir = best_trial.checkpoint.value
-        files.download(os.path.join(best_checkpoint_dir, "checkpoint"))
+        try:
+            from google.colab import files
+            files.download(os.path.join(best_checkpoint_dir, "checkpoint"))
+        except Exception:
+            print(f'Best checkpoint={str(os.path.join(best_checkpoint_dir, "checkpoint"))}')
 
 
 if __name__ == '__main__':
