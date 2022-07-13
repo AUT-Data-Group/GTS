@@ -15,7 +15,7 @@ from ray.tune.schedulers import ASHAScheduler
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-wandb.init(project="aufl/gpt3")
+wandb.init(project="gpt3")
 
 class GTSSupervisor:
     def __init__(self, save_adj_name, temperature, **kwargs):
