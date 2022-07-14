@@ -24,6 +24,8 @@ class GTSSupervisor:
         self._data_kwargs = kwargs.get('data')
         self._model_kwargs = kwargs.get('model')
         self._train_kwargs = kwargs.get('train')
+        #self._mr = kwargs.get('mr')
+        self._train_kwargs["mr"] = kwargs.get('mr')
         self.temperature = float(temperature)
         self.opt = self._train_kwargs.get('optimizer')
         self.max_grad_norm = self._train_kwargs.get('max_grad_norm', 1.)
@@ -142,7 +144,9 @@ class GTSSupervisor:
     def train(self, **kwargs):
         kwargs.update(self._train_kwargs)
         for k, v in kwargs.items():
+            print(f"Training parameter {k}: {v}")
             setattr(wandb.config, k, v)
+        '''
         config = {
             "mask_ratio": tune.choice([0.15, 0.3, 0.45, 0.6, 0.75]),
             "wandb": {
@@ -159,18 +163,40 @@ class GTSSupervisor:
         reporter = CLIReporter(
             # parameter_columns=["l1", "l2", "lr", "batch_size"],
             metric_columns=["loss", "training_iteration"])
-        result = tune.run(
-            partial(self._train, **kwargs),
-            loggers=[WandbLogger],
-            resources_per_trial={"cpu": 2, "gpu": 2},
+        '''
+        '''
+        {'base_lr': 0.0015, 'dropout': 0, 'epoch': 0, 'epochs': 150, 'epsilon': 0.001, 'global_step': 0, 'lr_decay_ratio': 0.1, 'max_grad_norm': 5, 'max_to_keep': 100, 'min_learning_rate': 2e-06, 'optimizer': 'adam', 'patience': 100, 'steps': [20, 30, 40], 'test_every_n_epochs': 5, 'knn_k': 10, 'epoch_use_regularization': 150, 'num_sample': 10, 'save_model': 1}
+        '''
+        '''result = tune.run(
+            partial(self._train, base_lr=kwargs["base_lr"],
+                dropout=kwargs["dropout"],
+                epoch=kwargs["epoch"],
+                epochs=kwargs["epochs"],
+                epsilon=kwargs["epsilon"],
+                global_step=kwargs["global_step"],
+                lr_decay_ratio=kwargs["lr_decay_ratio"],
+                max_grad_norm=kwargs["max_grad_norm"],
+                max_to_keep=kwargs["max_to_keep"],
+                min_learning_rate=kwargs["min_learning_rate"],
+                optimizer=kwargs["optimizer"],
+                patience=kwargs["patience"],
+                steps=kwargs["steps"],
+                test_every_n_epochs=kwargs["test_every_n_epochs"],
+                knn_k=kwargs["knn_k"],
+                epoch_use_regularization=kwargs["epoch_use_regularization"],
+                num_sample=kwargs["num_sample"],
+                save_model=kwargs["save_model"]
+
+                ),
+            #resources_per_trial={"cpu": 2, "gpu": 2},
             config=config,
-            num_samples=100,
-            scheduler=scheduler,
-            progress_reporter=reporter)
-        return result
+            #num_samples=100,
+            #scheduler=scheduler,
+            #progress_reporter=reporter
+            )'''
+        return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
     
     
-    @wandb_mixin
     def evaluate(self,label, dataset='val', batches_seen=0, gumbel_soft=True, config=None):
         """
         Computes mean L1Loss
@@ -282,7 +308,6 @@ class GTSSupervisor:
                 return mean_loss
 
     
-    @wandb_mixin
     def _train(self, config, base_lr,
                steps, patience=200, epochs=100, lr_decay_ratio=0.1, log_every=1, save_model=0,
                test_every_n_epochs=10, epsilon=1e-8, **kwargs):
@@ -430,11 +455,11 @@ class GTSSupervisor:
                     self._logger.warning('Early stopping at epoch: %d' % epoch_num)
                     break
 
-            with tune.checkpoint_dir(epoch_num) as checkpoint_dir:
+            '''with tune.checkpoint_dir(epoch_num) as checkpoint_dir:
                 path = os.path.join(checkpoint_dir, "checkpoint")
                 torch.save((self.GTS_model.state_dict(), optimizer.state_dict()), path)
 
-            tune.report(loss=(val_loss / val_steps))
+            tune.report(loss=(val_loss / val_steps))'''
             wandb.log({'val_loss': val_loss})
 
     def _prepare_data(self, x, y):
