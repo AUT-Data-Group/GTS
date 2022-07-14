@@ -144,7 +144,11 @@ class GTSSupervisor:
         for k, v in kwargs.items():
             setattr(wandb.config, k, v)
         config = {
-            "mask_ratio": tune.choice([0.15, 0.3, 0.45, 0.6, 0.75])
+            "mask_ratio": tune.choice([0.15, 0.3, 0.45, 0.6, 0.75]),
+            "wandb": {
+                "project": "transformer",
+                "log_config": True,
+                },
         }
         scheduler = ASHAScheduler(
             metric="loss",
