@@ -103,6 +103,7 @@ class ViViTSSL(nn.Module):
 
         # num_frames = num_frames//tube_size
         self.num_frames = num_frames
+        self.mask_ratio = mask_ratio
         self.embed_dims = embed_dims
         self.num_transformer_layers = num_transformer_layers
         self.attention_type = attention_type
@@ -326,7 +327,7 @@ class ViViTSSL(nn.Module):
         loss = (loss * mask).sum() / mask.sum()  # mean loss on removed patches
         return loss
 
-    def forward(self, x, mask_ratio=0.3):
+    def forward(self, x, mask_ratio):
         # # Return Class Token
         # if self.return_cls_token:
         #     return x[:, 0]

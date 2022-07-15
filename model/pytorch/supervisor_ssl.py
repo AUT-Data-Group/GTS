@@ -16,7 +16,7 @@ from ray.tune.integration.wandb import wandb_mixin, WandbLogger
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-wandb.init(project="transformer", entity="aufl")
+wandb.init(project="transformer", entity="aufl", mode="offline")
 
 class GTSSupervisor:
     def __init__(self, save_adj_name, temperature, **kwargs):
@@ -76,7 +76,7 @@ class GTSSupervisor:
         self.horizon = int(self._model_kwargs.get('horizon', 1))  # for the decoder
 
         # setup model
-        GTS_model = GTSModel(12,207,1, in_channels=2)
+        GTS_model = GTSModel(12,207,1, in_channels=2, mask_ratio=kwargs.get('mr'))
         self.GTS_model = GTS_model.cuda() if torch.cuda.is_available() else GTS_model
         self._logger.info("Model created")
 
