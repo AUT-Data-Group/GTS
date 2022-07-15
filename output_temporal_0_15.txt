@@ -1,0 +1,1152 @@
+2022-07-14 19:17:48.196783: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+14-07-2022 07:17:51 : DEBUG : __init__ : _configure_system : 53 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : [ray] Forcing OMP_NUM_THREADS=1 to avoid performance degradation with many workers (issue #6998). You can override this by explicitly setting OMP_NUM_THREADS.
+wandb: Tracking run with wandb version 0.12.21
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+/home/moghadas76/project/GTS/train_ssl.py:14: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  supervisor_config = yaml.load(f)
+2022-07-14 19:17:56,734 - INFO - Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0714191756/
+14-07-2022 07:17:56 : INFO : utils : get_logger : 196 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0714191756/
+14-07-2022 07:18:11 : INFO : model_ssl : __init__ : 114 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : num_frames = 12, embed_dims = 768,num_transformer_layers = 1,attention_type = fact_encoder,conv_type = Conv2d,tube_size = 2,return_cls_token= True
+2022-07-14 19:18:11,819 - INFO - Model created
+14-07-2022 07:18:11 : INFO : supervisor_ssl : __init__ : 81 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Model created
+Training parameter base_lr: 0.0015
+Training parameter dropout: 0
+Training parameter epoch: 0
+Training parameter epochs: 150
+Training parameter epsilon: 0.001
+Training parameter global_step: 0
+Training parameter lr_decay_ratio: 0.1
+Training parameter max_grad_norm: 5
+Training parameter max_to_keep: 100
+Training parameter min_learning_rate: 2e-06
+Training parameter optimizer: adam
+Training parameter patience: 100
+Training parameter steps: [20, 30, 40]
+Training parameter test_every_n_epochs: 5
+Training parameter knn_k: 10
+Training parameter epoch_use_regularization: 150
+Training parameter num_sample: 10
+Training parameter save_model: 1
+Training parameter mr: 0.15
+2022-07-14 19:18:11,823 - INFO - Start training ...
+14-07-2022 07:18:11 : INFO : supervisor_ssl : _train : 327 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Start training ...
+14-07-2022 07:18:11 : INFO : supervisor_ssl : _train : 331 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : num_batches:375
+2022-07-14 19:18:11,824 - INFO - num_batches:375
+Num of epoch: 0
+2022-07-14 19:20:43,541 - INFO - epoch complete
+14-07-2022 07:20:43 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:131: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+2022-07-14 19:20:43,542 - INFO - evaluating now!
+14-07-2022 07:20:43 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:418: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  warnings.warn("To get the last learning rate computed by the scheduler, "
+2022-07-14 19:20:50,795 - INFO - Epoch [0/150] (375) train_mae: 0.9838, val_mae: 0.8715, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 151.7s, 159.0s
+14-07-2022 07:20:50 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [0/150] (375) train_mae: 0.9838, val_mae: 0.8715, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 151.7s, 159.0s
+2022-07-14 19:20:52,054 - INFO - Saved model at 0
+14-07-2022 07:20:52 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 0
+2022-07-14 19:20:52,055 - INFO - Val loss decrease from inf to 0.8715, saving to models/epo0.tar
+14-07-2022 07:20:52 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from inf to 0.8715, saving to models/epo0.tar
+14-07-2022 07:23:29 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 1
+2022-07-14 19:23:29,837 - INFO - epoch complete
+14-07-2022 07:23:29 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:23:29,838 - INFO - evaluating now!
+2022-07-14 19:23:37,099 - INFO - Epoch [1/150] (750) train_mae: 0.7974, val_mae: 0.7707, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 157.8s, 165.0s
+14-07-2022 07:23:37 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [1/150] (750) train_mae: 0.7974, val_mae: 0.7707, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 157.8s, 165.0s
+2022-07-14 19:23:37,724 - INFO - Saved model at 1
+14-07-2022 07:23:37 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 1
+2022-07-14 19:23:37,725 - INFO - Val loss decrease from 0.8715 to 0.7707, saving to models/epo1.tar
+14-07-2022 07:23:37 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.8715 to 0.7707, saving to models/epo1.tar
+Num of epoch: 2
+2022-07-14 19:26:34,570 - INFO - epoch complete
+14-07-2022 07:26:34 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 19:26:34,571 - INFO - evaluating now!
+14-07-2022 07:26:34 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:26:41,725 - INFO - Epoch [2/150] (1125) train_mae: 0.7546, val_mae: 0.7661, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 176.8s, 184.0s
+14-07-2022 07:26:41 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [2/150] (1125) train_mae: 0.7546, val_mae: 0.7661, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 176.8s, 184.0s
+14-07-2022 07:26:42 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 2
+2022-07-14 19:26:42,325 - INFO - Saved model at 2
+2022-07-14 19:26:42,325 - INFO - Val loss decrease from 0.7707 to 0.7661, saving to models/epo2.tar
+14-07-2022 07:26:42 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7707 to 0.7661, saving to models/epo2.tar
+Num of epoch: 3
+2022-07-14 19:30:08,259 - INFO - epoch complete
+14-07-2022 07:30:08 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 19:30:08,260 - INFO - evaluating now!
+14-07-2022 07:30:08 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:30:15,530 - INFO - Epoch [3/150] (1500) train_mae: 0.7520, val_mae: 0.7654, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 205.9s, 213.2s
+14-07-2022 07:30:15 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [3/150] (1500) train_mae: 0.7520, val_mae: 0.7654, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 205.9s, 213.2s
+2022-07-14 19:30:16,118 - INFO - Saved model at 3
+14-07-2022 07:30:16 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 3
+2022-07-14 19:30:16,118 - INFO - Val loss decrease from 0.7661 to 0.7654, saving to models/epo3.tar
+14-07-2022 07:30:16 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7661 to 0.7654, saving to models/epo3.tar
+Num of epoch: 4
+2022-07-14 19:33:52,883 - INFO - epoch complete
+14-07-2022 07:33:52 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 19:33:52,883 - INFO - evaluating now!
+14-07-2022 07:33:52 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:34:00,172 - INFO - Epoch [4/150] (1875) train_mae: 0.7515, val_mae: 0.7648, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 216.8s, 224.1s
+14-07-2022 07:34:00 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [4/150] (1875) train_mae: 0.7515, val_mae: 0.7648, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 216.8s, 224.1s
+2022-07-14 19:34:14,559 - INFO - Test: mae: 0.7301
+14-07-2022 07:34:14 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7301
+2022-07-14 19:34:14,559 - INFO - Epoch [4/150] (1875) train_mae: 0.7515, test_mae: 0.7301, test_mape: test_mape, test_rmse: test_rmse, lr: 0.001500, 216.8s, 224.1s
+14-07-2022 07:34:14 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [4/150] (1875) train_mae: 0.7515, test_mae: 0.7301, test_mape: test_mape, test_rmse: test_rmse, lr: 0.001500, 216.8s, 224.1s
+2022-07-14 19:34:14,946 - INFO - Saved model at 4
+14-07-2022 07:34:14 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 4
+2022-07-14 19:34:14,946 - INFO - Val loss decrease from 0.7654 to 0.7648, saving to models/epo4.tar
+14-07-2022 07:34:14 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7654 to 0.7648, saving to models/epo4.tar
+14-07-2022 07:38:18 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 5
+2022-07-14 19:38:18,577 - INFO - epoch complete
+2022-07-14 19:38:18,578 - INFO - evaluating now!
+14-07-2022 07:38:18 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:38:25,843 - INFO - Epoch [5/150] (2250) train_mae: 0.7520, val_mae: 0.7642, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 243.6s, 250.9s
+14-07-2022 07:38:25 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [5/150] (2250) train_mae: 0.7520, val_mae: 0.7642, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 243.6s, 250.9s
+2022-07-14 19:38:26,390 - INFO - Saved model at 5
+14-07-2022 07:38:26 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 5
+2022-07-14 19:38:26,391 - INFO - Val loss decrease from 0.7648 to 0.7642, saving to models/epo5.tar
+14-07-2022 07:38:26 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7648 to 0.7642, saving to models/epo5.tar
+Num of epoch: 6
+2022-07-14 19:42:48,393 - INFO - epoch complete
+14-07-2022 07:42:48 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+14-07-2022 07:42:48 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:42:48,393 - INFO - evaluating now!
+14-07-2022 07:42:55 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [6/150] (2625) train_mae: 0.7511, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 262.0s, 269.3s
+2022-07-14 19:42:55,682 - INFO - Epoch [6/150] (2625) train_mae: 0.7511, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 262.0s, 269.3s
+14-07-2022 07:42:56 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 6
+2022-07-14 19:42:56,160 - INFO - Saved model at 6
+14-07-2022 07:42:56 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7642 to 0.7615, saving to models/epo6.tar
+2022-07-14 19:42:56,160 - INFO - Val loss decrease from 0.7642 to 0.7615, saving to models/epo6.tar
+Num of epoch: 7
+2022-07-14 19:47:30,236 - INFO - epoch complete
+14-07-2022 07:47:30 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 19:47:30,236 - INFO - evaluating now!
+14-07-2022 07:47:30 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 07:47:37 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [7/150] (3000) train_mae: 0.7502, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 274.1s, 281.3s
+2022-07-14 19:47:37,497 - INFO - Epoch [7/150] (3000) train_mae: 0.7502, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 274.1s, 281.3s
+Num of epoch: 8
+2022-07-14 19:52:49,143 - INFO - epoch complete
+14-07-2022 07:52:49 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 19:52:49,143 - INFO - evaluating now!
+14-07-2022 07:52:49 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 07:52:56 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [8/150] (3375) train_mae: 0.7500, val_mae: 0.7633, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 311.6s, 318.9s
+2022-07-14 19:52:56,417 - INFO - Epoch [8/150] (3375) train_mae: 0.7500, val_mae: 0.7633, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 311.6s, 318.9s
+Num of epoch: 9
+2022-07-14 19:58:16,065 - INFO - epoch complete
+14-07-2022 07:58:16 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 19:58:16,065 - INFO - evaluating now!
+14-07-2022 07:58:16 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 19:58:23,311 - INFO - Epoch [9/150] (3750) train_mae: 0.7496, val_mae: 0.7621, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 319.6s, 326.9s
+14-07-2022 07:58:23 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [9/150] (3750) train_mae: 0.7496, val_mae: 0.7621, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 319.6s, 326.9s
+2022-07-14 19:58:37,860 - INFO - Test: mae: 0.7344
+14-07-2022 07:58:37 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7344
+2022-07-14 19:58:37,861 - INFO - Epoch [9/150] (3750) train_mae: 0.7496, test_mae: 0.7344, test_mape: test_mape, test_rmse: test_rmse, lr: 0.001500, 319.6s, 326.9s
+14-07-2022 07:58:37 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [9/150] (3750) train_mae: 0.7496, test_mae: 0.7344, test_mape: test_mape, test_rmse: test_rmse, lr: 0.001500, 319.6s, 326.9s
+Num of epoch: 10
+2022-07-14 20:04:16,160 - INFO - epoch complete
+14-07-2022 08:04:16 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 20:04:16,160 - INFO - evaluating now!
+14-07-2022 08:04:16 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 08:04:23 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+2022-07-14 20:04:23,451 - INFO - Epoch [10/150] (4125) train_mae: 0.7503, val_mae: 0.7623, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 338.3s, 345.6s
+Log : Epoch [10/150] (4125) train_mae: 0.7503, val_mae: 0.7623, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 338.3s, 345.6s
+14-07-2022 08:10:29 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 11
+2022-07-14 20:10:29,853 - INFO - epoch complete
+2022-07-14 20:10:29,853 - INFO - evaluating now!
+14-07-2022 08:10:29 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 20:10:37,124 - INFO - Epoch [11/150] (4500) train_mae: 0.7509, val_mae: 0.7638, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 366.4s, 373.7s
+14-07-2022 08:10:37 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [11/150] (4500) train_mae: 0.7509, val_mae: 0.7638, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 366.4s, 373.7s
+Num of epoch: 12
+2022-07-14 20:16:54,918 - INFO - epoch complete
+14-07-2022 08:16:54 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 20:16:54,919 - INFO - evaluating now!
+14-07-2022 08:16:54 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 20:17:02,205 - INFO - Epoch [12/150] (4875) train_mae: 0.7496, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 377.8s, 385.1s
+14-07-2022 08:17:02 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [12/150] (4875) train_mae: 0.7496, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 377.8s, 385.1s
+2022-07-14 20:17:02,448 - INFO - Saved model at 12
+14-07-2022 08:17:02 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 12
+2022-07-14 20:17:02,449 - INFO - Val loss decrease from 0.7615 to 0.7615, saving to models/epo12.tar
+14-07-2022 08:17:02 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7615 to 0.7615, saving to models/epo12.tar
+14-07-2022 08:23:48 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+14-07-2022 08:23:48 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+Num of epoch: 13
+2022-07-14 20:23:48,776 - INFO - epoch complete
+2022-07-14 20:23:48,776 - INFO - evaluating now!
+2022-07-14 20:23:56,068 - INFO - Epoch [13/150] (5250) train_mae: 0.7489, val_mae: 0.7619, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 406.3s, 413.6s
+14-07-2022 08:23:56 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [13/150] (5250) train_mae: 0.7489, val_mae: 0.7619, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 406.3s, 413.6s
+Num of epoch: 14
+2022-07-14 20:30:59,644 - INFO - epoch complete
+2022-07-14 20:30:59,645 - INFO - evaluating now!
+14-07-2022 08:30:59 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+14-07-2022 08:30:59 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 20:31:06,923 - INFO - Epoch [14/150] (5625) train_mae: 0.7510, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 423.6s, 430.9s
+14-07-2022 08:31:06 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [14/150] (5625) train_mae: 0.7510, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 423.6s, 430.9s
+2022-07-14 20:31:21,421 - INFO - Test: mae: 0.7335
+14-07-2022 08:31:21 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7335
+2022-07-14 20:31:21,421 - INFO - Epoch [14/150] (5625) train_mae: 0.7510, test_mae: 0.7335, test_mape: test_mape, test_rmse: test_rmse, lr: 0.001500, 423.6s, 430.9s
+14-07-2022 08:31:21 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [14/150] (5625) train_mae: 0.7510, test_mae: 0.7335, test_mape: test_mape, test_rmse: test_rmse, lr: 0.001500, 423.6s, 430.9s
+Num of epoch: 15
+2022-07-14 20:38:35,953 - INFO - epoch complete
+14-07-2022 08:38:35 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 20:38:35,954 - INFO - evaluating now!
+14-07-2022 08:38:35 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 20:38:43,256 - INFO - Epoch [15/150] (6000) train_mae: 0.7500, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 434.5s, 441.8s
+14-07-2022 08:38:43 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [15/150] (6000) train_mae: 0.7500, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 434.5s, 441.8s
+Num of epoch: 16
+2022-07-14 20:46:35,718 - INFO - epoch complete
+2022-07-14 20:46:35,718 - INFO - evaluating now!
+14-07-2022 08:46:35 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+14-07-2022 08:46:35 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 08:46:43 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [16/150] (6375) train_mae: 0.7479, val_mae: 0.7601, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 472.5s, 479.8s
+2022-07-14 20:46:43,021 - INFO - Epoch [16/150] (6375) train_mae: 0.7479, val_mae: 0.7601, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 472.5s, 479.8s
+2022-07-14 20:46:43,253 - INFO - Saved model at 16
+14-07-2022 08:46:43 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 16
+2022-07-14 20:46:43,253 - INFO - Val loss decrease from 0.7615 to 0.7601, saving to models/epo16.tar
+14-07-2022 08:46:43 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7615 to 0.7601, saving to models/epo16.tar
+Num of epoch: 17
+2022-07-14 20:54:50,430 - INFO - epoch complete
+14-07-2022 08:54:50 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 20:54:50,430 - INFO - evaluating now!
+14-07-2022 08:54:50 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 20:54:57,729 - INFO - Epoch [17/150] (6750) train_mae: 0.7498, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 487.2s, 494.5s
+14-07-2022 08:54:57 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [17/150] (6750) train_mae: 0.7498, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 487.2s, 494.5s
+Num of epoch: 18
+2022-07-14 21:03:28,005 - INFO - epoch complete
+14-07-2022 09:03:28 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 21:03:28,005 - INFO - evaluating now!
+14-07-2022 09:03:28 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 09:03:35 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [18/150] (7125) train_mae: 0.7502, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 510.3s, 517.6s
+2022-07-14 21:03:35,295 - INFO - Epoch [18/150] (7125) train_mae: 0.7502, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 510.3s, 517.6s
+14-07-2022 09:12:34 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 19
+2022-07-14 21:12:34,512 - INFO - epoch complete
+14-07-2022 09:12:34 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 21:12:34,512 - INFO - evaluating now!
+2022-07-14 21:12:41,812 - INFO - Epoch [19/150] (7500) train_mae: 0.7509, val_mae: 0.7641, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 539.2s, 546.5s
+14-07-2022 09:12:41 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [19/150] (7500) train_mae: 0.7509, val_mae: 0.7641, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 539.2s, 546.5s
+2022-07-14 21:12:56,380 - INFO - Test: mae: 0.7361
+14-07-2022 09:12:56 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7361
+2022-07-14 21:12:56,380 - INFO - Epoch [19/150] (7500) train_mae: 0.7509, test_mae: 0.7361, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000015, 539.2s, 546.5s
+14-07-2022 09:12:56 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [19/150] (7500) train_mae: 0.7509, test_mae: 0.7361, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000015, 539.2s, 546.5s
+14-07-2022 09:22:07 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+14-07-2022 09:22:07 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+Num of epoch: 20
+2022-07-14 21:22:07,128 - INFO - epoch complete
+2022-07-14 21:22:07,128 - INFO - evaluating now!
+2022-07-14 21:22:14,424 - INFO - Epoch [20/150] (7875) train_mae: 0.7499, val_mae: 0.7637, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 550.7s, 558.0s
+14-07-2022 09:22:14 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [20/150] (7875) train_mae: 0.7499, val_mae: 0.7637, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 550.7s, 558.0s
+Num of epoch: 21
+2022-07-14 21:31:52,067 - INFO - epoch complete
+14-07-2022 09:31:52 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 21:31:52,068 - INFO - evaluating now!
+14-07-2022 09:31:52 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 09:31:59 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [21/150] (8250) train_mae: 0.7502, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 577.6s, 584.9s
+2022-07-14 21:31:59,370 - INFO - Epoch [21/150] (8250) train_mae: 0.7502, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 577.6s, 584.9s
+14-07-2022 09:41:57 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 22
+2022-07-14 21:41:57,445 - INFO - epoch complete
+2022-07-14 21:41:57,445 - INFO - evaluating now!
+14-07-2022 09:41:57 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 21:42:04,739 - INFO - Epoch [22/150] (8625) train_mae: 0.7508, val_mae: 0.7634, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 598.1s, 605.4s
+14-07-2022 09:42:04 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [22/150] (8625) train_mae: 0.7508, val_mae: 0.7634, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 598.1s, 605.4s
+Num of epoch: 23
+2022-07-14 21:52:14,454 - INFO - epoch complete
+14-07-2022 09:52:14 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 21:52:14,454 - INFO - evaluating now!
+14-07-2022 09:52:14 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 09:52:21 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [23/150] (9000) train_mae: 0.7493, val_mae: 0.7614, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 609.7s, 617.0s
+2022-07-14 21:52:21,740 - INFO - Epoch [23/150] (9000) train_mae: 0.7493, val_mae: 0.7614, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 609.7s, 617.0s
+14-07-2022 10:03:10 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 24
+2022-07-14 22:03:10,011 - INFO - epoch complete
+2022-07-14 22:03:10,011 - INFO - evaluating now!
+14-07-2022 10:03:10 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 10:03:17 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [24/150] (9375) train_mae: 0.7502, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 648.3s, 655.6s
+2022-07-14 22:03:17,310 - INFO - Epoch [24/150] (9375) train_mae: 0.7502, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 648.3s, 655.6s
+14-07-2022 10:03:31 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7345
+2022-07-14 22:03:31,879 - INFO - Test: mae: 0.7345
+2022-07-14 22:03:31,880 - INFO - Epoch [24/150] (9375) train_mae: 0.7502, test_mae: 0.7345, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000150, 648.3s, 655.6s
+14-07-2022 10:03:31 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [24/150] (9375) train_mae: 0.7502, test_mae: 0.7345, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000150, 648.3s, 655.6s
+Num of epoch: 25
+2022-07-14 22:14:29,829 - INFO - epoch complete
+2022-07-14 22:14:29,829 - INFO - evaluating now!
+14-07-2022 10:14:29 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+14-07-2022 10:14:29 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 22:14:37,130 - INFO - Epoch [25/150] (9750) train_mae: 0.7486, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 657.9s, 665.2s
+14-07-2022 10:14:37 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [25/150] (9750) train_mae: 0.7486, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 657.9s, 665.2s
+Num of epoch: 26
+2022-07-14 22:25:52,213 - INFO - epoch complete
+14-07-2022 10:25:52 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 22:25:52,214 - INFO - evaluating now!
+14-07-2022 10:25:52 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 10:25:59 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [26/150] (10125) train_mae: 0.7502, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 675.1s, 682.4s
+2022-07-14 22:25:59,493 - INFO - Epoch [26/150] (10125) train_mae: 0.7502, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 675.1s, 682.4s
+14-07-2022 10:37:31 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 27
+2022-07-14 22:37:31,887 - INFO - epoch complete
+14-07-2022 10:37:31 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 22:37:31,887 - INFO - evaluating now!
+14-07-2022 10:37:39 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [27/150] (10500) train_mae: 0.7497, val_mae: 0.7611, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 692.4s, 699.7s
+2022-07-14 22:37:39,181 - INFO - Epoch [27/150] (10500) train_mae: 0.7497, val_mae: 0.7611, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 692.4s, 699.7s
+Num of epoch: 28
+2022-07-14 22:49:36,758 - INFO - epoch complete
+14-07-2022 10:49:36 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 22:49:36,759 - INFO - evaluating now!
+14-07-2022 10:49:36 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 22:49:44,040 - INFO - Epoch [28/150] (10875) train_mae: 0.7503, val_mae: 0.7617, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 717.6s, 724.9s
+14-07-2022 10:49:44 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [28/150] (10875) train_mae: 0.7503, val_mae: 0.7617, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000150, 717.6s, 724.9s
+Num of epoch: 29
+2022-07-14 23:02:10,447 - INFO - epoch complete
+14-07-2022 11:02:10 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 23:02:10,447 - INFO - evaluating now!
+14-07-2022 11:02:10 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 23:02:17,727 - INFO - Epoch [29/150] (11250) train_mae: 0.7503, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 746.4s, 753.7s
+14-07-2022 11:02:17 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [29/150] (11250) train_mae: 0.7503, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 746.4s, 753.7s
+2022-07-14 23:02:32,290 - INFO - Test: mae: 0.7349
+14-07-2022 11:02:32 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7349
+2022-07-14 23:02:32,291 - INFO - Epoch [29/150] (11250) train_mae: 0.7503, test_mae: 0.7349, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 746.4s, 753.7s
+14-07-2022 11:02:32 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [29/150] (11250) train_mae: 0.7503, test_mae: 0.7349, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 746.4s, 753.7s
+Num of epoch: 30
+2022-07-14 23:15:09,263 - INFO - epoch complete
+14-07-2022 11:15:09 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 23:15:09,263 - INFO - evaluating now!
+14-07-2022 11:15:09 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 23:15:16,548 - INFO - Epoch [30/150] (11625) train_mae: 0.7501, val_mae: 0.7621, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 757.0s, 764.3s
+14-07-2022 11:15:16 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [30/150] (11625) train_mae: 0.7501, val_mae: 0.7621, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 757.0s, 764.3s
+Num of epoch: 31
+2022-07-14 23:27:56,792 - INFO - epoch complete
+14-07-2022 11:27:56 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 23:27:56,793 - INFO - evaluating now!
+14-07-2022 11:27:56 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 11:28:04 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [31/150] (12000) train_mae: 0.7489, val_mae: 0.7619, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 760.2s, 767.5s
+2022-07-14 23:28:04,073 - INFO - Epoch [31/150] (12000) train_mae: 0.7489, val_mae: 0.7619, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 760.2s, 767.5s
+Num of epoch: 32
+2022-07-14 23:41:41,014 - INFO - epoch complete
+14-07-2022 11:41:41 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 23:41:41,014 - INFO - evaluating now!
+14-07-2022 11:41:41 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-14 23:41:48,297 - INFO - Epoch [32/150] (12375) train_mae: 0.7501, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 816.9s, 824.2s
+14-07-2022 11:41:48 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [32/150] (12375) train_mae: 0.7501, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 816.9s, 824.2s
+Num of epoch: 33
+2022-07-14 23:55:36,061 - INFO - epoch complete
+14-07-2022 11:55:36 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-14 23:55:36,062 - INFO - evaluating now!
+14-07-2022 11:55:36 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+14-07-2022 11:55:43 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [33/150] (12750) train_mae: 0.7491, val_mae: 0.7599, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 827.8s, 835.0s
+2022-07-14 23:55:43,342 - INFO - Epoch [33/150] (12750) train_mae: 0.7491, val_mae: 0.7599, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 827.8s, 835.0s
+2022-07-14 23:55:43,581 - INFO - Saved model at 33
+14-07-2022 11:55:43 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 33
+2022-07-14 23:55:43,582 - INFO - Val loss decrease from 0.7601 to 0.7599, saving to models/epo33.tar
+14-07-2022 11:55:43 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7601 to 0.7599, saving to models/epo33.tar
+Num of epoch: 34
+2022-07-15 00:09:53,872 - INFO - epoch complete
+15-07-2022 12:09:53 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 00:09:53,872 - INFO - evaluating now!
+15-07-2022 12:09:53 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 00:10:01,148 - INFO - Epoch [34/150] (13125) train_mae: 0.7481, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 850.3s, 857.6s
+15-07-2022 12:10:01 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [34/150] (13125) train_mae: 0.7481, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 850.3s, 857.6s
+2022-07-15 00:10:15,758 - INFO - Test: mae: 0.7378
+15-07-2022 12:10:15 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7378
+2022-07-15 00:10:15,759 - INFO - Epoch [34/150] (13125) train_mae: 0.7481, test_mae: 0.7378, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000015, 850.3s, 857.6s
+15-07-2022 12:10:15 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [34/150] (13125) train_mae: 0.7481, test_mae: 0.7378, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000015, 850.3s, 857.6s
+Num of epoch: 35
+2022-07-15 00:24:52,109 - INFO - epoch complete
+15-07-2022 12:24:52 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 00:24:52,110 - INFO - evaluating now!
+15-07-2022 12:24:52 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 00:24:59,429 - INFO - Epoch [35/150] (13500) train_mae: 0.7505, val_mae: 0.7625, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 876.4s, 883.7s
+15-07-2022 12:24:59 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [35/150] (13500) train_mae: 0.7505, val_mae: 0.7625, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 876.4s, 883.7s
+15-07-2022 12:39:45 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 36
+2022-07-15 00:39:45,025 - INFO - epoch complete
+2022-07-15 00:39:45,025 - INFO - evaluating now!
+15-07-2022 12:39:45 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 00:39:52,324 - INFO - Epoch [36/150] (13875) train_mae: 0.7471, val_mae: 0.7631, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 885.6s, 892.9s
+15-07-2022 12:39:52 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [36/150] (13875) train_mae: 0.7471, val_mae: 0.7631, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 885.6s, 892.9s
+Num of epoch: 37
+2022-07-15 00:55:08,183 - INFO - epoch complete
+15-07-2022 12:55:08 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 00:55:08,184 - INFO - evaluating now!
+15-07-2022 12:55:08 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 00:55:15,462 - INFO - Epoch [37/150] (14250) train_mae: 0.7486, val_mae: 0.7609, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 915.9s, 923.1s
+15-07-2022 12:55:15 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [37/150] (14250) train_mae: 0.7486, val_mae: 0.7609, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 915.9s, 923.1s
+15-07-2022 01:10:53 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 01:10:53 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+Num of epoch: 38
+2022-07-15 01:10:53,215 - INFO - epoch complete
+2022-07-15 01:10:53,215 - INFO - evaluating now!
+2022-07-15 01:11:00,500 - INFO - Epoch [38/150] (14625) train_mae: 0.7494, val_mae: 0.7597, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 937.8s, 945.0s
+15-07-2022 01:11:00 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [38/150] (14625) train_mae: 0.7494, val_mae: 0.7597, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000015, 937.8s, 945.0s
+15-07-2022 01:11:00 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 38
+2022-07-15 01:11:00,736 - INFO - Saved model at 38
+15-07-2022 01:11:00 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7599 to 0.7597, saving to models/epo38.tar
+2022-07-15 01:11:00,736 - INFO - Val loss decrease from 0.7599 to 0.7597, saving to models/epo38.tar
+15-07-2022 01:26:46 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 39
+2022-07-15 01:26:46,504 - INFO - epoch complete
+2022-07-15 01:26:46,505 - INFO - evaluating now!
+15-07-2022 01:26:46 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 01:26:53,769 - INFO - Epoch [39/150] (15000) train_mae: 0.7484, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000000, 945.8s, 953.0s
+15-07-2022 01:26:53 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [39/150] (15000) train_mae: 0.7484, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000000, 945.8s, 953.0s
+2022-07-15 01:27:08,376 - INFO - Test: mae: 0.7343
+15-07-2022 01:27:08 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7343
+2022-07-15 01:27:08,376 - INFO - Epoch [39/150] (15000) train_mae: 0.7484, test_mae: 0.7343, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000000, 945.8s, 953.0s
+15-07-2022 01:27:08 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [39/150] (15000) train_mae: 0.7484, test_mae: 0.7343, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000000, 945.8s, 953.0s
+15-07-2022 01:43:11 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 40
+2022-07-15 01:43:11,155 - INFO - epoch complete
+2022-07-15 01:43:11,155 - INFO - evaluating now!
+15-07-2022 01:43:11 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 01:43:18,429 - INFO - Epoch [40/150] (15375) train_mae: 0.7495, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 962.8s, 970.1s
+15-07-2022 01:43:18 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [40/150] (15375) train_mae: 0.7495, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 962.8s, 970.1s
+15-07-2022 01:59:30 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 41
+2022-07-15 01:59:30,839 - INFO - epoch complete
+2022-07-15 01:59:30,840 - INFO - evaluating now!
+15-07-2022 01:59:30 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 01:59:38 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [41/150] (15750) train_mae: 0.7500, val_mae: 0.7593, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 972.4s, 979.7s
+2022-07-15 01:59:38,129 - INFO - Epoch [41/150] (15750) train_mae: 0.7500, val_mae: 0.7593, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 972.4s, 979.7s
+15-07-2022 01:59:38 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Saved model at 41
+2022-07-15 01:59:38,361 - INFO - Saved model at 41
+15-07-2022 01:59:38 : INFO : supervisor_ssl : _train : 447 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Val loss decrease from 0.7597 to 0.7593, saving to models/epo41.tar
+2022-07-15 01:59:38,361 - INFO - Val loss decrease from 0.7597 to 0.7593, saving to models/epo41.tar
+15-07-2022 02:16:14 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 42
+2022-07-15 02:16:14,787 - INFO - epoch complete
+2022-07-15 02:16:14,787 - INFO - evaluating now!
+15-07-2022 02:16:14 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 02:16:22 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [42/150] (16125) train_mae: 0.7497, val_mae: 0.7617, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 996.4s, 1003.7s
+2022-07-15 02:16:22,071 - INFO - Epoch [42/150] (16125) train_mae: 0.7497, val_mae: 0.7617, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 996.4s, 1003.7s
+15-07-2022 02:33:26 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 43
+2022-07-15 02:33:26,960 - INFO - epoch complete
+2022-07-15 02:33:26,961 - INFO - evaluating now!
+15-07-2022 02:33:26 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 02:33:34,235 - INFO - Epoch [43/150] (16500) train_mae: 0.7501, val_mae: 0.7597, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1024.9s, 1032.2s
+15-07-2022 02:33:34 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [43/150] (16500) train_mae: 0.7501, val_mae: 0.7597, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1024.9s, 1032.2s
+Num of epoch: 44
+2022-07-15 02:50:51,231 - INFO - epoch complete
+2022-07-15 02:50:51,231 - INFO - evaluating now!
+15-07-2022 02:50:51 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 02:50:51 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 02:50:58,490 - INFO - Epoch [44/150] (16875) train_mae: 0.7501, val_mae: 0.7608, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1037.0s, 1044.3s
+15-07-2022 02:50:58 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [44/150] (16875) train_mae: 0.7501, val_mae: 0.7608, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1037.0s, 1044.3s
+2022-07-15 02:51:12,989 - INFO - Test: mae: 0.7356
+15-07-2022 02:51:12 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7356
+15-07-2022 02:51:12 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [44/150] (16875) train_mae: 0.7501, test_mae: 0.7356, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1037.0s, 1044.3s
+2022-07-15 02:51:12,989 - INFO - Epoch [44/150] (16875) train_mae: 0.7501, test_mae: 0.7356, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1037.0s, 1044.3s
+Num of epoch: 45
+2022-07-15 03:09:00,139 - INFO - epoch complete
+15-07-2022 03:09:00 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 03:09:00,139 - INFO - evaluating now!
+15-07-2022 03:09:00 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 03:09:07 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [45/150] (17250) train_mae: 0.7498, val_mae: 0.7594, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1067.1s, 1074.4s
+2022-07-15 03:09:07,411 - INFO - Epoch [45/150] (17250) train_mae: 0.7498, val_mae: 0.7594, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1067.1s, 1074.4s
+Num of epoch: 46
+2022-07-15 03:27:14,050 - INFO - epoch complete
+15-07-2022 03:27:14 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 03:27:14,050 - INFO - evaluating now!
+15-07-2022 03:27:14 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 03:27:21 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [46/150] (17625) train_mae: 0.7500, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1086.6s, 1093.9s
+2022-07-15 03:27:21,310 - INFO - Epoch [46/150] (17625) train_mae: 0.7500, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1086.6s, 1093.9s
+15-07-2022 03:45:37 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 47
+2022-07-15 03:45:37,452 - INFO - epoch complete
+2022-07-15 03:45:37,452 - INFO - evaluating now!
+15-07-2022 03:45:37 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 03:45:44 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [47/150] (18000) train_mae: 0.7490, val_mae: 0.7638, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1096.1s, 1103.4s
+2022-07-15 03:45:44,722 - INFO - Epoch [47/150] (18000) train_mae: 0.7490, val_mae: 0.7638, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1096.1s, 1103.4s
+15-07-2022 04:04:39 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 48
+2022-07-15 04:04:39,355 - INFO - epoch complete
+2022-07-15 04:04:39,355 - INFO - evaluating now!
+15-07-2022 04:04:39 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 04:04:46,627 - INFO - Epoch [48/150] (18375) train_mae: 0.7494, val_mae: 0.7629, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1134.6s, 1141.9s
+15-07-2022 04:04:46 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [48/150] (18375) train_mae: 0.7494, val_mae: 0.7629, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1134.6s, 1141.9s
+15-07-2022 04:23:54 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 49
+2022-07-15 04:23:54,766 - INFO - epoch complete
+2022-07-15 04:23:54,766 - INFO - evaluating now!
+15-07-2022 04:23:54 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 04:24:02,038 - INFO - Epoch [49/150] (18750) train_mae: 0.7497, val_mae: 0.7600, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1148.1s, 1155.4s
+15-07-2022 04:24:02 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [49/150] (18750) train_mae: 0.7497, val_mae: 0.7600, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1148.1s, 1155.4s
+2022-07-15 04:24:16,552 - INFO - Test: mae: 0.7346
+15-07-2022 04:24:16 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7346
+2022-07-15 04:24:16,552 - INFO - Epoch [49/150] (18750) train_mae: 0.7497, test_mae: 0.7346, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1148.1s, 1155.4s
+15-07-2022 04:24:16 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [49/150] (18750) train_mae: 0.7497, test_mae: 0.7346, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1148.1s, 1155.4s
+Num of epoch: 50
+2022-07-15 04:43:42,409 - INFO - epoch complete
+15-07-2022 04:43:42 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 04:43:42,410 - INFO - evaluating now!
+15-07-2022 04:43:42 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 04:43:49,664 - INFO - Epoch [50/150] (19125) train_mae: 0.7484, val_mae: 0.7608, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1165.9s, 1173.1s
+15-07-2022 04:43:49 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [50/150] (19125) train_mae: 0.7484, val_mae: 0.7608, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1165.9s, 1173.1s
+Num of epoch: 51
+2022-07-15 05:03:43,978 - INFO - epoch complete
+15-07-2022 05:03:43 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 05:03:43,978 - INFO - evaluating now!
+15-07-2022 05:03:43 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 05:03:51,256 - INFO - Epoch [51/150] (19500) train_mae: 0.7513, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1194.3s, 1201.6s
+15-07-2022 05:03:51 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [51/150] (19500) train_mae: 0.7513, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1194.3s, 1201.6s
+15-07-2022 05:23:57 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 52
+2022-07-15 05:23:57,759 - INFO - epoch complete
+15-07-2022 05:23:57 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 05:23:57,759 - INFO - evaluating now!
+2022-07-15 05:24:05,021 - INFO - Epoch [52/150] (19875) train_mae: 0.7495, val_mae: 0.7630, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1206.5s, 1213.8s
+15-07-2022 05:24:05 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [52/150] (19875) train_mae: 0.7495, val_mae: 0.7630, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1206.5s, 1213.8s
+15-07-2022 05:44:40 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 53
+2022-07-15 05:44:40,427 - INFO - epoch complete
+15-07-2022 05:44:40 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 05:44:40,427 - INFO - evaluating now!
+2022-07-15 05:44:47,688 - INFO - Epoch [53/150] (20250) train_mae: 0.7491, val_mae: 0.7611, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1235.4s, 1242.7s
+15-07-2022 05:44:47 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [53/150] (20250) train_mae: 0.7491, val_mae: 0.7611, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1235.4s, 1242.7s
+Num of epoch: 54
+2022-07-15 06:05:42,959 - INFO - epoch complete
+15-07-2022 06:05:42 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 06:05:42,959 - INFO - evaluating now!
+15-07-2022 06:05:42 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 06:05:50,231 - INFO - Epoch [54/150] (20625) train_mae: 0.7505, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1255.3s, 1262.5s
+15-07-2022 06:05:50 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [54/150] (20625) train_mae: 0.7505, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1255.3s, 1262.5s
+2022-07-15 06:06:04,747 - INFO - Test: mae: 0.7334
+15-07-2022 06:06:04 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7334
+2022-07-15 06:06:04,747 - INFO - Epoch [54/150] (20625) train_mae: 0.7505, test_mae: 0.7334, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1255.3s, 1262.5s
+15-07-2022 06:06:04 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [54/150] (20625) train_mae: 0.7505, test_mae: 0.7334, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1255.3s, 1262.5s
+Num of epoch: 55
+2022-07-15 06:27:39,330 - INFO - epoch complete
+2022-07-15 06:27:39,330 - INFO - evaluating now!
+15-07-2022 06:27:39 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 06:27:39 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 06:27:46 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [55/150] (21000) train_mae: 0.7507, val_mae: 0.7628, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1294.6s, 1301.9s
+2022-07-15 06:27:46,599 - INFO - Epoch [55/150] (21000) train_mae: 0.7507, val_mae: 0.7628, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1294.6s, 1301.9s
+Num of epoch: 56
+2022-07-15 06:50:02,452 - INFO - epoch complete
+2022-07-15 06:50:02,452 - INFO - evaluating now!
+15-07-2022 06:50:02 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 06:50:02 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 06:50:09,704 - INFO - Epoch [56/150] (21375) train_mae: 0.7495, val_mae: 0.7611, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1335.9s, 1343.1s
+15-07-2022 06:50:09 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [56/150] (21375) train_mae: 0.7495, val_mae: 0.7611, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1335.9s, 1343.1s
+Num of epoch: 57
+2022-07-15 07:12:39,504 - INFO - epoch complete
+15-07-2022 07:12:39 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 07:12:39,505 - INFO - evaluating now!
+15-07-2022 07:12:39 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 07:12:46,776 - INFO - Epoch [57/150] (21750) train_mae: 0.7499, val_mae: 0.7620, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1349.8s, 1357.1s
+15-07-2022 07:12:46 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [57/150] (21750) train_mae: 0.7499, val_mae: 0.7620, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1349.8s, 1357.1s
+Num of epoch: 58
+2022-07-15 07:35:36,743 - INFO - epoch complete
+15-07-2022 07:35:36 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 07:35:36,743 - INFO - evaluating now!
+15-07-2022 07:35:36 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 07:35:44,012 - INFO - Epoch [58/150] (22125) train_mae: 0.7497, val_mae: 0.7610, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1370.0s, 1377.2s
+15-07-2022 07:35:44 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [58/150] (22125) train_mae: 0.7497, val_mae: 0.7610, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1370.0s, 1377.2s
+Num of epoch: 59
+2022-07-15 07:59:01,865 - INFO - epoch complete
+15-07-2022 07:59:01 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 07:59:01,865 - INFO - evaluating now!
+15-07-2022 07:59:01 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 07:59:09,116 - INFO - Epoch [59/150] (22500) train_mae: 0.7498, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1397.9s, 1405.1s
+15-07-2022 07:59:09 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [59/150] (22500) train_mae: 0.7498, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1397.9s, 1405.1s
+2022-07-15 07:59:23,677 - INFO - Test: mae: 0.7349
+15-07-2022 07:59:23 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7349
+2022-07-15 07:59:23,677 - INFO - Epoch [59/150] (22500) train_mae: 0.7498, test_mae: 0.7349, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1397.9s, 1405.1s
+15-07-2022 07:59:23 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [59/150] (22500) train_mae: 0.7498, test_mae: 0.7349, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1397.9s, 1405.1s
+Num of epoch: 60
+2022-07-15 08:22:56,370 - INFO - epoch complete
+15-07-2022 08:22:56 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 08:22:56,370 - INFO - evaluating now!
+15-07-2022 08:22:56 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 08:23:03,633 - INFO - Epoch [60/150] (22875) train_mae: 0.7494, val_mae: 0.7617, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1412.7s, 1420.0s
+15-07-2022 08:23:03 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [60/150] (22875) train_mae: 0.7494, val_mae: 0.7617, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1412.7s, 1420.0s
+15-07-2022 08:47:05 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 61
+2022-07-15 08:47:05,657 - INFO - epoch complete
+2022-07-15 08:47:05,657 - INFO - evaluating now!
+15-07-2022 08:47:05 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 08:47:12,936 - INFO - Epoch [61/150] (23250) train_mae: 0.7499, val_mae: 0.7607, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1442.0s, 1449.3s
+15-07-2022 08:47:12 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [61/150] (23250) train_mae: 0.7499, val_mae: 0.7607, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1442.0s, 1449.3s
+Num of epoch: 62
+2022-07-15 09:11:32,491 - INFO - epoch complete
+2022-07-15 09:11:32,491 - INFO - evaluating now!
+15-07-2022 09:11:32 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 09:11:32 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 09:11:39,750 - INFO - Epoch [62/150] (23625) train_mae: 0.7506, val_mae: 0.7595, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1459.6s, 1466.8s
+15-07-2022 09:11:39 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [62/150] (23625) train_mae: 0.7506, val_mae: 0.7595, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1459.6s, 1466.8s
+Num of epoch: 63
+2022-07-15 09:36:14,867 - INFO - epoch complete
+15-07-2022 09:36:14 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 09:36:14,867 - INFO - evaluating now!
+15-07-2022 09:36:14 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 09:36:22,131 - INFO - Epoch [63/150] (24000) train_mae: 0.7492, val_mae: 0.7602, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1475.1s, 1482.4s
+15-07-2022 09:36:22 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [63/150] (24000) train_mae: 0.7492, val_mae: 0.7602, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1475.1s, 1482.4s
+Num of epoch: 64
+2022-07-15 10:01:35,562 - INFO - epoch complete
+15-07-2022 10:01:35 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 10:01:35,563 - INFO - evaluating now!
+15-07-2022 10:01:35 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 10:01:42,848 - INFO - Epoch [64/150] (24375) train_mae: 0.7505, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1513.4s, 1520.7s
+15-07-2022 10:01:42 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [64/150] (24375) train_mae: 0.7505, val_mae: 0.7615, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1513.4s, 1520.7s
+15-07-2022 10:01:57 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7356
+2022-07-15 10:01:57,385 - INFO - Test: mae: 0.7356
+2022-07-15 10:01:57,386 - INFO - Epoch [64/150] (24375) train_mae: 0.7505, test_mae: 0.7356, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1513.4s, 1520.7s
+15-07-2022 10:01:57 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [64/150] (24375) train_mae: 0.7505, test_mae: 0.7356, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1513.4s, 1520.7s
+Num of epoch: 65
+2022-07-15 10:27:13,707 - INFO - epoch complete
+2022-07-15 10:27:13,707 - INFO - evaluating now!
+15-07-2022 10:27:13 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 10:27:13 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 10:27:20,964 - INFO - Epoch [65/150] (24750) train_mae: 0.7502, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1516.3s, 1523.6s
+15-07-2022 10:27:20 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [65/150] (24750) train_mae: 0.7502, val_mae: 0.7612, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1516.3s, 1523.6s
+Num of epoch: 66
+2022-07-15 10:52:39,477 - INFO - epoch complete
+15-07-2022 10:52:39 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 10:52:39,477 - INFO - evaluating now!
+15-07-2022 10:52:39 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 10:52:46 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [66/150] (25125) train_mae: 0.7512, val_mae: 0.7609, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1518.5s, 1525.8s
+2022-07-15 10:52:46,728 - INFO - Epoch [66/150] (25125) train_mae: 0.7512, val_mae: 0.7609, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1518.5s, 1525.8s
+Num of epoch: 67
+2022-07-15 11:19:02,853 - INFO - epoch complete
+15-07-2022 11:19:02 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 11:19:02,853 - INFO - evaluating now!
+15-07-2022 11:19:02 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 11:19:10,121 - INFO - Epoch [67/150] (25500) train_mae: 0.7490, val_mae: 0.7610, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1576.1s, 1583.4s
+15-07-2022 11:19:10 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [67/150] (25500) train_mae: 0.7490, val_mae: 0.7610, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1576.1s, 1583.4s
+15-07-2022 11:45:38 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 68
+2022-07-15 11:45:38,056 - INFO - epoch complete
+2022-07-15 11:45:38,057 - INFO - evaluating now!
+15-07-2022 11:45:38 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 11:45:45,315 - INFO - Epoch [68/150] (25875) train_mae: 0.7491, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1587.9s, 1595.2s
+15-07-2022 11:45:45 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [68/150] (25875) train_mae: 0.7491, val_mae: 0.7624, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1587.9s, 1595.2s
+Num of epoch: 69
+2022-07-15 12:12:46,803 - INFO - epoch complete
+15-07-2022 12:12:46 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 12:12:46,803 - INFO - evaluating now!
+15-07-2022 12:12:46 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 12:12:54,070 - INFO - Epoch [69/150] (26250) train_mae: 0.7491, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1621.5s, 1628.8s
+15-07-2022 12:12:54 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [69/150] (26250) train_mae: 0.7491, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1621.5s, 1628.8s
+15-07-2022 12:13:08 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7331
+2022-07-15 12:13:08,681 - INFO - Test: mae: 0.7331
+2022-07-15 12:13:08,682 - INFO - Epoch [69/150] (26250) train_mae: 0.7491, test_mae: 0.7331, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1621.5s, 1628.8s
+15-07-2022 12:13:08 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [69/150] (26250) train_mae: 0.7491, test_mae: 0.7331, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1621.5s, 1628.8s
+Num of epoch: 70
+2022-07-15 12:40:29,063 - INFO - epoch complete
+15-07-2022 12:40:29 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 12:40:29,063 - INFO - evaluating now!
+15-07-2022 12:40:29 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 12:40:36,334 - INFO - Epoch [70/150] (26625) train_mae: 0.7501, val_mae: 0.7610, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1640.4s, 1647.7s
+15-07-2022 12:40:36 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [70/150] (26625) train_mae: 0.7501, val_mae: 0.7610, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1640.4s, 1647.7s
+15-07-2022 01:08:10 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 71
+2022-07-15 13:08:10,450 - INFO - epoch complete
+15-07-2022 01:08:10 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 13:08:10,451 - INFO - evaluating now!
+15-07-2022 01:08:17 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [71/150] (27000) train_mae: 0.7503, val_mae: 0.7605, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1654.1s, 1661.4s
+2022-07-15 13:08:17,717 - INFO - Epoch [71/150] (27000) train_mae: 0.7503, val_mae: 0.7605, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1654.1s, 1661.4s
+Num of epoch: 72
+2022-07-15 13:36:23,409 - INFO - epoch complete
+15-07-2022 01:36:23 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 13:36:23,410 - INFO - evaluating now!
+15-07-2022 01:36:23 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 13:36:30,663 - INFO - Epoch [72/150] (27375) train_mae: 0.7478, val_mae: 0.7628, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1685.7s, 1692.9s
+15-07-2022 01:36:30 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [72/150] (27375) train_mae: 0.7478, val_mae: 0.7628, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1685.7s, 1692.9s
+15-07-2022 02:04:53 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 73
+2022-07-15 14:04:53,670 - INFO - epoch complete
+2022-07-15 14:04:53,671 - INFO - evaluating now!
+15-07-2022 02:04:53 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 14:05:00,925 - INFO - Epoch [73/150] (27750) train_mae: 0.7491, val_mae: 0.7609, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1703.0s, 1710.3s
+15-07-2022 02:05:00 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [73/150] (27750) train_mae: 0.7491, val_mae: 0.7609, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1703.0s, 1710.3s
+Num of epoch: 74
+2022-07-15 14:33:50,693 - INFO - epoch complete
+15-07-2022 02:33:50 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 14:33:50,693 - INFO - evaluating now!
+15-07-2022 02:33:50 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 14:33:57,964 - INFO - Epoch [74/150] (28125) train_mae: 0.7501, val_mae: 0.7594, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1729.8s, 1737.0s
+15-07-2022 02:33:57 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [74/150] (28125) train_mae: 0.7501, val_mae: 0.7594, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1729.8s, 1737.0s
+2022-07-15 14:34:12,461 - INFO - Test: mae: 0.7333
+15-07-2022 02:34:12 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7333
+2022-07-15 14:34:12,461 - INFO - Epoch [74/150] (28125) train_mae: 0.7501, test_mae: 0.7333, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1729.8s, 1737.0s
+15-07-2022 02:34:12 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [74/150] (28125) train_mae: 0.7501, test_mae: 0.7333, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1729.8s, 1737.0s
+15-07-2022 03:03:22 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 75
+2022-07-15 15:03:22,895 - INFO - epoch complete
+15-07-2022 03:03:22 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 15:03:22,895 - INFO - evaluating now!
+2022-07-15 15:03:30,148 - INFO - Epoch [75/150] (28500) train_mae: 0.7509, val_mae: 0.7631, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1750.4s, 1757.7s
+15-07-2022 03:03:30 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [75/150] (28500) train_mae: 0.7509, val_mae: 0.7631, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1750.4s, 1757.7s
+Num of epoch: 76
+2022-07-15 15:32:54,370 - INFO - epoch complete
+2022-07-15 15:32:54,370 - INFO - evaluating now!
+15-07-2022 03:32:54 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+15-07-2022 03:32:54 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 15:33:01,624 - INFO - Epoch [76/150] (28875) train_mae: 0.7504, val_mae: 0.7605, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1764.2s, 1771.5s
+15-07-2022 03:33:01 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [76/150] (28875) train_mae: 0.7504, val_mae: 0.7605, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1764.2s, 1771.5s
+Num of epoch: 77
+2022-07-15 16:02:58,135 - INFO - epoch complete
+15-07-2022 04:02:58 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 16:02:58,136 - INFO - evaluating now!
+15-07-2022 04:02:58 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 16:03:05,391 - INFO - Epoch [77/150] (29250) train_mae: 0.7499, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1796.5s, 1803.8s
+15-07-2022 04:03:05 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [77/150] (29250) train_mae: 0.7499, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1796.5s, 1803.8s
+Num of epoch: 78
+2022-07-15 16:33:09,231 - INFO - epoch complete
+15-07-2022 04:33:09 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 16:33:09,232 - INFO - evaluating now!
+15-07-2022 04:33:09 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 16:33:16,489 - INFO - Epoch [78/150] (29625) train_mae: 0.7495, val_mae: 0.7598, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1803.8s, 1811.1s
+15-07-2022 04:33:16 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [78/150] (29625) train_mae: 0.7495, val_mae: 0.7598, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1803.8s, 1811.1s
+Num of epoch: 79
+2022-07-15 17:03:56,983 - INFO - epoch complete
+15-07-2022 05:03:56 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 17:03:56,984 - INFO - evaluating now!
+15-07-2022 05:03:56 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 17:04:04,352 - INFO - Epoch [79/150] (30000) train_mae: 0.7509, val_mae: 0.7599, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1840.5s, 1847.9s
+15-07-2022 05:04:04 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [79/150] (30000) train_mae: 0.7509, val_mae: 0.7599, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1840.5s, 1847.9s
+2022-07-15 17:04:18,861 - INFO - Test: mae: 0.7349
+15-07-2022 05:04:18 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7349
+2022-07-15 17:04:18,862 - INFO - Epoch [79/150] (30000) train_mae: 0.7509, test_mae: 0.7349, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1840.5s, 1847.9s
+15-07-2022 05:04:18 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [79/150] (30000) train_mae: 0.7509, test_mae: 0.7349, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1840.5s, 1847.9s
+Num of epoch: 80
+2022-07-15 17:35:29,709 - INFO - epoch complete
+15-07-2022 05:35:29 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 17:35:29,711 - INFO - evaluating now!
+15-07-2022 05:35:29 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 17:35:37,186 - INFO - Epoch [80/150] (30375) train_mae: 0.7493, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1870.8s, 1878.3s
+15-07-2022 05:35:37 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [80/150] (30375) train_mae: 0.7493, val_mae: 0.7616, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1870.8s, 1878.3s
+Num of epoch: 81
+2022-07-15 18:07:05,697 - INFO - epoch complete
+15-07-2022 06:07:05 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 18:07:05,699 - INFO - evaluating now!
+15-07-2022 06:07:05 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 18:07:12,964 - INFO - Epoch [81/150] (30750) train_mae: 0.7504, val_mae: 0.7600, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1888.5s, 1895.8s
+15-07-2022 06:07:12 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [81/150] (30750) train_mae: 0.7504, val_mae: 0.7600, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1888.5s, 1895.8s
+Num of epoch: 82
+2022-07-15 18:39:03,462 - INFO - epoch complete
+15-07-2022 06:39:03 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 18:39:03,465 - INFO - evaluating now!
+15-07-2022 06:39:03 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 18:39:10,717 - INFO - Epoch [82/150] (31125) train_mae: 0.7499, val_mae: 0.7632, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1910.5s, 1917.8s
+15-07-2022 06:39:10 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [82/150] (31125) train_mae: 0.7499, val_mae: 0.7632, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1910.5s, 1917.8s
+Num of epoch: 83
+2022-07-15 19:11:27,778 - INFO - epoch complete
+15-07-2022 07:11:27 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+2022-07-15 19:11:27,780 - INFO - evaluating now!
+15-07-2022 07:11:27 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+15-07-2022 07:11:35 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [83/150] (31500) train_mae: 0.7490, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1937.1s, 1944.4s
+2022-07-15 19:11:35,074 - INFO - Epoch [83/150] (31500) train_mae: 0.7490, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1937.1s, 1944.4s
+15-07-2022 07:44:06 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 84
+2022-07-15 19:44:06,998 - INFO - epoch complete
+15-07-2022 07:44:07 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 19:44:07,000 - INFO - evaluating now!
+2022-07-15 19:44:14,271 - INFO - Epoch [84/150] (31875) train_mae: 0.7505, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1951.9s, 1959.2s
+15-07-2022 07:44:14 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [84/150] (31875) train_mae: 0.7505, val_mae: 0.7618, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1951.9s, 1959.2s
+2022-07-15 19:44:28,802 - INFO - Test: mae: 0.7344
+15-07-2022 07:44:28 : INFO : supervisor_ssl : evaluate : 291 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Test: mae: 0.7344
+2022-07-15 19:44:28,802 - INFO - Epoch [84/150] (31875) train_mae: 0.7505, test_mae: 0.7344, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1951.9s, 1959.2s
+15-07-2022 07:44:28 : INFO : supervisor_ssl : _train : 422 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [84/150] (31875) train_mae: 0.7505, test_mae: 0.7344, test_mape: test_mape, test_rmse: test_rmse, lr: 0.000002, 1951.9s, 1959.2s
+15-07-2022 08:17:29 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 85
+2022-07-15 20:17:29,047 - INFO - epoch complete
+15-07-2022 08:17:29 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 20:17:29,050 - INFO - evaluating now!
+2022-07-15 20:17:36,573 - INFO - Epoch [85/150] (32250) train_mae: 0.7518, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1980.2s, 1987.8s
+15-07-2022 08:17:36 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [85/150] (32250) train_mae: 0.7518, val_mae: 0.7622, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1980.2s, 1987.8s
+15-07-2022 08:50:55 : INFO : supervisor_ssl : _train : 392 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : epoch complete
+Num of epoch: 86
+2022-07-15 20:50:55,923 - INFO - epoch complete
+15-07-2022 08:50:55 : INFO : supervisor_ssl : _train : 394 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : evaluating now!
+2022-07-15 20:50:55,924 - INFO - evaluating now!
+2022-07-15 20:51:03,173 - INFO - Epoch [86/150] (32625) train_mae: 0.7497, val_mae: 0.7601, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1999.3s, 2006.6s
+15-07-2022 08:51:03 : INFO : supervisor_ssl : _train : 413 : (Process Details : (185245, MainProcess), Thread Details : (140525630485440, MainThread))
+Log : Epoch [86/150] (32625) train_mae: 0.7497, val_mae: 0.7601, val_mape: val_mape, val_rmse: val_rmse, lr: 0.000002, 1999.3s, 2006.6s
+Num of epoch: 87
+Traceback (most recent call last):
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 42, in <module>
+    main(args)
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 18, in main
+    result = supervisor.train()
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 197, in train
+    return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 386, in _train
+    loss.backward()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/_tensor.py", line 396, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/autograd/__init__.py", line 173, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/wandb_torch.py", line 264, in <lambda>
+    handle = var.register_hook(lambda grad: _callback(grad, log_track))
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/wandb_torch.py", line 262, in _callback
+    self.log_tensor_stats(grad.data, name)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/wandb_torch.py", line 238, in log_tensor_stats
+    wandb.run._log(
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1334, in _log
+    self._partial_history_callback(data, step, commit)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1223, in _partial_history_callback
+    self._backend.interface.publish_partial_history(
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface.py", line 553, in publish_partial_history
+    self._publish_partial_history(partial_history)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 62, in _publish_partial_history
+    self._publish(rec)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_queue.py", line 49, in _publish
+    raise Exception("The wandb backend process has shutdown")
+Exception: The wandb backend process has shutdown
+Traceback (most recent call last):
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 42, in <module>
+    main(args)
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 18, in main
+    result = supervisor.train()
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 197, in train
+    return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 386, in _train
+    loss.backward()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/_tensor.py", line 396, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph, inputs=inputs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/autograd/__init__.py", line 173, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/wandb_torch.py", line 264, in <lambda>
+    handle = var.register_hook(lambda grad: _callback(grad, log_track))
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/wandb_torch.py", line 262, in _callback
+    self.log_tensor_stats(grad.data, name)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/wandb_torch.py", line 238, in log_tensor_stats
+    wandb.run._log(
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1334, in _log
+    self._partial_history_callback(data, step, commit)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1223, in _partial_history_callback
+    self._backend.interface.publish_partial_history(
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface.py", line 553, in publish_partial_history
+    self._publish_partial_history(partial_history)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 62, in _publish_partial_history
+    self._publish(rec)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_queue.py", line 49, in _publish
+    raise Exception("The wandb backend process has shutdown")
+Exception: The wandb backend process has shutdown
+/home/moghadas76/anaconda3/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

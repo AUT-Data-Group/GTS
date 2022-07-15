@@ -1,0 +1,77 @@
+2022-07-15 21:29:57.368342: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+15-07-2022 09:30:19 : DEBUG : __init__ : _configure_system : 53 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : [ray] Forcing OMP_NUM_THREADS=1 to avoid performance degradation with many workers (issue #6998). You can override this by explicitly setting OMP_NUM_THREADS.
+wandb: Tracking run with wandb version 0.12.21
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+/home/moghadas76/project/GTS/train_ssl.py:14: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  supervisor_config = yaml.load(f)
+2022-07-15 21:30:26,738 - INFO - Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0715213026/
+15-07-2022 09:30:26 : INFO : utils : get_logger : 196 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0715213026/
+15-07-2022 09:30:56 : INFO : model_ssl : __init__ : 114 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : num_frames = 12, embed_dims = 768,num_transformer_layers = 1,attention_type = fact_encoder,conv_type = Conv2d,tube_size = 2,return_cls_token= True
+2022-07-15 21:30:56,816 - INFO - Model created
+15-07-2022 09:30:56 : INFO : supervisor_ssl : __init__ : 81 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Model created
+Training parameter base_lr: 0.0015
+Training parameter dropout: 0
+Training parameter epoch: 0
+Training parameter epochs: 150
+Training parameter epsilon: 0.001
+Training parameter global_step: 0
+Training parameter lr_decay_ratio: 0.1
+Training parameter max_grad_norm: 5
+Training parameter max_to_keep: 100
+Training parameter min_learning_rate: 2e-06
+Training parameter optimizer: adam
+Training parameter patience: 100
+Training parameter steps: [20, 30, 40]
+Training parameter test_every_n_epochs: 5
+Training parameter knn_k: 10
+Training parameter epoch_use_regularization: 150
+Training parameter num_sample: 10
+Training parameter save_model: 1
+Training parameter mr: 0.6
+2022-07-15 21:30:56,820 - INFO - Start training ...
+15-07-2022 09:30:56 : INFO : supervisor_ssl : _train : 327 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Start training ...
+2022-07-15 21:30:56,821 - INFO - num_batches:375
+15-07-2022 09:30:56 : INFO : supervisor_ssl : _train : 331 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : num_batches:375
+Num of epoch: 0
+2022-07-15 21:32:19,006 - INFO - epoch complete
+15-07-2022 09:32:19 : INFO : supervisor_ssl : _train : 392 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : epoch complete
+/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:131: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+2022-07-15 21:32:19,041 - INFO - evaluating now!
+15-07-2022 09:32:19 : INFO : supervisor_ssl : _train : 394 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : evaluating now!
+/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:418: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  warnings.warn("To get the last learning rate computed by the scheduler, "
+2022-07-15 21:32:21,955 - INFO - Epoch [0/150] (375) train_mae: 1.0274, val_mae: 0.9137, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 82.2s, 85.1s
+15-07-2022 09:32:21 : INFO : supervisor_ssl : _train : 413 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Epoch [0/150] (375) train_mae: 1.0274, val_mae: 0.9137, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 82.2s, 85.1s
+15-07-2022 09:32:22 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Saved model at 0
+2022-07-15 21:32:22,468 - INFO - Saved model at 0
+15-07-2022 09:32:22 : INFO : supervisor_ssl : _train : 447 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Val loss decrease from inf to 0.9137, saving to models/epo0.tar
+2022-07-15 21:32:22,469 - INFO - Val loss decrease from inf to 0.9137, saving to models/epo0.tar
+15-07-2022 09:33:36 : INFO : supervisor_ssl : _train : 392 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : epoch complete
+Num of epoch: 1
+2022-07-15 21:33:36,370 - INFO - epoch complete
+2022-07-15 21:33:36,370 - INFO - evaluating now!
+15-07-2022 09:33:36 : INFO : supervisor_ssl : _train : 394 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : evaluating now!
+2022-07-15 21:33:39,325 - INFO - Epoch [1/150] (750) train_mae: 0.8143, val_mae: 0.7974, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 73.9s, 76.9s
+15-07-2022 09:33:39 : INFO : supervisor_ssl : _train : 413 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Epoch [1/150] (750) train_mae: 0.8143, val_mae: 0.7974, val_mape: val_mape, val_rmse: val_rmse, lr: 0.001500, 73.9s, 76.9s
+15-07-2022 09:33:39 : INFO : supervisor_ssl : save_model : 123 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Saved model at 1
+2022-07-15 21:33:39,687 - INFO - Saved model at 1
+15-07-2022 09:33:39 : INFO : supervisor_ssl : _train : 447 : (Process Details : (225240, MainProcess), Thread Details : (139776919774144, MainThread))
+Log : Val loss decrease from 0.9137 to 0.7974, saving to models/epo1.tar
+2022-07-15 21:33:39,688 - INFO - Val loss decrease from 0.9137 to 0.7974, saving to models/epo1.tar

@@ -1,0 +1,179 @@
+2022-07-14 18:12:37.821812: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+14-07-2022 06:12:41 : DEBUG : __init__ : _configure_system : 53 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : [ray] Forcing OMP_NUM_THREADS=1 to avoid performance degradation with many workers (issue #6998). You can override this by explicitly setting OMP_NUM_THREADS.
+wandb: Currently logged in as: moghadas76 (aufl). Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.12.21
+wandb: Run data is saved locally in /home/moghadas76/project/GTS/wandb/run-20220714_181242-3h3m2xeb
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run warm-sunset-11
+wandb: ⭐️ View project at https://wandb.ai/aufl/transformer
+wandb: 🚀 View run at https://wandb.ai/aufl/transformer/runs/3h3m2xeb
+/home/moghadas76/project/GTS/train_ssl.py:14: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  supervisor_config = yaml.load(f)
+2022-07-14 18:12:50,873 - INFO - Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0714181250/
+14-07-2022 06:12:50 : INFO : utils : get_logger : 196 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0714181250/
+14-07-2022 06:13:05 : INFO : model_ssl : __init__ : 114 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : num_frames = 12, embed_dims = 768,num_transformer_layers = 1,attention_type = fact_encoder,conv_type = Conv2d,tube_size = 2,return_cls_token= True
+2022-07-14 18:13:05,737 - INFO - Model created
+14-07-2022 06:13:05 : INFO : supervisor_ssl : __init__ : 81 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : Model created
+Training parameter base_lr: 0.0015
+Training parameter dropout: 0
+Training parameter epoch: 0
+Training parameter epochs: 150
+Training parameter epsilon: 0.001
+Training parameter global_step: 0
+Training parameter lr_decay_ratio: 0.1
+Training parameter max_grad_norm: 5
+Training parameter max_to_keep: 100
+Training parameter min_learning_rate: 2e-06
+Training parameter optimizer: adam
+Training parameter patience: 100
+Training parameter steps: [20, 30, 40]
+Training parameter test_every_n_epochs: 5
+Training parameter knn_k: 10
+Training parameter epoch_use_regularization: 150
+Training parameter num_sample: 10
+Training parameter save_model: 1
+Training parameter mr: 0.45
+2022-07-14 18:13:05,740 - INFO - Start training ...
+14-07-2022 06:13:05 : INFO : supervisor_ssl : _train : 327 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : Start training ...
+14-07-2022 06:13:05 : INFO : supervisor_ssl : _train : 331 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : num_batches:375
+2022-07-14 18:13:05,741 - INFO - num_batches:375
+Num of epoch: 0
+2022-07-14 18:15:42,757 - INFO - epoch complete
+14-07-2022 06:15:42 : INFO : supervisor_ssl : _train : 392 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : epoch complete
+/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:131: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+2022-07-14 18:15:42,758 - INFO - evaluating now!
+14-07-2022 06:15:42 : INFO : supervisor_ssl : _train : 394 : (Process Details : (181475, MainProcess), Thread Details : (140586340484032, MainThread))
+Log : evaluating now!
+Thread SenderThread:
+Traceback (most recent call last):
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 108, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 158, in execute
+    return self.client.execute(*args, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/transport/requests.py", line 39, in execute
+    request.raise_for_status()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/requests/models.py", line 960, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 1341, in upsert_run
+    response = self.gql(mutation, variable_values=variable_values, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 124, in __call__
+    if not check_retry_fn(e):
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/util.py", line 887, in no_retry_auth
+    raise CommError("Permission denied, ask the project owner to grant you access")
+wandb.errors.CommError: Permission denied, ask the project owner to grant you access
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/internal_util.py", line 51, in run
+    self._run()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/internal_util.py", line 95, in _run
+    self._debounce()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/internal.py", line 316, in _debounce
+    self._sm.debounce()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 321, in debounce
+    self._debounce_config()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/sender.py", line 327, in _debounce_config
+    self._api.upsert_run(
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/apis/normalize.py", line 61, in wrapper
+    raise CommError(message, err).with_traceback(sys.exc_info()[2])
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 1341, in upsert_run
+    response = self.gql(mutation, variable_values=variable_values, **kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 124, in __call__
+    if not check_retry_fn(e):
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/util.py", line 887, in no_retry_auth
+    raise CommError("Permission denied, ask the project owner to grant you access")
+wandb.errors.CommError: Permission denied, ask the project owner to grant you access
+wandb: ERROR Internal wandb error: file data was not synced
+Traceback (most recent call last):
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 42, in <module>
+    main(args)
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 18, in main
+    result = supervisor.train()
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 197, in train
+    return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 400, in _train
+    val_loss = self.evaluate(label, dataset='val', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 229, in evaluate
+    loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 342, in forward
+    wandb.config.mask_ratio = mask_ratio
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_config.py", line 152, in __setitem__
+    self._callback(key=key, val=val)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1133, in _config_callback
+    self._backend.interface.publish_config(key=key, val=val, data=data)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface.py", line 198, in publish_config
+    self._publish_config(cfg)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 291, in _publish_config
+    self._publish(rec)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_queue.py", line 49, in _publish
+    raise Exception("The wandb backend process has shutdown")
+Exception: The wandb backend process has shutdown
+Traceback (most recent call last):
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 42, in <module>
+    main(args)
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 18, in main
+    result = supervisor.train()
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 197, in train
+    return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 400, in _train
+    val_loss = self.evaluate(label, dataset='val', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 229, in evaluate
+    loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 342, in forward
+    wandb.config.mask_ratio = mask_ratio
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_config.py", line 152, in __setitem__
+    self._callback(key=key, val=val)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 1133, in _config_callback
+    self._backend.interface.publish_config(key=key, val=val, data=data)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface.py", line 198, in publish_config
+    self._publish_config(cfg)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 291, in _publish_config
+    self._publish(rec)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_queue.py", line 49, in _publish
+    raise Exception("The wandb backend process has shutdown")
+Exception: The wandb backend process has shutdown
+Exception in thread NetStatThr:
+Traceback (most recent call last):
+  File "/home/moghadas76/anaconda3/lib/python3.9/threading.py", line 973, in _bootstrap_inner
+    self.run()
+  File "/home/moghadas76/anaconda3/lib/python3.9/threading.py", line 910, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/wandb_run.py", line 152, in check_network_status
+    status_response = self._interface.communicate_network_status()
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface.py", line 138, in communicate_network_status
+    resp = self._communicate_network_status(status)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 405, in _communicate_network_status
+    resp = self._communicate(req, local=True)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 226, in _communicate
+    return self._communicate_async(rec, local=local).get(timeout=timeout)
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/wandb/sdk/interface/interface_shared.py", line 231, in _communicate_async
+    raise Exception("The wandb backend process has shutdown")
+Exception: The wandb backend process has shutdown
+/home/moghadas76/anaconda3/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
