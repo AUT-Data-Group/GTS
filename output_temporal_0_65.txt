@@ -1,0 +1,83 @@
+2022-07-16 21:11:07.305991: I tensorflow/core/util/util.cc:169] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+16-07-2022 09:11:10 : DEBUG : __init__ : _configure_system : 53 : (Process Details : (261901, MainProcess), Thread Details : (140098877572032, MainThread))
+Log : [ray] Forcing OMP_NUM_THREADS=1 to avoid performance degradation with many workers (issue #6998). You can override this by explicitly setting OMP_NUM_THREADS.
+wandb: Tracking run with wandb version 0.12.21
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+/home/moghadas76/project/GTS/train_ssl.py:14: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please read https://msg.pyyaml.org/load for full details.
+  supervisor_config = yaml.load(f)
+2022-07-16 21:11:16,211 - INFO - Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0716211116/
+16-07-2022 09:11:16 : INFO : utils : get_logger : 196 : (Process Details : (261901, MainProcess), Thread Details : (140098877572032, MainThread))
+Log : Log directory: data/model/GTS_DR_3_h_12_2_lr_0.0015_bs_64_0716211116/
+16-07-2022 09:11:30 : INFO : model_ssl : __init__ : 114 : (Process Details : (261901, MainProcess), Thread Details : (140098877572032, MainThread))
+Log : num_frames = 12, embed_dims = 768,num_transformer_layers = 1,attention_type = fact_encoder,conv_type = Conv2d,tube_size = 2,return_cls_token= True
+2022-07-16 21:11:31,356 - INFO - Model created
+16-07-2022 09:11:31 : INFO : supervisor_ssl : __init__ : 81 : (Process Details : (261901, MainProcess), Thread Details : (140098877572032, MainThread))
+Log : Model created
+Training parameter base_lr: 0.0015
+Training parameter dropout: 0
+Training parameter epoch: 0
+Training parameter epochs: 150
+Training parameter epsilon: 0.001
+Training parameter global_step: 0
+Training parameter lr_decay_ratio: 0.1
+Training parameter max_grad_norm: 5
+Training parameter max_to_keep: 100
+Training parameter min_learning_rate: 2e-06
+Training parameter optimizer: adam
+Training parameter patience: 100
+Training parameter steps: [20, 30, 40]
+Training parameter test_every_n_epochs: 5
+Training parameter knn_k: 10
+Training parameter epoch_use_regularization: 150
+Training parameter num_sample: 10
+Training parameter save_model: 1
+Training parameter mr: 0.65
+2022-07-16 21:11:31,360 - INFO - Start training ...
+16-07-2022 09:11:31 : INFO : supervisor_ssl : _train : 327 : (Process Details : (261901, MainProcess), Thread Details : (140098877572032, MainThread))
+Log : Start training ...
+16-07-2022 09:11:31 : INFO : supervisor_ssl : _train : 331 : (Process Details : (261901, MainProcess), Thread Details : (140098877572032, MainThread))
+Log : num_batches:375
+2022-07-16 21:11:31,361 - INFO - num_batches:375
+Num of epoch: 0
+Traceback (most recent call last):
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 42, in <module>
+    main(args)
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 18, in main
+    result = supervisor.train()
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 197, in train
+    return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 355, in _train
+    loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 343, in forward
+    latent, mask, ids_restore = self.forward_encoder(x, mask_ratio)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 271, in forward_encoder
+    z = self.encode(x, b, t, c, h, w)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 216, in encode
+    x = x + self.time_embed
+RuntimeError: The size of tensor a (5) must match the size of tensor b (4) at non-singleton dimension 1
+Traceback (most recent call last):
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 42, in <module>
+    main(args)
+  File "/home/moghadas76/project/GTS/train_ssl.py", line 18, in main
+    result = supervisor.train()
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 197, in train
+    return self._train(**kwargs,config={"mask_ratio": kwargs.pop("mr", 0.3)})
+  File "/home/moghadas76/project/GTS/model/pytorch/supervisor_ssl.py", line 355, in _train
+    loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
+  File "/home/moghadas76/anaconda3/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 343, in forward
+    latent, mask, ids_restore = self.forward_encoder(x, mask_ratio)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 271, in forward_encoder
+    z = self.encode(x, b, t, c, h, w)
+  File "/home/moghadas76/project/GTS/model/pytorch/model_ssl.py", line 216, in encode
+    x = x + self.time_embed
+RuntimeError: The size of tensor a (5) must match the size of tensor b (4) at non-singleton dimension 1
+wandb: Waiting for W&B process to finish... (failed 1).
+wandb: - 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb: \ 0.000 MB of 0.000 MB uploaded (0.000 MB deduped)wandb:                                                                                
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/moghadas76/project/GTS/wandb/offline-run-20220716_211110-2abmb8w8
+wandb: Find logs at: ./wandb/offline-run-20220716_211110-2abmb8w8/logs
