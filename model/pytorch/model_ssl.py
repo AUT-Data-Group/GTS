@@ -96,6 +96,7 @@ class ViViTSSL(nn.Module):
                  return_cls_token=True,
                  horizon=12,
                  mask_ratio=0.3,
+                 mode="temporal",
                  **kwargs):
         super().__init__()
         assert attention_type in self.supported_attention_types, (
@@ -169,7 +170,9 @@ class ViViTSSL(nn.Module):
         self.decoder_pred = nn.Linear(embed_dims, 414, bias=True)
         self.mask_token = nn.Parameter(torch.zeros(1, 1, 768))
         #  norm_layer(decoder_embed_dim, patch_size**2 * in_chans, bias=True) steal from source code
-    
+        self.mode = mode
+
+
     def interpolate_pos_encoding(self, x, w, h):
         npatch = x.shape[1] - 1
         N = self.pos_embed.shape[1] - 1
@@ -291,7 +294,11 @@ class ViViTSSL(nn.Module):
         # masking: length -> length * mask_ratio
         t, b, Y = x.shape
         x = x.reshape(b, t, Y)
-        x, mask, ids_restore = self.random_masking(x, mask_ratio)
+        METHODS = {
+            "temporal": self.random_masking,
+            "spatial": self.random_vertex_masking
+        }
+        x, mask, ids_restore = METHODS[self.mode](x, mask_ratio)
         b,t, Y = x.shape
         c, h, w = 2, Y//2, 1
         x = x.reshape(b, t, c, h, w)
@@ -345,7 +352,6 @@ class ViViTSSL(nn.Module):
             mean = target.mean(dim=-1, keepdim=True)
             var = target.var(dim=-1, keepdim=True)
             target = (target - mean) / (var + 1.e-6)**.5
-        # import pdb;pdb.set_trace()
         # torch.Size([8, 64, 414])
         # torch.Size([64, 12, 414])
         loss = (pred - target) ** 2
