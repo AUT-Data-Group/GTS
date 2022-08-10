@@ -39,6 +39,6 @@ if __name__ == '__main__':
     parser.add_argument('--use_cpu_only', default=False, type=bool, help='Set to true to only use cpu.')
     parser.add_argument('--temperature', default=0.5, type=float, help='temperature value for gumbel-softmax.')
     parser.add_argument('--mr', default=0.3, type=float, help='mask ratio')
-    parser.add_argument('--mode', default="spatial", type=float, help='mask method')
+    parser.add_argument('--mode', default="spatial", type=str, help='mask method')
     args = parser.parse_args()
     main(args)
