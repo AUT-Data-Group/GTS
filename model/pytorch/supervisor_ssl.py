@@ -26,6 +26,7 @@ class GTSSupervisor:
         self._train_kwargs = kwargs.get('train')
         #self._mr = kwargs.get('mr')
         self._train_kwargs["mr"] = kwargs.get('mr')
+        self._train_kwargs["mode"] = kwargs.get('mode')
         self.temperature = float(temperature)
         self.opt = self._train_kwargs.get('optimizer')
         self.max_grad_norm = self._train_kwargs.get('max_grad_norm', 1.)
