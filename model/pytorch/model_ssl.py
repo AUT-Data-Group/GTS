@@ -97,7 +97,7 @@ class ViViTSSL(nn.Module):
                  return_cls_token=True,
                  horizon=12,
                  mask_ratio=0.3,
-                 mode="temporal",
+                 mode="spatial",
                  **kwargs):
         super().__init__()
         assert attention_type in self.supported_attention_types, (
