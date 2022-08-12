@@ -1,3 +1,4 @@
+import os
 import math
 import wandb
 import torch
@@ -15,7 +16,6 @@ try:
 except ImportError as e:
     import data_transform as T
     from transformer import PatchEmbed, TransformerContainer, ClassificationHead
-
 
 
 
