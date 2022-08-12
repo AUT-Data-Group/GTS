@@ -260,7 +260,7 @@ class ViViTSSL(nn.Module):
         # unshuffle to get the binary mask
         mask = torch.gather(mask, dim=2, index=ids_restore.unsqueeze(-1).unsqueeze(-1).repeat(1, 1, L, 2).reshape(N, L, D, 2))
 
-        return x_masked, mask, ids_restore
+        return x_masked.view(N, L, -1), mask.view(N, L, -1), ids_restore.view(N, L, -1)
 
     def random_masking(self, x, mask_ratio):
         """
