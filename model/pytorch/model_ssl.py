@@ -9,6 +9,7 @@ import logging
 from logging import config
 from einops import rearrange, reduce, repeat
 from IPython.display import display
+DEBUG = os.environ.get("DEBUG")
 
 try:
     from . import data_transform as T
