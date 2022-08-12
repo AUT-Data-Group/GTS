@@ -147,7 +147,8 @@ class GTSSupervisor:
         kwargs.update(self._train_kwargs)
         for k, v in kwargs.items():
             print(f"Training parameter {k}: {v}")
-            setattr(wandb.config, k, v)
+            if not DEBUG:
+                setattr(wandb.config, k, v)
         '''
         config = {
             "mask_ratio": tune.choice([0.15, 0.3, 0.45, 0.6, 0.75]),
@@ -353,7 +354,8 @@ class GTSSupervisor:
             for batch_idx, (x, y) in enumerate(train_iterator):
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
-                wandb.watch(self.GTS_model)
+                if not DEBUG:
+                    wandb.watch(self.GTS_model)
                 loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
                 # if (epoch_num % epochs) == epochs - 1:
                 #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
@@ -397,8 +399,9 @@ class GTSSupervisor:
             end_time = time.time()
 
             if label == 'without_regularization':
-                wandb.log({'train_loss': np.mean(losses)})
-                wandb.log({'epoch': epoch_num})
+                if not DEBUG:
+                    wandb.log({'train_loss': np.mean(losses)})
+                    wandb.log({'epoch': epoch_num})
                 val_loss = self.evaluate(label, dataset='val', batches_seen=batches_seen, gumbel_soft=gumbel_soft, config=config)
                 val_steps += 1
                 end_time2 = time.time()
@@ -462,7 +465,8 @@ class GTSSupervisor:
                 torch.save((self.GTS_model.state_dict(), optimizer.state_dict()), path)
 
             tune.report(loss=(val_loss / val_steps))'''
-            wandb.log({'val_loss': val_loss})
+            if not DEBUG:
+                wandb.log({'val_loss': val_loss})
 
     def _prepare_data(self, x, y):
         x, y = self._get_x_y(x, y)
