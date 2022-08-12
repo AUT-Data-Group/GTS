@@ -237,7 +237,6 @@ class ViViTSSL(nn.Module):
         Per-sample shuffling is done by argsort random noise.
         x: [N, L, D], sequence
         """
-        import pdb;pdb.set_trace()
         N, L, D = x.shape  # batch, length, dim
         D = D//2
         x = x.reshape(N, L, D,2)
