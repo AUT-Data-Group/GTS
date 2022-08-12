@@ -252,7 +252,7 @@ class ViViTSSL(nn.Module):
 
         # keep the first subset
         ids_keep = ids_shuffle[:,:len_keep]
-        x_masked = torch.gather(x, dim=2, index=ids_keep.unsqueeze(-1).repeat(1, 1, D, 2))
+        x_masked = torch.gather(x, dim=2, index=ids_keep.unsqueeze(-1).unsqueeze(-1).repeat(1, 1, D, 2))
 
         # generate the binary mask: 0 is keep, 1 is remove
         mask = torch.ones([N, L, D, 2], device=x.device)
