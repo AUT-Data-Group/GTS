@@ -160,7 +160,7 @@ class ViViTSSL(nn.Module):
         # whether to add one cls_token in temporal pos_enb
         num_frames = num_frames + 1
         num_patches = num_patches + 1
-        if self.mode == "spatial":
+        if mode == "spatial":
             num_patches -=1
             num_patches *= (1-self.mask_ratio)
             num_patches = int(num_patches)
