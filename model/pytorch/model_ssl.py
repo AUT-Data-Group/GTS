@@ -160,7 +160,11 @@ class ViViTSSL(nn.Module):
         # whether to add one cls_token in temporal pos_enb
         num_frames = num_frames + 1
         num_patches = num_patches + 1
-
+        if self.mode == "spatial":
+            num_patches -=1
+            num_patches *= (1-self.mask_ratio)
+            num_patches = int(num_patches)
+            num_patches += 1
         self.pos_embed = nn.Parameter(torch.zeros(1,num_patches,embed_dims))
         if mode == "temporal":
             self.time_embed = nn.Parameter(torch.zeros(1,int((1 - mask_ratio)*num_frames),embed_dims))
@@ -204,7 +208,6 @@ class ViViTSSL(nn.Module):
     def encode(self, x, b, t, c, h, w):
         # t, b, Y = x.shape
         # c, h, w = 2, Y//2, 1
-        import pdb;pdb.set_trace()
         x = self.patch_embed(x)
 
         # Add Position Embedding
