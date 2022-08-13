@@ -176,7 +176,6 @@ class ViViTSSL(nn.Module):
         #  norm_layer(decoder_embed_dim, patch_size**2 * in_chans, bias=True) steal from source code
         self.mode = mode
 
-
     def interpolate_pos_encoding(self, x, w, h):
         import pdb;pdb.set_trace()
         npatch = x.shape[1] - 1
@@ -205,6 +204,7 @@ class ViViTSSL(nn.Module):
     def encode(self, x, b, t, c, h, w):
         # t, b, Y = x.shape
         # c, h, w = 2, Y//2, 1
+        import pdb;pdb.set_trace()
         x = self.patch_embed(x)
 
         # Add Position Embedding
