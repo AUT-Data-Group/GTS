@@ -181,7 +181,6 @@ class ViViTSSL(nn.Module):
         self.mode = mode
 
     def interpolate_pos_encoding(self, x, w, h):
-        import pdb;pdb.set_trace()
         npatch = x.shape[1] - 1
         N = self.pos_embed.shape[1] - 1
         # if npatch == N and w == h:
@@ -357,6 +356,7 @@ class ViViTSSL(nn.Module):
         (Pdb) mask.shape
         torch.Size([64, 12])
         """
+        import pdb;pdb.set_trace()
         t, b, Y = x.shape
         x = x.reshape(b, t, Y)
         target = x
