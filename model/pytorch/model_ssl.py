@@ -356,7 +356,6 @@ class ViViTSSL(nn.Module):
         (Pdb) mask.shape
         torch.Size([64, 12])
         """
-        import pdb;pdb.set_trace()
         t, b, Y = x.shape
         x = x.reshape(b, t, Y)
         target = x
@@ -367,7 +366,8 @@ class ViViTSSL(nn.Module):
         # torch.Size([8, 64, 414])
         # torch.Size([64, 12, 414])
         loss = (pred - target) ** 2
-        loss = loss.mean(dim=-1)  # [N, L], mean loss per patch
+        if self.mode != "spatial":
+            loss = loss.mean(dim=-1)  # [N, L], mean loss per patch
 
         loss = (loss * mask).sum() / mask.sum()  # mean loss on removed patches
         return loss
