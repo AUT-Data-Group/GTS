@@ -3,6 +3,7 @@ from torch.utils.tensorboard import SummaryWriter
 import numpy as np
 from lib import utils
 from model.pytorch.model import ViViT as GTSModel
+from model.pytorch.model_ssl import ViViTComplete
 from model.pytorch.loss import masked_mae_loss, masked_mape_loss, masked_rmse_loss, masked_mse_loss
 import pandas as pd
 import os
@@ -11,6 +12,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class GTSSupervisor:
+    fine_tune_path = "/content/drive/MyDrive/improved_graph_wavenet/GTS/models/epo17.tar"
+
     def __init__(self, save_adj_name, temperature, **kwargs):
         self._kwargs = kwargs
         self._data_kwargs = kwargs.get('data')
@@ -64,15 +67,22 @@ class GTSSupervisor:
         self.use_curriculum_learning = bool(
             self._model_kwargs.get('use_curriculum_learning', False))
         self.horizon = int(self._model_kwargs.get('horizon', 1))  # for the decoder
-
+        self.fine_tune_flag = self._model_kwargs.get('fine_tune', False)
         # setup model
-        GTS_model = GTSModel(12,207,1, in_channels=2)
+        GTS_model = self.get_model(self.fine_tune_flag)
         self.GTS_model = GTS_model.cuda() if torch.cuda.is_available() else GTS_model
         self._logger.info("Model created")
 
         self._epoch_num = self._train_kwargs.get('epoch', 0)
         if self._epoch_num > 0:
             self.load_model()
+    
+    def get_model(self, fine_tune=False):
+        if not fine_tune:
+            return GTSModel(12,207,1, in_channels=2)
+        else:
+            self._logger.info("Fine tuning is enabled!")
+            return ViViTComplete(self.fine_tune_path)
 
     @staticmethod
     def _get_log_dir(kwargs):
