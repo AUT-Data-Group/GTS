@@ -8,8 +8,10 @@ from model.pytorch.loss import masked_mae_loss, masked_mape_loss, masked_rmse_lo
 import pandas as pd
 import os
 import time
+import wandb
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+wandb.init(project="transformer", entity="aufl")
 
 class GTSSupervisor:
     fine_tune_path = "/content/drive/MyDrive/improved_graph_wavenet/GTS/models/epo17.tar"
@@ -143,6 +145,9 @@ class GTSSupervisor:
 
     def train(self, **kwargs):
         kwargs.update(self._train_kwargs)
+        for k, v in kwargs.items():
+            print(f"Training parameter {k}: {v}")
+            setattr(wandb.config, k, v)
         return self._train(**kwargs)
 
     def evaluate(self,label, dataset='val', batches_seen=0, gumbel_soft=True):
@@ -298,6 +303,7 @@ class GTSSupervisor:
             for batch_idx, (x, y) in enumerate(train_iterator):
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
+                wandb.watch(self.GTS_model)
                 output = self.GTS_model(x)
                 # if (epoch_num % epochs) == epochs - 1:
                 #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
@@ -343,6 +349,7 @@ class GTSSupervisor:
 
             if label == 'without_regularization':
                 val_loss, val_mape, val_rmse = self.evaluate(label, dataset='val', batches_seen=batches_seen, gumbel_soft=gumbel_soft)
+                wandb.log({'val_loss': val_loss, 'epoch': epoch_num, 'val_mape': val_mape,'val_rmse': val_rmse, "training_loss": np.mean(losses)})
                 end_time2 = time.time()
                 self._writer.add_scalar('training loss',
                                         np.mean(losses),
