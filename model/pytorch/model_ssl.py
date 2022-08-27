@@ -404,7 +404,7 @@ class ViViTComplete(nn.Module):
     def load_encoder(self, ckp):
         checkpoint = torch.load(ckp)
         model = ViViTSSL(12,207,1, in_channels=2, mask_ratio=0.0)
-        model.load_state_dict(checkpoint)
+        model.load_state_dict(checkpoint["model_state_dict"])
         for param in model.parameters():
             param.requires_grad = False
         model.fc = nn.Identity()
