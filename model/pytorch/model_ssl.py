@@ -390,3 +390,29 @@ class ViViTSSL(nn.Module):
         pred = self.forward_decoder(latent, ids_restore)  # [N, L, p*p*3]
         loss = self.forward_loss(x, pred, mask)
         return loss, pred, mask
+
+
+
+
+class ViViTComplete(nn.Module):
+
+    def __init__(self, ckp):
+        self.encoder = self.load_encoder(ckp)
+        self.fc = nn.Linear(768, 414)
+        self.conv = nn.Conv2d(1, 12, kernel_size=1)
+    
+    def load_encoder(self, ckp):
+        checkpoint = torch.load(ckp)
+        model = ViViTSSL(12,207,1, in_channels=2, mask_ratio=0.0)
+        model.load_state_dict(checkpoint)
+        for param in model.parameters():
+            param.requires_grad = False
+        model.fc = nn.Identity()
+        model.conv = nn.Identity()
+        return model
+        
+
+    def forward(self, x):
+        x = self.encoder(x)
+        fc = self.fc(x[:, 0])
+        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
