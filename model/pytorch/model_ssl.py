@@ -397,6 +397,7 @@ class ViViTSSL(nn.Module):
 class ViViTComplete(nn.Module):
 
     def __init__(self, ckp):
+        super().__init__()
         self.encoder = self.load_encoder(ckp)
         self.fc = nn.Linear(768, 414)
         self.conv = nn.Conv2d(1, 12, kernel_size=1)
