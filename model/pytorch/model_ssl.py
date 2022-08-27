@@ -417,5 +417,6 @@ class ViViTComplete(nn.Module):
         c, h, w = 2, Y//2, 1
         x = x.reshape(b, t, c, h, w)
         z = self.encoder.encode(x, b, t, c, h, w)
+        import pdb;pdb.set_trace()
         fc = self.fc(z[:, 0])
         return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
