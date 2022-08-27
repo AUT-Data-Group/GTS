@@ -413,7 +413,7 @@ class ViViTComplete(nn.Module):
         return model
 
     def forward(self, x):
-        b,t, Y = x.shape
+        t, b, Y = x.shape
         c, h, w = 2, Y//2, 1
         x = x.reshape(b, t, c, h, w)
         z = self.encoder.encode(x, b, t, c, h, w)
