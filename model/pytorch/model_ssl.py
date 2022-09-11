@@ -405,8 +405,9 @@ class ViViTComplete(nn.Module):
         checkpoint = torch.load(ckp)
         model = ViViTSSL(12,207,1, in_channels=2, mask_ratio=0.3, mode="spatial")
         model.load_state_dict(checkpoint["model_state_dict"])
-        for param in model.parameters():
-            param.requires_grad = False
+        # Experiment # 2
+        # for param in model.parameters():
+        #     param.requires_grad = False
         model.fc = nn.Identity()
         model.conv = nn.Identity()
         return model
