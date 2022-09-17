@@ -78,7 +78,7 @@ class GTSSupervisor:
         self.horizon = int(self._model_kwargs.get('horizon', 1))  # for the decoder
 
         # setup model
-        GTS_model = GTSModel(12,207,1, in_channels=2, mask_ratio=kwargs.get('mr'))
+        GTS_model = GTSModel(12,207,2, in_channels=1, mask_ratio=kwargs.get('mr'))
         self.GTS_model = GTS_model.cuda() if torch.cuda.is_available() else GTS_model
         self._logger.info("Model created")
 
