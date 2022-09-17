@@ -205,7 +205,7 @@ class ViViTSSL(nn.Module):
 
     def encode(self, x, b, t, c, h, w):
         # t, b, Y = x.shape
-        # c, h, w = 2, Y//2, 1
+        # c, h, w = 1, Y//2, 2
         x = self.patch_embed(x)
 
         # Add Position Embedding
@@ -310,7 +310,7 @@ class ViViTSSL(nn.Module):
         }
         x, mask, ids_restore = METHODS[self.mode](x, mask_ratio)
         b,t, Y = x.shape
-        c, h, w = 2, Y//2, 1
+        w, h, c = 2, Y//2, 1
         x = x.reshape(b, t, c, h, w)
         z = self.encode(x, b, t, c, h, w)
         return z, mask, ids_restore
@@ -414,7 +414,7 @@ class ViViTComplete(nn.Module):
 
     def forward(self, x):
         t, b, Y = x.shape
-        c, h, w = 2, Y//2, 1
+        w, h, c = 2, Y//2, 1
         x = x.reshape(b, t, c, h, w)
         z = self.encoder.encode(x, b, t, c, h, w)
         fc = self.fc(z)
