@@ -355,7 +355,7 @@ class GTSSupervisor:
                 optimizer.zero_grad()
                 x, y = self._prepare_data(x, y)
                 if not DEBUG:
-                    wandb.watch(self.GTS_model)
+                    wandb.watch(self.GTS_model, log_freq=100)
                 loss, _, _ = self.GTS_model(x, mask_ratio=config["mask_ratio"])
                 # if (epoch_num % epochs) == epochs - 1:
                 #     output = self.GTS_model(label, x, self._train_feas, temp, gumbel_soft, y, batches_seen)
