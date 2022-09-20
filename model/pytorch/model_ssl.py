@@ -206,7 +206,6 @@ class ViViTSSL(nn.Module):
     def encode(self, x, b, t, c, h, w):
         # t, b, Y = x.shape
         # c, h, w = 1, Y//2, 2
-        import pdb;pdb.set_trace()
         x = self.patch_embed(x)
 
         # Add Position Embedding
