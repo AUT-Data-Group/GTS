@@ -88,7 +88,7 @@ class ViViTSSL(nn.Module):
                  embed_dims=768,
                  num_heads=1,
                  num_transformer_layers=1,
-                 in_channels=1,
+                 in_channels=2,
                  dropout_p=0.,
                  tube_size=2,
                  conv_type='Conv2d',
@@ -119,7 +119,6 @@ class ViViTSSL(nn.Module):
         f"conv_type = {self.conv_type}," 
         f"tube_size = {self.tube_size},"
         f"return_cls_token= {self.return_cls_token}")
-        breakpoint()
         #tokenize & position embedding
         self.patch_embed = PatchEmbed(
             img_size=img_size,
@@ -405,7 +404,7 @@ class ViViTComplete(nn.Module):
     
     def load_encoder(self, ckp):
         checkpoint = torch.load(ckp)
-        model = ViViTSSL(12,207,1, in_channels=2, mask_ratio=0.3, mode="spatial")
+        model = ViViTSSL(12,207,2, in_channels=1, mask_ratio=0.3, mode="spatial")
         model.load_state_dict(checkpoint["model_state_dict"])
         # Experiment # 2
         for param in model.parameters():
