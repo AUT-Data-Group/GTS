@@ -119,6 +119,7 @@ class ViViTSSL(nn.Module):
         f"conv_type = {self.conv_type}," 
         f"tube_size = {self.tube_size},"
         f"return_cls_token= {self.return_cls_token}")
+        breakpoint()
         #tokenize & position embedding
         self.patch_embed = PatchEmbed(
             img_size=img_size,
