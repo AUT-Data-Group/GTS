@@ -88,7 +88,7 @@ class ViViTSSL(nn.Module):
                  embed_dims=768,
                  num_heads=1,
                  num_transformer_layers=1,
-                 in_channels=2,
+                 in_channels=1,
                  dropout_p=0.,
                  tube_size=2,
                  conv_type='Conv2d',
