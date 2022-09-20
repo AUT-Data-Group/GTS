@@ -206,6 +206,7 @@ class ViViTSSL(nn.Module):
     def encode(self, x, b, t, c, h, w):
         # t, b, Y = x.shape
         # c, h, w = 1, Y//2, 2
+        import pdb;pdb.set_trace()
         x = self.patch_embed(x)
 
         # Add Position Embedding
@@ -406,8 +407,8 @@ class ViViTComplete(nn.Module):
         model = ViViTSSL(12,207,1, in_channels=2, mask_ratio=0.3, mode="spatial")
         model.load_state_dict(checkpoint["model_state_dict"])
         # Experiment # 2
-        # for param in model.parameters():
-        #     param.requires_grad = False
+        for param in model.parameters():
+            param.requires_grad = False
         model.fc = nn.Identity()
         model.conv = nn.Identity()
         return model
