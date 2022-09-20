@@ -105,7 +105,7 @@ class PatchEmbed(nn.Module):
 		super().__init__()
 		self.img_size = (img_size, 1)
 		self.patch_size = (patch_size, 1)
-
+		print("====", in_channels, img_size, patch_size)
 		num_patches = \
 			(self.img_size[1] // self.patch_size[1]) * \
 			(self.img_size[0] // self.patch_size[0])
