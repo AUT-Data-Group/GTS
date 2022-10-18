@@ -4,6 +4,7 @@ log_level: INFO
 data:
   batch_size: 64
   dataset_dir: data/PEMS-3
+  dataset_npz: data/PEMS03.npz
   test_batch_size: 64
   val_batch_size: 64
   graph_pkl_filename: data/sensor_graph/adj_mx.pkl
