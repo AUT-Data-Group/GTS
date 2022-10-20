@@ -45,13 +45,23 @@ class GTSSupervisor:
             df = pd.read_hdf('./data/metr-la.h5')
         elif self._data_kwargs['dataset_dir'] == 'data/PEMS-BAY':
             df = pd.read_hdf('./data/pems-bay.h5')
+        else:
+            df = np.load(self._data_kwargs["dataset_npz"])
+            df = df.f.data
+
         #else:
         #    df = pd.read_csv('./data/pmu_normalized.csv', header=None)
         #    df = df.transpose()
         num_samples = df.shape[0]
         num_train = round(num_samples * 0.7)
-        df = df[:num_train].values
-        scaler = utils.StandardScaler(mean=df.mean(), std=df.std())
+        try:
+            df = df[:num_train].values
+        except Exception as e:
+            df = df[:num_train]
+        try:
+            scaler = utils.StandardScaler(mean=df.mean(), std=df.std())
+        except Exception as e:
+            scaler = utils.StandardScaler(mean=np.mean(df, -1), std=np.std(df, -1))
         train_feas = scaler.transform(df)
         self._train_feas = torch.Tensor(train_feas).to(device)
         #print(self._train_feas.shape)
