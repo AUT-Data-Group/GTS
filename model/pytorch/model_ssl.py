@@ -113,6 +113,8 @@ class ViViTSSL(nn.Module):
         self.tube_size = tube_size
         self.num_time_transformer_layers = 4
         self.return_cls_token = return_cls_token
+        self.input_dim = in_channels
+        self.nodes = img_size
         logging.info(f"num_frames = {self.num_frames}, embed_dims = {self.embed_dims},"
         f"num_transformer_layers = {self.num_transformer_layers},"
         f"attention_type = {self.attention_type},"  
@@ -172,10 +174,10 @@ class ViViTSSL(nn.Module):
             self.time_embed = nn.Parameter(torch.zeros(1,num_frames,embed_dims))
         self.drop_after_pos = nn.Dropout(p=dropout_p)
         self.drop_after_time = nn.Dropout(p=dropout_p)
-        self.fc = nn.Linear(768, 414)
+        self.fc = nn.Linear(768, in_channels* img_size)
         self.conv = nn.Conv2d(1, 12, kernel_size=1)
         # self.decoder_embed = norm_layer(decoder_embed_dim)
-        self.decoder_pred = nn.Linear(embed_dims, 414, bias=True)
+        self.decoder_pred = nn.Linear(embed_dims, in_channels* img_size, bias=True)
         self.mask_token = nn.Parameter(torch.zeros(1, 1, 768))
         #  norm_layer(decoder_embed_dim, patch_size**2 * in_chans, bias=True) steal from source code
         self.mode = mode
@@ -339,7 +341,7 @@ class ViViTSSL(nn.Module):
         # # remove cls token
         # x = x[:, 1:, :]
         fc = self.decoder_pred(x)
-        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> b x (n c)")
+        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=self.nodes, c=self.input_dim)), "b x n c -> b x (n c)")
 
     def forward_loss(self, x, pred, mask):
         """
@@ -395,15 +397,23 @@ class ViViTSSL(nn.Module):
 
 class ViViTComplete(nn.Module):
 
-    def __init__(self, ckp):
+    def __init__(self, ckp, num_frames,
+                 img_size,
+                 patch_size,
+                 embed_dims=768,
+                 num_heads=1,
+                 num_transformer_layers=1,
+                 in_channels=2):
         super().__init__()
         self.encoder = self.load_encoder(ckp)
-        self.fc = nn.Linear(768, 414)
+        self.fc = nn.Linear(768, img_size*in_channels)
         self.conv = nn.Conv2d(1, 12, kernel_size=1)
+        self.nodes = img_size
+        self.in_channels = in_channels
     
     def load_encoder(self, ckp):
         checkpoint = torch.load(ckp)
-        model = ViViTSSL(12,207,2, in_channels=1, mask_ratio=0.3, mode="spatial")
+        model = ViViTSSL(12,self.nodes,2, in_channels=self.in_channels, mask_ratio=0.3, mode="spatial")
         model.load_state_dict(checkpoint["model_state_dict"])
         # Experiment # 2
         for param in model.parameters():
