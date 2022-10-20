@@ -69,7 +69,7 @@ class GTSSupervisor:
         k = self._train_kwargs.get('knn_k')
         knn_metric = 'cosine'
         from sklearn.neighbors import kneighbors_graph
-        g = kneighbors_graph(train_feas.T, k, metric=knn_metric)
+        g = kneighbors_graph(train_feas.mean(-1).T, k, metric=knn_metric)
         g = np.array(g.todense(), dtype=np.float32)
         self.adj_mx = torch.Tensor(g).to(device)
         self.num_nodes = int(self._model_kwargs.get('num_nodes', 1))
