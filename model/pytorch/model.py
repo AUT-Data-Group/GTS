@@ -194,7 +194,6 @@ class ViViT(nn.Module):
         t, b, Y = x.shape
         w, h, c = self.input_dim, Y//self.input_dim, 1
         x = x.reshape(b, t, c, h, w)
-        breakpoint()
         x = self.patch_embed(x)
 
         # Add Position Embedding
