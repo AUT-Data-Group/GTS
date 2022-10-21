@@ -117,13 +117,13 @@ class PatchEmbed(nn.Module):
 		# Use conv layer to embed
 		if conv_type == 'Conv2d':
 			self.projection = nn.Conv2d(
-				in_channels,
+				1,
 				embed_dims,
 				kernel_size=patch_size,
 				stride=patch_size)
 		elif conv_type == 'Conv3d':
 			self.projection = nn.Conv3d(
-				in_channels,
+				1,
 				embed_dims,
 				kernel_size=(tube_size,patch_size,patch_size),
 				stride=(tube_size,patch_size,patch_size))

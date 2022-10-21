@@ -106,6 +106,8 @@ class ViViT(nn.Module):
         self.conv_type = conv_type
         self.tube_size = tube_size
         self.num_time_transformer_layers = 4
+        self.input_dim = in_channels
+        self.nodes = img_size
         self.return_cls_token = return_cls_token
         logging.info(f"num_frames = {self.num_frames}, embed_dims = {self.embed_dims},"
         f"num_transformer_layers = {self.num_transformer_layers},"
@@ -117,7 +119,7 @@ class ViViT(nn.Module):
         self.patch_embed = PatchEmbed(
             img_size=img_size,
             patch_size=patch_size,
-            in_channels=in_channels,
+            in_channels=1,
             embed_dims=embed_dims,
             tube_size=tube_size,
             conv_type=conv_type)
@@ -159,7 +161,7 @@ class ViViT(nn.Module):
         self.time_embed = nn.Parameter(torch.zeros(1,num_frames,embed_dims))
         self.drop_after_pos = nn.Dropout(p=dropout_p)
         self.drop_after_time = nn.Dropout(p=dropout_p)
-        self.fc = nn.Linear(768, 414)
+        self.fc = nn.Linear(768, in_channels* img_size)
         self.conv = nn.Conv2d(1, 12, kernel_size=1)
     
     def interpolate_pos_encoding(self, x, w, h):
@@ -190,8 +192,9 @@ class ViViT(nn.Module):
         #x => torch.Size([12, 64, 414])
         #Tokenize
         t, b, Y = x.shape
-        c, h, w = 2, Y//2, 1
+        w, h, c = self.input_dim, Y//self.input_dim, 1
         x = x.reshape(b, t, c, h, w)
+        breakpoint()
         x = self.patch_embed(x)
 
         # Add Position Embedding
@@ -221,4 +224,4 @@ class ViViT(nn.Module):
         # else:
         #     return x[:, 1:].mean(1)
         fc = self.fc(x[:, 0])
-        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=207, c=2)), "b x n c -> x b (n c)")
+        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=self.nodes, c=1)), "b x n c -> x b (n c)")
