@@ -94,10 +94,10 @@ class GTSSupervisor:
     
     def get_model(self, fine_tune=False):
         if not fine_tune:
-            return GTSModel(12,207,1, in_channels=2)
+            return GTSModel(12,self.num_nodes,1, in_channels=self.input_dim)
         else:
             self._logger.info("Fine tuning is enabled!")
-            return ViViTComplete(self.fine_tune_path)
+            return ViViTComplete(self.fine_tune_path, 12,self.num_nodes,1, in_channels=self.input_dim)
 
     @staticmethod
     def _get_log_dir(kwargs):
