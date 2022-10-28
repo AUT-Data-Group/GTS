@@ -168,7 +168,7 @@ class ViViT(nn.Module):
         npatch = x.shape[1] - 1
         N = self.pos_embed.shape[1] - 1
         # if npatch == N and w == h:
-        if npatch == N:
+        if npatch == N or npatch == N*w:
             return self.pos_embed
         class_pos_embed = self.pos_embed[:, 0]
         patch_pos_embed = self.pos_embed[:, 1:]
