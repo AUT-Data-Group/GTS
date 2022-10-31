@@ -99,7 +99,7 @@ class PatchEmbed(nn.Module):
 				 img_size,
 				 patch_size,
 				 tube_size=2,
-				 in_channels=2,
+				 in_channels=1,
 				 embed_dims=768,
 				 conv_type='Conv2d'):
 		super().__init__()

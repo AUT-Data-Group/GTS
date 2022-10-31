@@ -168,7 +168,8 @@ class ViViT(nn.Module):
         npatch = x.shape[1] - 1
         N = self.pos_embed.shape[1] - 1
         # if npatch == N and w == h:
-        if npatch == N or npatch == N*w:
+        if npatch == N:
+            #TODO: FIX ME
             return self.pos_embed
         class_pos_embed = self.pos_embed[:, 0]
         patch_pos_embed = self.pos_embed[:, 1:]
@@ -179,8 +180,8 @@ class ViViT(nn.Module):
         # see discussion at https://github.com/facebookresearch/dino/issues/8
         w0, h0 = w0 + 0.1, h0 + 0.1
         patch_pos_embed = nn.functional.interpolate(
-            patch_pos_embed.reshape(1, int(math.sqrt(N)), int(math.sqrt(N)), dim).permute(0, 3, 1, 2),
-            scale_factor=(w0 / math.sqrt(N), h0 / math.sqrt(N)),
+            patch_pos_embed.reshape(1, h, 1, dim).permute(0, 3, 1, 2),
+            scale_factor=(w0 / h, h0),
             mode='bicubic',
         )
         assert int(w0) == patch_pos_embed.shape[-2] and int(h0) == patch_pos_embed.shape[-1]
