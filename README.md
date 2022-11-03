@@ -1,6 +1,4 @@
-# Discrete Graph Structure Learning for Forecasting Multiple Time Series
 
-This is a PyTorch implementation of the paper "[Discrete Graph Structure Learning for Forecasting Multiple Time Series](https://openreview.net/pdf?id=WEHSlH5mOk)", ICLR 2021.
 
 ## Installation
 
@@ -74,3 +72,6 @@ If you use this repository, e.g., the code and the datasets, in your research, p
 ## Acknowledgments
 
 [DCRNN-PyTorch](https://github.com/chnsh/DCRNN_PyTorch), [GCN](https://github.com/tkipf/gcn), [NRI](https://github.com/ethanfetaya/NRI) and [LDS-GNN](https://github.com/lucfra/LDS-GNN).
+# Discrete Graph Structure Learning for Forecasting Multiple Time Series
+
+This is a PyTorch implementation of the paper "[Discrete Graph Structure Learning for Forecasting Multiple Time Series](https://openreview.net/pdf?id=WEHSlH5mOk)", ICLR 2021.
