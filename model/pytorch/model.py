@@ -224,4 +224,4 @@ class ViViT(nn.Module):
         # else:
         #     return x[:, 1:].mean(1)
         fc = self.fc(x[:, 0])
-        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=self.nodes, c=1)), "b x n c -> x b (n c)")
+        return rearrange(self.conv(rearrange(fc.unsqueeze(1), "b x (n c) -> b x n c", n=self.nodes, c=1*self.input_dim)), "b x n c -> x b (n c)")
